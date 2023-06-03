@@ -3,14 +3,14 @@ import 'package:math_expressions/math_expressions.dart';
 import 'package:p_chat/calculator/widgets/num_button.dart';
 import 'package:p_chat/calculator/helper/gradient_divider.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class CalcPage extends StatefulWidget {
+  const CalcPage({Key? key}) : super(key: key);
 
   @override
-  State<Home> createState() => _Home();
+  State<CalcPage> createState() => _CalcPage();
 }
 
-class _Home extends State<Home> {
+class _CalcPage extends State<CalcPage> {
   var userQuestion = '';
   var userAnswer = '';
   final List<String> button = [
