@@ -156,6 +156,10 @@ class _CalcPage extends State<CalcPage> {
   }
   void equalPressed() {
       String finalQuestion = userQuestion;
+      // print(finalQuestion);
+      if (finalQuestion == "1306"){
+        print("hello");
+      }
       try{
         Parser p = Parser();
         Expression exp = p.parse(finalQuestion);
