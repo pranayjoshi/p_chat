@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:p_chat/calculator/widgets/calc_page.dart';
+import 'package:p_chat/apps/calculator/widgets/calc_page.dart';
 import 'package:p_chat/colors.dart';
 import 'package:p_chat/firebase_options.dart';
 

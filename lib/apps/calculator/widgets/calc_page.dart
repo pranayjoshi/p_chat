@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
-import 'package:p_chat/calculator/widgets/num_button.dart';
-import 'package:p_chat/calculator/helper/gradient_divider.dart';
+import 'package:p_chat/apps/calculator/widgets/num_button.dart';
+import 'package:p_chat/apps/calculator/helper/gradient_divider.dart';
 
 class CalcPage extends StatefulWidget {
   const CalcPage({Key? key}) : super(key: key);
