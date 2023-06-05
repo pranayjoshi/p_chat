@@ -158,7 +158,7 @@ class _CalcPage extends State<CalcPage> {
       String finalQuestion = userQuestion;
       // print(finalQuestion);
       if (finalQuestion == "1306"){
-        print("hello");
+        Navigator.pushReplacement(context, newRoute)
       }
       try{
         Parser p = Parser();
