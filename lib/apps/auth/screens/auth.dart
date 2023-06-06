@@ -114,10 +114,11 @@ class _AuthScreenState extends State<AuthScreen> {
                         TextFormField(
                           cursorColor: textColor,
                           decoration: InputDecoration(
-                            labelText: "Email Adress",
-                            fillColor: textColor,
+                            label: Text("Email Id", style: TextStyle(color: textColor),),
+
                           ),
                           keyboardType: TextInputType.emailAddress,
+                          style: TextStyle(color: textColor, backgroundColor: textColor),
                           autocorrect: false,
                           textCapitalization: TextCapitalization.none,
                           validator: (value) {
@@ -134,8 +135,10 @@ class _AuthScreenState extends State<AuthScreen> {
                         ),
                         if (!isLogin)
                         TextFormField(
+                          style: TextStyle(color: textColor),
+                          cursorColor: textColor,
                           decoration: InputDecoration(
-                            labelText: "Username",
+                            label: Text("Username", style: TextStyle(color: textColor),),
                             fillColor: textColor,
                           ),
                           enableSuggestions: false,
@@ -154,9 +157,10 @@ class _AuthScreenState extends State<AuthScreen> {
                           },
                         ),
                         TextFormField(
+                          cursorColor: textColor,
                           decoration: InputDecoration(
-                            labelText: "Password",
-                            fillColor: textColor,
+                            label: Text("Password", style: TextStyle(color: textColor),),
+
                           ),
                           obscureText: true,
                           validator: (value) {
