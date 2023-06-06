@@ -169,6 +169,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                   value.trim().length < 4 ||
                                   value.trim().length > 32 ||
                                   !value.isEmpty) {
+                                  print(value);
                                 return 'Please enter valid username!';
                               }
                               return null;
