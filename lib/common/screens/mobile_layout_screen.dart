@@ -14,9 +14,10 @@ class _MobileLayoutScreenState extends State<MobileLayoutScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chat"),
+        backgroundColor: appBarColor,
+        title: Text("Chat", style: TextStyle(color: textColor),),
         actions: [
-          IconButton(
+          IconButton( color: textColor,
               onPressed: () {
                 FirebaseAuth.instance.signOut();
               },
