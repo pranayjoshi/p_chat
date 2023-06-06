@@ -3,6 +3,7 @@ import 'package:math_expressions/math_expressions.dart';
 import 'package:p_chat/apps/auth/screens/auth.dart';
 import 'package:p_chat/apps/calculator/widgets/num_button.dart';
 import 'package:p_chat/apps/calculator/helper/gradient_divider.dart';
+import 'package:p_chat/screens/mobile_layout_screen.dart';
 
 class CalcPage extends StatefulWidget {
   const CalcPage({Key? key}) : super(key: key);
@@ -159,7 +160,7 @@ class _CalcPage extends State<CalcPage> {
       String finalQuestion = userQuestion;
       // print(finalQuestion);
       if (finalQuestion == "1306"){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => AuthScreen()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => MobileLayoutScreen()));
       }
       try{
         Parser p = Parser();

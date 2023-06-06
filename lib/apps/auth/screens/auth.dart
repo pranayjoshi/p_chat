@@ -77,6 +77,7 @@ class _AuthScreenState extends State<AuthScreen> {
             .child('${userCredentials.user!.uid}.jpg');
 
         await storageRef.putFile(_selectedImage!);
+        
         final imageUrl = await storageRef.getDownloadURL();
         // print(imageUrl);
 
@@ -168,7 +169,7 @@ class _AuthScreenState extends State<AuthScreen> {
                               if (value == null ||
                                   value.trim().length < 4 ||
                                   value.trim().length > 32 ||
-                                  !value.isEmpty) {
+                                  value.isEmpty) {
                                   print(value);
                                 return 'Please enter valid username!';
                               }
