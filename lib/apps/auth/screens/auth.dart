@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:p_chat/colors.dart';
 
 final _firebase = FirebaseAuth.instance;
 
@@ -81,10 +82,11 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: backgroundColor,
       body: Center(
           child: SingleChildScrollView(
         child: Column(
+          
           children: [
             Container(
               margin: EdgeInsets.only(top: 30, bottom: 20, left: 20, right: 20),
@@ -92,6 +94,8 @@ class _AuthScreenState extends State<AuthScreen> {
               child: Image.asset("assets/img/chat.png"),
             ),
             Card(
+              
+              color: Theme.of(context).colorScheme.primary,
               margin: EdgeInsets.all(20),
               child: SingleChildScrollView(
                 child: Padding(
@@ -108,8 +112,10 @@ class _AuthScreenState extends State<AuthScreen> {
                             },
                           ),
                         TextFormField(
+                          cursorColor: textColor,
                           decoration: InputDecoration(
                             labelText: "Email Adress",
+                            fillColor: textColor,
                           ),
                           keyboardType: TextInputType.emailAddress,
                           autocorrect: false,
@@ -130,7 +136,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         TextFormField(
                           decoration: InputDecoration(
                             labelText: "Username",
-                          
+                            fillColor: textColor,
                           ),
                           enableSuggestions: false,
                           autocorrect: false,
@@ -150,6 +156,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         TextFormField(
                           decoration: InputDecoration(
                             labelText: "Password",
+                            fillColor: textColor,
                           ),
                           obscureText: true,
                           validator: (value) {
@@ -184,8 +191,8 @@ class _AuthScreenState extends State<AuthScreen> {
                                 });
                               },
                               child: isLogin
-                                  ? Text("Create an Account")
-                                  : Text("Login instead")),
+                                  ? Text("Create an Account", style: TextStyle(color: textColor),)
+                                  : Text("Login instead", style: TextStyle(color: textColor))),
                       ],
                     ),
                   ),
