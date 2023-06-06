@@ -22,7 +22,7 @@ class _AuthScreenState extends State<AuthScreen> {
   var _enteredEmail = "";
   var _enteredPass = "";
   var _isUploading = false;
-  var _enteredUsername ="";
+  var _enteredUsername = "";
 
   File? _selectedImage;
 
@@ -73,10 +73,9 @@ class _AuthScreenState extends State<AuthScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(err.message ?? "Authentication Failed!")));
       setState(() {
-      _isUploading = false;
-    });
+        _isUploading = false;
+      });
     }
-    
   }
 
   @override
@@ -86,7 +85,6 @@ class _AuthScreenState extends State<AuthScreen> {
       body: Center(
           child: SingleChildScrollView(
         child: Column(
-          
           children: [
             Container(
               margin: EdgeInsets.only(top: 30, bottom: 20, left: 20, right: 20),
@@ -94,7 +92,6 @@ class _AuthScreenState extends State<AuthScreen> {
               child: Image.asset("assets/img/chat.png"),
             ),
             Card(
-              
               color: Theme.of(context).colorScheme.primary,
               margin: EdgeInsets.all(20),
               child: SingleChildScrollView(
@@ -114,11 +111,16 @@ class _AuthScreenState extends State<AuthScreen> {
                         TextFormField(
                           cursorColor: textColor,
                           decoration: InputDecoration(
-                            label: Text("Email Id", style: TextStyle(color: textColor),),
-
+                            label: Text(
+                              "Email Id",
+                              style: TextStyle(color: textColor),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: textColor)),
                           ),
                           keyboardType: TextInputType.emailAddress,
-                          style: TextStyle(color: textColor, backgroundColor: textColor),
+                          style: TextStyle(
+                              color: textColor, backgroundColor: textColor),
                           autocorrect: false,
                           textCapitalization: TextCapitalization.none,
                           validator: (value) {
@@ -134,36 +136,43 @@ class _AuthScreenState extends State<AuthScreen> {
                           },
                         ),
                         if (!isLogin)
-                        TextFormField(
-                          style: TextStyle(color: textColor),
-                          cursorColor: textColor,
-                          decoration: InputDecoration(
-                            label: Text("Username", style: TextStyle(color: textColor),),
-                            fillColor: textColor,
-                            enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: textColor)),
+                          TextFormField(
+                            style: TextStyle(color: textColor),
+                            cursorColor: textColor,
+                            decoration: InputDecoration(
+                              label: Text(
+                                "Username",
+                                style: TextStyle(color: textColor),
+                              ),
+                              fillColor: textColor,
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: textColor)),
+                            ),
+                            enableSuggestions: false,
+                            autocorrect: false,
+                            textCapitalization: TextCapitalization.none,
+                            validator: (value) {
+                              if (value == null ||
+                                  value.trim().length < 4 ||
+                                  value.trim().length > 32 ||
+                                  !value.isEmpty) {
+                                return 'Please enter valid username!';
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              _enteredUsername = value!;
+                            },
                           ),
-                          
-                          enableSuggestions: false,
-                          autocorrect: false,
-                          textCapitalization: TextCapitalization.none,
-                          validator: (value) {
-                            if (value == null ||
-                                value.trim().length < 4 || value.trim().length > 32 ||
-                                !value.isEmpty) {
-                              return 'Please enter valid username!';
-                            }
-                            return null;
-                          },
-                          onSaved: (value) {
-                            _enteredUsername = value!;
-                          },
-                        ),
                         TextFormField(
                           cursorColor: textColor,
                           decoration: InputDecoration(
-                            label: Text("Password", style: TextStyle(color: textColor),),
-
+                            label: Text(
+                              "Password",
+                              style: TextStyle(color: textColor),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: textColor)),
                           ),
                           obscureText: true,
                           validator: (value) {
@@ -196,8 +205,12 @@ class _AuthScreenState extends State<AuthScreen> {
                                 });
                               },
                               child: isLogin
-                                  ? Text("Create an Account", style: TextStyle(color: textColor),)
-                                  : Text("Login instead", style: TextStyle(color: textColor))),
+                                  ? Text(
+                                      "Create an Account",
+                                      style: TextStyle(color: textColor),
+                                    )
+                                  : Text("Login instead",
+                                      style: TextStyle(color: textColor))),
                       ],
                     ),
                   ),
