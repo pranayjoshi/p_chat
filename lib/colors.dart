@@ -1,3 +1,4 @@
+import 'dart:js';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
@@ -14,3 +15,4 @@ const chatBarMessage = Color.fromRGBO(30, 36, 40, 1);
 const mobileChatBoxColor = Color.fromRGBO(31, 44, 52, 1);
 const greyColor = Colors.grey;
 const blackColor = Colors.black;
+const containerColor = Color(0xFFD1C4E9);

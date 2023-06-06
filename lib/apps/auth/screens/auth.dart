@@ -140,7 +140,10 @@ class _AuthScreenState extends State<AuthScreen> {
                           decoration: InputDecoration(
                             label: Text("Username", style: TextStyle(color: textColor),),
                             fillColor: textColor,
+                            enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: textColor)),
                           ),
+                          
                           enableSuggestions: false,
                           autocorrect: false,
                           textCapitalization: TextCapitalization.none,
@@ -183,9 +186,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                 _submit();
                               },
                               style: ElevatedButton.styleFrom(
-                                  backgroundColor: Theme.of(context)
-                                      .colorScheme
-                                      .primaryContainer),
+                                  backgroundColor: containerColor),
                               child: isLogin ? Text("Login") : Text("Sign Up")),
                         if (!_isUploading)
                           TextButton(

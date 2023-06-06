@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:p_chat/colors.dart';
 
 
 class UserImagePicker extends StatefulWidget {
@@ -44,7 +45,7 @@ class _UserImagePickerState extends State<UserImagePicker> {
           children: [
             CircleAvatar(
               radius: 40,
-              backgroundColor: Colors.grey,
+              backgroundColor: greyColor,
               foregroundImage:_pickedImageFile != null ? FileImage(_pickedImageFile!) : null,
             ),
             Positioned(
