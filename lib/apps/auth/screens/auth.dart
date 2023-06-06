@@ -86,11 +86,11 @@ class _AuthScreenState extends State<AuthScreen> {
           child: SingleChildScrollView(
         child: Column(
           children: [
-            // Container(
-            //   margin: EdgeInsets.only(top: 30, bottom: 20, left: 20, right: 20),
-            //   width: 200,
-            //   child: Image.asset("assets/images/chat.png"),
-            // ),
+            Container(
+              margin: EdgeInsets.only(top: 30, bottom: 20, left: 20, right: 20),
+              width: 200,
+              child: Image.asset("assets/img/chat.png"),
+            ),
             Card(
               margin: EdgeInsets.all(20),
               child: SingleChildScrollView(
