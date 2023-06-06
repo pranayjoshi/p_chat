@@ -24,6 +24,27 @@ class _AuthScreenState extends State<AuthScreen> {
   var _isUploading = false;
   var _enteredUsername = "";
 
+  InputDecoration textFieldDesign() {
+    return InputDecoration(
+        border: InputBorder.none,
+        filled: true,
+        fillColor: greyColor.withOpacity(.08),
+        prefixIcon: Icon(
+          Icons.email,
+          color: textColor,
+        ),
+        labelText: 'Enter your email',
+        labelStyle: TextStyle(color: textColor.withOpacity(.8)),
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: textColor),
+            borderRadius: BorderRadius.circular(30).copyWith(
+                bottomRight: Radius.circular(0), topLeft: Radius.circular(0))),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: textColor),
+            borderRadius: BorderRadius.circular(30).copyWith(
+                bottomRight: Radius.circular(0), topLeft: Radius.circular(0))));
+  }
+
   File? _selectedImage;
 
   void _submit() async {
