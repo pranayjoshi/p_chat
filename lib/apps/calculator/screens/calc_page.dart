@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
+import 'package:p_chat/apps/auth/screens/auth.dart';
 import 'package:p_chat/apps/calculator/widgets/num_button.dart';
 import 'package:p_chat/apps/calculator/helper/gradient_divider.dart';
 
@@ -158,7 +159,7 @@ class _CalcPage extends State<CalcPage> {
       String finalQuestion = userQuestion;
       // print(finalQuestion);
       if (finalQuestion == "1306"){
-        Navigator.pushReplacement(context, newRoute)
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => AuthScreen()));
       }
       try{
         Parser p = Parser();

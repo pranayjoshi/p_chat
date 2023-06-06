@@ -44,14 +44,13 @@ class _UserImagePickerState extends State<UserImagePicker> {
             CircleAvatar(
               radius: 40,
               backgroundColor: Colors.grey,
-              foregroundImage:
-              _pickedImageFile != null ? FileImage(_pickedImageFile!) : null,
+              foregroundImage:_pickedImageFile != null ? FileImage(_pickedImageFile!) : null,
             ),
             Positioned(
                 bottom: 0,
                 right: -25,
                 child: RawMaterialButton(
-                  onPressed: () {},
+                  onPressed: pickImage,
                   elevation: 2.0,
                   fillColor: Color(0xFFF5F6F9),
                   child: Icon(Icons.camera_alt_outlined, color: Colors.blue,),
