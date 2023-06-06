@@ -152,19 +152,36 @@ class _AuthScreenState extends State<AuthScreen> {
                             _enteredEmail = value!;
                           },
                         ),
+                        SizedBox(
+                          height: 12,
+                        ),
                         if (!isLogin)
                           TextFormField(
                             style: TextStyle(color: textColor),
                             cursorColor: textColor,
                             decoration: InputDecoration(
-                              label: Text(
-                                "Username",
-                                style: TextStyle(color: textColor),
-                              ),
-                              fillColor: textColor,
-                              enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: textColor)),
-                            ),
+                                border: InputBorder.none,
+                                filled: true,
+                                fillColor: greyColor.withOpacity(.08),
+                                prefixIcon: Icon(
+                                  Icons.account_circle_rounded,
+                                  color: textColor,
+                                ),
+                                labelText: 'Choose a Username',
+                                labelStyle:
+                                    TextStyle(color: textColor.withOpacity(.8)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: textColor),
+                                    borderRadius: BorderRadius.circular(30)
+                                        .copyWith(
+                                            bottomRight: Radius.circular(0),
+                                            topLeft: Radius.circular(0))),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: textColor),
+                                    borderRadius: BorderRadius.circular(30)
+                                        .copyWith(
+                                            bottomRight: Radius.circular(0),
+                                            topLeft: Radius.circular(0)))),
                             enableSuggestions: false,
                             autocorrect: false,
                             textCapitalization: TextCapitalization.none,
@@ -181,16 +198,35 @@ class _AuthScreenState extends State<AuthScreen> {
                               _enteredUsername = value!;
                             },
                           ),
+                        SizedBox(
+                          height: 12,
+                        ),
                         TextFormField(
+                          style: TextStyle(color: textColor),
                           cursorColor: textColor,
                           decoration: InputDecoration(
-                            label: Text(
-                              "Password",
-                              style: TextStyle(color: textColor),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: textColor)),
-                          ),
+                              border: InputBorder.none,
+                              filled: true,
+                              fillColor: greyColor.withOpacity(.08),
+                              prefixIcon: Icon(
+                                Icons.email,
+                                color: textColor,
+                              ),
+                              labelText: 'Enter your Password',
+                              labelStyle:
+                                  TextStyle(color: textColor.withOpacity(.8)),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: textColor),
+                                  borderRadius: BorderRadius.circular(30)
+                                      .copyWith(
+                                          bottomRight: Radius.circular(0),
+                                          topLeft: Radius.circular(0))),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: textColor),
+                                  borderRadius: BorderRadius.circular(30)
+                                      .copyWith(
+                                          bottomRight: Radius.circular(0),
+                                          topLeft: Radius.circular(0)))),
                           obscureText: true,
                           validator: (value) {
                             if (value == null || value.trim().length < 6) {
