@@ -81,7 +81,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: mainColor,
       body: Center(
           child: SingleChildScrollView(
         child: Column(
@@ -108,19 +108,36 @@ class _AuthScreenState extends State<AuthScreen> {
                               _selectedImage = pickedImage;
                             },
                           ),
+                        SizedBox(
+                          height: 12,
+                        ),
                         TextFormField(
+                          style: TextStyle(color: textColor),
                           cursorColor: textColor,
                           decoration: InputDecoration(
-                            label: Text(
-                              "Email Id",
-                              style: TextStyle(color: textColor),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: textColor)),
-                          ),
+                              border: InputBorder.none,
+                              filled: true,
+                              fillColor: greyColor.withOpacity(.08),
+                              prefixIcon: Icon(
+                                Icons.email,
+                                color: textColor,
+                              ),
+                              labelText: 'Enter your email',
+                              labelStyle:
+                                  TextStyle(color: textColor.withOpacity(.8)),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: textColor),
+                                  borderRadius: BorderRadius.circular(30)
+                                      .copyWith(
+                                          bottomRight: Radius.circular(0),
+                                          topLeft: Radius.circular(0))),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: textColor),
+                                  borderRadius: BorderRadius.circular(30)
+                                      .copyWith(
+                                          bottomRight: Radius.circular(0),
+                                          topLeft: Radius.circular(0)))),
                           keyboardType: TextInputType.emailAddress,
-                          style: TextStyle(
-                              color: textColor, backgroundColor: textColor),
                           autocorrect: false,
                           textCapitalization: TextCapitalization.none,
                           validator: (value) {
