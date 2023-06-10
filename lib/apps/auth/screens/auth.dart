@@ -77,9 +77,13 @@ class _AuthScreenState extends State<AuthScreen> {
             .child('${userCredentials.user!.uid}.jpg');
 
         await storageRef.putFile(_selectedImage!);
-        
+
         final imageUrl = await storageRef.getDownloadURL();
         // print(imageUrl);
+
+        final username = await FirebaseFirestore.instance.collection("users").where("username", isEqualTo: _enteredUsername).get().then((value) => value.size > 0 ? true : false);
+        print("hiiidawdW");
+        print(username);
 
         await FirebaseFirestore.instance
             .collection("users")
