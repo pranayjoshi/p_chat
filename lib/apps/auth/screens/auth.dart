@@ -103,10 +103,11 @@ class _AuthScreenState extends State<AuthScreen> {
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(err.message ?? "Authentication Failed!")));
-      setState(() {
+      
+    }
+    setState(() {
         _isUploading = false;
       });
-    }
   }
 
   @override
@@ -210,7 +211,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         SizedBox(
                           height: 12,
                         ),
-                        if (_isUploading) CircularProgressIndicator(),
+                        if (_isUploading) Center(child: const CircularProgressIndicator()),
                         if (!_isUploading)
                           ElevatedButton(
                               onPressed: () {
