@@ -10,6 +10,10 @@ class MobileLayoutScreen extends StatefulWidget {
 }
 
 class _MobileLayoutScreenState extends State<MobileLayoutScreen> {
+
+  signOut() async {
+        await FirebaseAuth.instance.signOut();
+      }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,9 +22,7 @@ class _MobileLayoutScreenState extends State<MobileLayoutScreen> {
         title: Text("Chat", style: TextStyle(color: textColor),),
         actions: [
           IconButton( color: textColor,
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-              },
+              onPressed: () {signOut();},
               icon: Icon(Icons.exit_to_app))
         ],
       ),

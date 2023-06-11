@@ -54,11 +54,11 @@ class _AuthScreenState extends State<AuthScreen> {
       return;
     }
 
-    if (!isLogin && _selectedImage == null) {
-      ScaffoldMessenger.of(context).clearSnackBars();
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Please choose an image!")));
-    }
+    // if (!isLogin && _selectedImage == null) {
+    //   ScaffoldMessenger.of(context).clearSnackBars();
+    //   ScaffoldMessenger.of(context)
+    //       .showSnackBar(SnackBar(content: Text("Please choose an image!")));
+    // }
 
     _formkey.currentState!.save();
     try {
@@ -95,6 +95,7 @@ class _AuthScreenState extends State<AuthScreen> {
             .set({
           "username": _enteredUsername,
           "email": _enteredEmail,
+          "isOnline": true,
           "image_url": imageUrl
         });
       }
