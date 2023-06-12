@@ -37,6 +37,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         labelStyle: TextStyle(color: textColor.withOpacity(.8)),);
   }
 
+  void setFields(){
+    
+  }
+
   File? _selectedImage;
 
   void _submit() async {
