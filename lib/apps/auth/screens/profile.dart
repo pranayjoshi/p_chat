@@ -38,7 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void setFields(){
-    
+
   }
 
   File? _selectedImage;
@@ -127,6 +127,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: appBarColor,
+        title: Text(
+          "Profile",
+          style: TextStyle(color: textColor),
+        )),
       backgroundColor: mainColor,
       body: SingleChildScrollView(
                 child: Padding(

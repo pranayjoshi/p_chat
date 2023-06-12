@@ -30,7 +30,12 @@ class _AuthScreenState extends State<AuthScreen> {
     
 
   Future<bool> usernameExists(String username) async {
-      return await FirebaseFirestore.instance.collection("users").where("username", isEqualTo: _enteredUsername).get().then((value) => value.size > 0 ? true : false);}
+      final stat = await FirebaseFirestore.instance.collection("users").where("username", isEqualTo: username).get().then((value) => value.size > 0 ? true : false);
+      print(stat);
+      print(username);
+      print("Wadadawd");
+      return stat;
+    }
 
   InputDecoration textFieldDesign(String labelText, IconData icon) {
     return InputDecoration(
@@ -154,7 +159,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             style: TextStyle(color: textColor),
                             cursorColor: textColor,
                             decoration: textFieldDesign("Enter your Full Name",
-                                Icons.account_circle_rounded),
+                                Icons.person_2_outlined),
                             enableSuggestions: false,
                             autocorrect: false,
                             textCapitalization: TextCapitalization.none,
@@ -216,11 +221,11 @@ class _AuthScreenState extends State<AuthScreen> {
                                   value.trim().length < 4 ||
                                   value.trim().length > 32 ||
                                   value.contains(" ") ||
-                                  userExists ||
                                   value.isEmpty) {
                                   print(value);
                                 return 'Please enter valid username!';
                               }
+                              if (userExists) return 'Username Already Exists!';
                               return null;
                             },
                             onSaved: (value) {
@@ -253,6 +258,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         if (!_isUploading)
                           ElevatedButton(
                               onPressed: () {
+                                
                                 _submit();
                               },
                               style: ElevatedButton.styleFrom(
