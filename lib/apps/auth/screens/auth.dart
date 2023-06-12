@@ -108,6 +108,7 @@ class _AuthScreenState extends State<AuthScreen> {
     setState(() {
         _isUploading = false;
       });
+    
   }
 
   @override
