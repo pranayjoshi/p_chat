@@ -1,16 +1,18 @@
 class UserModel {
   final String name;
+  final String username;
   final String uid;
   final String profilePic;
   final bool isOnline;
-  final String phoneNumber;
+  final String email;
   final List<String> groupId;
   UserModel({
     required this.name,
+    required this.username,
     required this.uid,
     required this.profilePic,
     required this.isOnline,
-    required this.phoneNumber,
+    required this.email,
     required this.groupId,
   });
 
@@ -20,7 +22,7 @@ class UserModel {
       'uid': uid,
       'profilePic': profilePic,
       'isOnline': isOnline,
-      'phoneNumber': phoneNumber,
+      'phoneNumber': email,
       'groupId': groupId,
     };
   }
@@ -28,10 +30,11 @@ class UserModel {
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       name: map['name'] ?? '',
+      username: map['username'] ?? '',
       uid: map['uid'] ?? '',
       profilePic: map['profilePic'] ?? '',
       isOnline: map['isOnline'] ?? false,
-      phoneNumber: map['phoneNumber'] ?? '',
+      email: map['phoneNumber'] ?? '',
       groupId: List<String>.from(map['groupId']),
     );
   }

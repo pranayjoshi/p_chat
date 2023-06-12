@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:p_chat/apps/auth/widgets/user_picker_image.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:p_chat/colors.dart';
 
 final _firebase = FirebaseAuth.instance;
+var _instance = FirebaseFirestore.instance;
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -20,9 +22,15 @@ class _AuthScreenState extends State<AuthScreen> {
   final _formkey = GlobalKey<FormState>();
   var isLogin = true;
   var _enteredEmail = "";
+  var _enteredName = "";
   var _enteredPass = "";
   var _isUploading = false;
   var _enteredUsername = "";
+  var userExists = true;
+    
+
+  Future<bool> usernameExists(String username) async {
+      return await FirebaseFirestore.instance.collection("users").where("username", isEqualTo: _enteredUsername).get().then((value) => value.size > 0 ? true : false);}
 
   InputDecoration textFieldDesign(String labelText, IconData icon) {
     return InputDecoration(
@@ -85,14 +93,11 @@ class _AuthScreenState extends State<AuthScreen> {
         }
         // print(imageUrl);
 
-        final username = await FirebaseFirestore.instance.collection("users").where("username", isEqualTo: _enteredUsername).get().then((value) => value.size > 0 ? true : false);
-        print("hiiidawdW");
-        print(username);
-
         await FirebaseFirestore.instance
             .collection("users")
             .doc(userCredentials.user!.uid)
             .set({
+
           "username": _enteredUsername,
           "email": _enteredEmail,
           "isOnline": true,
@@ -144,6 +149,32 @@ class _AuthScreenState extends State<AuthScreen> {
                         SizedBox(
                           height: 12,
                         ),
+                        if (!isLogin)
+                          TextFormField(
+                            style: TextStyle(color: textColor),
+                            cursorColor: textColor,
+                            decoration: textFieldDesign("Enter your Full Name",
+                                Icons.account_circle_rounded),
+                            enableSuggestions: false,
+                            autocorrect: false,
+                            textCapitalization: TextCapitalization.none,
+                            validator: (value) {
+                              if (value == null ||
+                                  value.trim().length < 4 ||
+                                  value.trim().length > 32 ||
+                                  value.isEmpty) {
+                                  print(value);
+                                return 'Please enter valid username!';
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              _enteredName = value!;
+                            },
+                          ),
+                        SizedBox(
+                          height: 12,
+                        ),
                         TextFormField(
                           style: TextStyle(color: textColor),
                           cursorColor: textColor,
@@ -176,10 +207,16 @@ class _AuthScreenState extends State<AuthScreen> {
                             enableSuggestions: false,
                             autocorrect: false,
                             textCapitalization: TextCapitalization.none,
+                            onChanged: (text) async {
+                              final check = await usernameExists(text);
+                              setState(() => userExists = check);
+                            },
                             validator: (value) {
                               if (value == null ||
                                   value.trim().length < 4 ||
                                   value.trim().length > 32 ||
+                                  value.contains(" ") ||
+                                  userExists ||
                                   value.isEmpty) {
                                   print(value);
                                 return 'Please enter valid username!';
