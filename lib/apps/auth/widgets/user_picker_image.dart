@@ -6,7 +6,9 @@ import 'package:p_chat/colors.dart';
 
 
 class UserImagePicker extends StatefulWidget {
-  const UserImagePicker({super.key, required this.onPickImage});
+  const UserImagePicker({super.key, this.radius = 40, required this.onPickImage, this.defaultImageUrl ="https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png"});
+  final String defaultImageUrl;
+  final double radius;
   final void Function(File pickedImage) onPickImage;
 
   @override
@@ -15,7 +17,7 @@ class UserImagePicker extends StatefulWidget {
 
 class _UserImagePickerState extends State<UserImagePicker> {
   File? _pickedImageFile;
-  
+
 
   
 
@@ -44,10 +46,16 @@ class _UserImagePickerState extends State<UserImagePicker> {
           clipBehavior: Clip.none,
           fit: StackFit.expand,
           children: [
+          _pickedImageFile != null ?
             CircleAvatar(
-              radius: 40,
-              backgroundColor: greyColor,
-              foregroundImage:_pickedImageFile != null ? FileImage(_pickedImageFile!) : null,
+              radius: widget.radius,
+              backgroundColor: Colors.grey,
+              backgroundImage: FileImage(_pickedImageFile!) ,
+            ) :
+            CircleAvatar(
+              radius: widget.radius,
+              backgroundColor: Colors.grey,
+              backgroundImage: NetworkImage(widget.defaultImageUrl) ,
             ),
             Positioned(
                 bottom: 0,
