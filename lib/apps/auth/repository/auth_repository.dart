@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:p_chat/apps/auth/screens/profile.dart';
 
 import '../../../common/utils/utils.dart';
 import '../../../models/user.dart';
@@ -43,23 +45,23 @@ class AuthRepository {
   }) async {
     try {
       String uid = auth.currentUser!.uid;
-      String photoUrl =
+      String imageUrl =
           'https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png';
 
       if (profilePic != null) {
-        photoUrl = await ref
-            .read(commonFirebaseStorageRepositoryProvider)
-            .storeFileToFirebase(
-              'profilePic/$uid',
-              profilePic,
-            );
+        final storageRef = FirebaseStorage.instance
+            .ref()
+            .child('user_images')
+            .child('${uid}.jpg');
+        await storageRef.putFile(profilePic!);
+        imageUrl = await storageRef.getDownloadURL();
       }
 
       var user = UserModel(
         username: username,
         name: name,
         uid: uid,
-        profilePic: photoUrl,
+        profilePic: imageUrl,
         isOnline: true,
         email: auth.currentUser!.email!,
         groupId: [],
@@ -70,7 +72,7 @@ class AuthRepository {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-          builder: (context) => const MobileLayoutScreen(),
+          builder: (context) => const ProfileScreen(),
         ),
         (route) => false,
       );
