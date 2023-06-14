@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:p_chat/apps/auth/controller/auth_controller.dart';
 import 'package:p_chat/apps/auth/widgets/user_picker_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,20 +11,22 @@ import 'package:p_chat/colors.dart';
 
 final _firebase = FirebaseAuth.instance;
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
 
   static const String routeName = "/profile";
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  ConsumerState<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   final _formkey = GlobalKey<FormState>();
   var isLogin = true;
   var _isUploading = false;
   var _enteredUsername = "";
+  var _enteredName = "";
+  var _defaultImageUrl = "";
 
   InputDecoration textFieldDesign(String labelText, IconData icon) {
     return InputDecoration(
@@ -39,6 +43,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void setFields(){
 
+  }
+
+  void storeUserData() async {
+    ref.read(authControllerProvider).saveUserDataToFirebase(
+            context,
+            _enteredName,
+            _enteredUsername,
+            _selectedImage,
+        );
   }
 
   File? _selectedImage;
@@ -72,7 +85,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         print("waawdwawdawd");
         Map<String, dynamic>? data = documentSnap.data();
         var value = data?['username'];
-        _enteredUsername = value+"wad"; // <-- The value you want to retrieve. 
+        var value2 = data?['username'];
+        _enteredUsername = value; // <-- The value you want to retrieve. 
+        _defaultImageUrl = value2;
         print(value);
         print(_enteredUsername);
         // Call setState if needed.
@@ -149,6 +164,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             onPickImage: (pickedImage) {
                               _selectedImage = pickedImage;
                             },
+                            defaultImageUrl: _defaultImageUrl,
                           ),
                         SizedBox(
                           height: 12,
