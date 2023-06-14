@@ -1,12 +1,11 @@
-import 'dart:ffi';
-import 'dart:io';
+
 
 // import 'package:p_chat/apps/auth/controller/auth_controller.dart';
 import 'package:p_chat/apps/auth/screens/profile.dart';
-import 'package:p_chat/apps/auth/widgets/user_picker_image.dart';
+// import 'package:p_chat/apps/auth/widgets/user_picker_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+// import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:p_chat/colors.dart';
 
@@ -50,7 +49,6 @@ class _AuthScreenState extends State<AuthScreen> {
                 bottomRight: Radius.circular(0), topLeft: Radius.circular(0))));
   }
 
-  File? _selectedImage;
 
   void _submit() async {
     final isValid = _formkey.currentState!.validate();
@@ -73,9 +71,12 @@ class _AuthScreenState extends State<AuthScreen> {
       if (isLogin) {
         final userCredentials = await _firebase.signInWithEmailAndPassword(
             email: _enteredEmail, password: _enteredPass);
+            print(userCredentials);
       } else {
         final userCredentials = await _firebase.createUserWithEmailAndPassword(
             email: _enteredEmail, password: _enteredPass);
+      
+      print(userCredentials);
 
         Navigator.push(
         context,
@@ -145,12 +146,6 @@ class _AuthScreenState extends State<AuthScreen> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        if (!isLogin)
-                          UserImagePicker(
-                            onPickImage: (pickedImage) {
-                              _selectedImage = pickedImage;
-                            },
-                          ),
                         SizedBox(
                           height: 12,
                         ),
