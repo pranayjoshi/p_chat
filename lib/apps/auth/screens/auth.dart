@@ -25,20 +25,9 @@ class _AuthScreenState extends State<AuthScreen> {
   final _formkey = GlobalKey<FormState>();
   var isLogin = true;
   var _enteredEmail = "";
-  var _enteredName = "";
   var _enteredPass = "";
   var _isUploading = false;
-  var _enteredUsername = "";
-  var userExists = true;
-    
-
-  Future<bool> usernameExists(String username) async {
-      final stat = await FirebaseFirestore.instance.collection("users").where("username", isEqualTo: username).get().then((value) => value.size > 0 ? true : false);
-      print(stat);
-      print(username);
-      print("Wadadawd");
-      return stat;
-    }
+  
 
   InputDecoration textFieldDesign(String labelText, IconData icon) {
     return InputDecoration(
@@ -165,32 +154,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         SizedBox(
                           height: 12,
                         ),
-                        if (!isLogin)
-                          TextFormField(
-                            style: TextStyle(color: textColor),
-                            cursorColor: textColor,
-                            decoration: textFieldDesign("Enter your Full Name",
-                                Icons.person_2_outlined),
-                            enableSuggestions: false,
-                            autocorrect: false,
-                            textCapitalization: TextCapitalization.none,
-                            validator: (value) {
-                              if (value == null ||
-                                  value.trim().length < 4 ||
-                                  value.trim().length > 32 ||
-                                  value.isEmpty) {
-                                  print(value);
-                                return 'Please enter valid username!';
-                              }
-                              return null;
-                            },
-                            onSaved: (value) {
-                              _enteredName = value!;
-                            },
-                          ),
-                        SizedBox(
-                          height: 12,
-                        ),
+                        
                         TextFormField(
                           style: TextStyle(color: textColor),
                           cursorColor: textColor,
@@ -211,38 +175,6 @@ class _AuthScreenState extends State<AuthScreen> {
                             _enteredEmail = value!;
                           },
                         ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        if (!isLogin)
-                          TextFormField(
-                            style: TextStyle(color: textColor),
-                            cursorColor: textColor,
-                            decoration: textFieldDesign("Enter your Username",
-                                Icons.account_circle_rounded),
-                            enableSuggestions: false,
-                            autocorrect: false,
-                            textCapitalization: TextCapitalization.none,
-                            onChanged: (text) async {
-                              final check = await usernameExists(text);
-                              setState(() => userExists = check);
-                            },
-                            validator: (value) {
-                              if (value == null ||
-                                  value.trim().length < 4 ||
-                                  value.trim().length > 32 ||
-                                  value.contains(" ") ||
-                                  value.isEmpty) {
-                                  print(value);
-                                return 'Please enter valid username!';
-                              }
-                              if (userExists) return 'Username Already Exists!';
-                              return null;
-                            },
-                            onSaved: (value) {
-                              _enteredUsername = value!;
-                            },
-                          ),
                         SizedBox(
                           height: 12,
                         ),

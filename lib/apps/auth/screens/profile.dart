@@ -28,29 +28,39 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   var _enteredName = "";
   var _defaultImageUrl = "";
 
+  var userExists = true;
+
+  Future<bool> usernameExists(String username) async {
+    final stat = await FirebaseFirestore.instance
+        .collection("users")
+        .where("username", isEqualTo: username)
+        .get()
+        .then((value) => value.size > 0 ? true : false);
+    return stat;
+  }
+
   InputDecoration textFieldDesign(String labelText, IconData icon) {
     return InputDecoration(
-        border: InputBorder.none,
-        filled: true,
-        fillColor: greyColor.withOpacity(.08),
-        prefixIcon: Icon(
-          icon,
-          color: textColor,
-        ),
-        labelText: labelText,
-        labelStyle: TextStyle(color: textColor.withOpacity(.8)),);
+      border: InputBorder.none,
+      filled: true,
+      fillColor: greyColor.withOpacity(.08),
+      prefixIcon: Icon(
+        icon,
+        color: textColor,
+      ),
+      labelText: labelText,
+      labelStyle: TextStyle(color: textColor.withOpacity(.8)),
+    );
   }
 
-  void setFields(){
-
-  }
+  void setFields() {}
 
   void storeUserData() async {
     ref.read(authControllerProvider).saveUserDataToFirebase(
-            context,
-            _enteredName,
-            _enteredUsername,
-            _selectedImage,
+          context,
+          _enteredName,
+          _enteredUsername,
+          _selectedImage,
         );
   }
 
@@ -76,138 +86,169 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       });
       final currentUser = FirebaseAuth.instance.currentUser;
       final currentUid = currentUser!.uid;
-      Map<String, dynamic>? data = {"":""};
+      Map<String, dynamic>? data = {"": ""};
 
       final documentSnap = await FirebaseFirestore.instance
-            .collection("users")
-            .doc(currentUid).get();
+          .collection("users")
+          .doc(currentUid)
+          .get();
       if (documentSnap.exists) {
         print("waawdwawdawd");
         Map<String, dynamic>? data = documentSnap.data();
         var value = data?['username'];
         var value2 = data?['username'];
-        _enteredUsername = value; // <-- The value you want to retrieve. 
+        _enteredUsername = value; // <-- The value you want to retrieve.
         _defaultImageUrl = value2;
         print(value);
         print(_enteredUsername);
         // Call setState if needed.
       }
       print(data);
-        // final storageRef = FirebaseStorage.instance
-        //     .ref()
-        //     .child('user_images')
-        //     .child('${userCredentials.user!.uid}.jpg');
-        // var imageUrl = "";
-        // if (!isLogin && _selectedImage == null) {
-        //   imageUrl = 'https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png';
-        // }else {
-        //   await storageRef.putFile(_selectedImage!);
-          
-        //   imageUrl = await storageRef.getDownloadURL();
-        // }
-        // // print(imageUrl);
+      // final storageRef = FirebaseStorage.instance
+      //     .ref()
+      //     .child('user_images')
+      //     .child('${userCredentials.user!.uid}.jpg');
+      // var imageUrl = "";
+      // if (!isLogin && _selectedImage == null) {
+      //   imageUrl = 'https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png';
+      // }else {
+      //   await storageRef.putFile(_selectedImage!);
 
-        // final username = await FirebaseFirestore.instance.collection("users").where("username", isEqualTo: _enteredUsername).get().then((value) => value.size > 0 ? true : false);
-        // print("hiiidawdW");
-        // print(username);
+      //   imageUrl = await storageRef.getDownloadURL();
+      // }
+      // // print(imageUrl);
 
-        // await FirebaseFirestore.instance
-        //     .collection("users")
-        //     .doc(userCredentials.user!.uid)
-        //     .set({
-        //   "username": _enteredUsername,
-        //   "email": _enteredEmail,
-        //   "isOnline": true,
-        //   "image_url": imageUrl
-        // });
-      
+      // final username = await FirebaseFirestore.instance.collection("users").where("username", isEqualTo: _enteredUsername).get().then((value) => value.size > 0 ? true : false);
+      // print("hiiidawdW");
+      // print(username);
+
+      // await FirebaseFirestore.instance
+      //     .collection("users")
+      //     .doc(userCredentials.user!.uid)
+      //     .set({
+      //   "username": _enteredUsername,
+      //   "email": _enteredEmail,
+      //   "isOnline": true,
+      //   "image_url": imageUrl
+      // });
     } on FirebaseAuthException catch (err) {
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(err.message ?? "Authentication Failed!")));
-      
     }
     setState(() {
-        _isUploading = false;
-      });
+      _isUploading = false;
+    });
   }
 
   @override
   void initState() {
-    
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: appBarColor,
-        title: Text(
-          "Profile",
-          style: TextStyle(color: textColor),
-        )),
+          backgroundColor: appBarColor,
+          title: Text(
+            "Profile",
+            style: TextStyle(color: textColor),
+          )),
       backgroundColor: mainColor,
       body: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Form(
-                    key: _formkey,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SizedBox(
-                          height: 120,
-                        ),
-                          UserImagePicker(
-                            onPickImage: (pickedImage) {
-                              _selectedImage = pickedImage;
-                            },
-                            defaultImageUrl: _defaultImageUrl,
-                          ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                          TextFormField(
-                            style: TextStyle(color: textColor),
-                            cursorColor: textColor,
-                            decoration: textFieldDesign("Enter your Username",
-                                Icons.account_circle_rounded),
-                            enableSuggestions: false,
-                            autocorrect: false,
-                            textCapitalization: TextCapitalization.none,
-                            validator: (value) {
-                              if (value == null ||
-                                  value.trim().length < 4 ||
-                                  value.trim().length > 32 ||
-                                  value.isEmpty) {
-                                  print(value);
-                                return 'Please enter valid username!';
-                              }
-                              return null;
-                            },
-                            onSaved: (value) {
-                              _enteredUsername = value!;
-                            },
-                          ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        if (_isUploading) Center(child: const CircularProgressIndicator()),
-                        if (!_isUploading)
-                          ElevatedButton(
-                              onPressed: () {
-                                _submit();
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: containerColor),
-                              child: Text("Submit"),),
-                      ],
-                    ),
-                  ),
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Form(
+            key: _formkey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  height: 120,
                 ),
-              ),
-            );
+                UserImagePicker(
+                  onPickImage: (pickedImage) {
+                    _selectedImage = pickedImage;
+                  },
+                  defaultImageUrl: _defaultImageUrl,
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                if (!isLogin)
+                  TextFormField(
+                    style: TextStyle(color: textColor),
+                    cursorColor: textColor,
+                    decoration: textFieldDesign(
+                        "Enter your Full Name", Icons.person_2_outlined),
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    textCapitalization: TextCapitalization.none,
+                    validator: (value) {
+                      if (value == null ||
+                          value.trim().length < 4 ||
+                          value.trim().length > 32 ||
+                          value.isEmpty) {
+                        print(value);
+                        return 'Please enter valid username!';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _enteredName = value!;
+                    },
+                  ),
+                SizedBox(
+                  height: 12,
+                ),
+                TextFormField(
+                  style: TextStyle(color: textColor),
+                  cursorColor: textColor,
+                  decoration: textFieldDesign(
+                      "Enter your Username", Icons.account_circle_rounded),
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  textCapitalization: TextCapitalization.none,
+                  onChanged: (text) async {
+                    final check = await usernameExists(text);
+                    setState(() => userExists = check);
+                  },
+                  validator: (value) {
+                    if (value == null ||
+                        value.trim().length < 4 ||
+                        value.trim().length > 32 ||
+                        value.contains(" ") ||
+                        value.isEmpty) {
+                      print(value);
+                      return 'Please enter valid username!';
+                    }
+                    if (userExists) return 'Username Already Exists!';
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _enteredUsername = value!;
+                  },
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                if (_isUploading)
+                  Center(child: const CircularProgressIndicator()),
+                if (!_isUploading)
+                  ElevatedButton(
+                    onPressed: () {
+                      storeUserData();
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: containerColor),
+                    child: Text("Submit"),
+                  ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
