@@ -20,9 +20,10 @@ class UserModel {
     return {
       'name': name,
       'uid': uid,
+      'username': username,
       'profilePic': profilePic,
       'isOnline': isOnline,
-      'phoneNumber': email,
+      'email': email,
       'groupId': groupId,
     };
   }

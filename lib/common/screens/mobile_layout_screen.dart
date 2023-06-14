@@ -30,7 +30,7 @@ class _MobileLayoutScreenState extends State<MobileLayoutScreen> {
           IconButton(
               color: textColor,
               onPressed: () {
-                logout();
+                logout(); Navigator.pop(context);
               },
               icon: Icon(Icons.exit_to_app))
         ],

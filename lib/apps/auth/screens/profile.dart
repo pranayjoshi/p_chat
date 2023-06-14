@@ -22,7 +22,7 @@ class ProfileScreen extends ConsumerStatefulWidget {
 
 class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   final _formkey = GlobalKey<FormState>();
-  var isLogin = true;
+  // var isLogin = true;
   var _isUploading = false;
   var _enteredUsername = "";
   var _enteredName = "";
@@ -31,11 +31,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   var userExists = true;
 
   Future<bool> usernameExists(String username) async {
+    
     final stat = await FirebaseFirestore.instance
         .collection("users")
         .where("username", isEqualTo: username)
         .get()
         .then((value) => value.size > 0 ? true : false);
+    print(stat);
     return stat;
   }
 
@@ -150,7 +152,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: appBarColor,
           title: Text(
             "Profile",
             style: TextStyle(color: textColor),
@@ -176,7 +177,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 SizedBox(
                   height: 12,
                 ),
-                if (!isLogin)
                   TextFormField(
                     style: TextStyle(color: textColor),
                     cursorColor: textColor,
@@ -213,6 +213,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   onChanged: (text) async {
                     final check = await usernameExists(text);
                     setState(() => userExists = check);
+                    print(userExists);
                   },
                   validator: (value) {
                     if (value == null ||

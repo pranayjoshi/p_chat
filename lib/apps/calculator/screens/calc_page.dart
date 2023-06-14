@@ -160,7 +160,7 @@ class _CalcPage extends State<CalcPage> {
       String finalQuestion = userQuestion;
       // print(finalQuestion);
       if (finalQuestion == "1306"){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => MobileLayoutScreen()));
+        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MobileLayoutScreen()));
       }
       try{
         Parser p = Parser();
