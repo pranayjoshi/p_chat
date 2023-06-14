@@ -1,5 +1,3 @@
-
-
 // import 'package:p_chat/apps/auth/controller/auth_controller.dart';
 import 'package:p_chat/apps/auth/screens/profile.dart';
 // import 'package:p_chat/apps/auth/widgets/user_picker_image.dart';
@@ -8,7 +6,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:p_chat/colors.dart';
-
 
 final _firebase = FirebaseAuth.instance;
 var _instance = FirebaseFirestore.instance;
@@ -26,7 +23,6 @@ class _AuthScreenState extends State<AuthScreen> {
   var _enteredEmail = "";
   var _enteredPass = "";
   var _isUploading = false;
-  
 
   InputDecoration textFieldDesign(String labelText, IconData icon) {
     return InputDecoration(
@@ -49,7 +45,6 @@ class _AuthScreenState extends State<AuthScreen> {
                 bottomRight: Radius.circular(0), topLeft: Radius.circular(0))));
   }
 
-
   void _submit() async {
     final isValid = _formkey.currentState!.validate();
 
@@ -65,30 +60,28 @@ class _AuthScreenState extends State<AuthScreen> {
       if (isLogin) {
         final userCredentials = await _firebase.signInWithEmailAndPassword(
             email: _enteredEmail, password: _enteredPass);
-            print(userCredentials);
+        print(userCredentials);
       } else {
         final userCredentials = await _firebase.createUserWithEmailAndPassword(
             email: _enteredEmail, password: _enteredPass);
-      
-      print(userCredentials);
+
+        print(userCredentials);
 
         Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const ProfileScreen(),
-        ),
-      );
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ProfileScreen(),
+          ),
+        );
       }
     } on FirebaseAuthException catch (err) {
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(err.message ?? "Authentication Failed!")));
-      
     }
     setState(() {
-        _isUploading = false;
-      });
-    
+      _isUploading = false;
+    });
   }
 
   @override
@@ -118,7 +111,17 @@ class _AuthScreenState extends State<AuthScreen> {
                         SizedBox(
                           height: 12,
                         ),
-                        
+                        if (!_isUploading)
+                          isLogin
+                              ? Text(
+                                  "Login",
+                                  style: TextStyle(color: textColor, fontSize: 28, fontWeight: FontWeight.w600),
+                                )
+                              : Text("Sign Up",
+                                  style: TextStyle(color: textColor, fontSize: 28, fontWeight: FontWeight.w600)),
+                        SizedBox(
+                          height: 24,
+                        ),
                         TextFormField(
                           style: TextStyle(color: textColor),
                           cursorColor: textColor,
@@ -161,11 +164,11 @@ class _AuthScreenState extends State<AuthScreen> {
                         SizedBox(
                           height: 12,
                         ),
-                        if (_isUploading) Center(child: const CircularProgressIndicator()),
+                        if (_isUploading)
+                          Center(child: const CircularProgressIndicator()),
                         if (!_isUploading)
                           ElevatedButton(
                               onPressed: () {
-                                
                                 _submit();
                               },
                               style: ElevatedButton.styleFrom(

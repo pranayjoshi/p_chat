@@ -31,9 +31,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   TextEditingController _nameController = TextEditingController();
   var _defaultImageUrl = "";
 
-  var userExists = true;
+  var userExists = false;
 
   Future<bool> usernameExists(String username) async {
+    print(_userData!.username);
     if (_userData!.username == username){
       return false;
     }
@@ -63,9 +64,21 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   void setFields() async {
     print("hello");
     final userData = await ref.read(authControllerProvider).getUserData();
-    _userData = userData;
-    _usernameController.text =  userData!.username;
-    _nameController.text = userData.name;
+    if (userData == null) {
+      _userData = UserModel(
+      name: '',
+      username: '',
+      uid: '',
+      profilePic: '',
+      isOnline: false,
+      email: '',
+      groupId: [],
+    );
+    }else {_userData = userData;}
+    
+
+    _usernameController.text =  _userData!.username;
+    _nameController.text = _userData!.name;
     print(_nameController.text);
   }
 
