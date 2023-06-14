@@ -55,9 +55,18 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     );
   }
 
-  void setFields() {}
+  void setFields() {
+    print("hello");
+  }
 
   void storeUserData() async {
+    final isValid = _formkey.currentState!.validate();
+
+    if (!isValid) {
+      return;
+    }
+
+    _formkey.currentState!.save();
     ref.read(authControllerProvider).saveUserDataToFirebase(
           context,
           _enteredName,
@@ -95,17 +104,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           .doc(currentUid)
           .get();
       if (documentSnap.exists) {
-        print("waawdwawdawd");
         Map<String, dynamic>? data = documentSnap.data();
         var value = data?['username'];
         var value2 = data?['username'];
         _enteredUsername = value; // <-- The value you want to retrieve.
         _defaultImageUrl = value2;
-        print(value);
-        print(_enteredUsername);
         // Call setState if needed.
       }
-      print(data);
       // final storageRef = FirebaseStorage.instance
       //     .ref()
       //     .child('user_images')
@@ -145,6 +150,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   @override
   void initState() {
+    setFields();
     super.initState();
   }
 
@@ -152,11 +158,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: appBarColor,
+        iconTheme: IconThemeData(color: textColor),
           title: Text(
             "Profile",
             style: TextStyle(color: textColor),
           )),
-      backgroundColor: mainColor,
+      backgroundColor: backgroundColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(16),
@@ -172,11 +180,12 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   onPickImage: (pickedImage) {
                     _selectedImage = pickedImage;
                   },
-                  defaultImageUrl: _defaultImageUrl,
+                  // defaultImageUrl: _defaultImageUrl,
                 ),
                 SizedBox(
-                  height: 12,
+                  height: 30,
                 ),
+                Container(alignment: Alignment.centerLeft, padding: EdgeInsets.only(bottom: 8), child: Text("Your Name", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),)),
                   TextFormField(
                     style: TextStyle(color: textColor),
                     cursorColor: textColor,
@@ -200,8 +209,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     },
                   ),
                 SizedBox(
-                  height: 12,
+                  height: 20,
                 ),
+                Container(alignment: Alignment.centerLeft, padding: EdgeInsets.only(bottom: 8), child: Text("Your Username", style: TextStyle( fontWeight: FontWeight.w500, fontSize: 16),)),
                 TextFormField(
                   style: TextStyle(color: textColor),
                   cursorColor: textColor,
@@ -232,7 +242,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   },
                 ),
                 SizedBox(
-                  height: 12,
+                  height: 30,
                 ),
                 if (_isUploading)
                   Center(child: const CircularProgressIndicator()),
@@ -242,7 +252,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       storeUserData();
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: containerColor),
+                        backgroundColor: mainColor, foregroundColor: textColor),
                     child: Text("Submit"),
                   ),
               ],

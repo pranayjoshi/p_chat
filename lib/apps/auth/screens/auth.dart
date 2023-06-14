@@ -57,12 +57,6 @@ class _AuthScreenState extends State<AuthScreen> {
       return;
     }
 
-    // if (!isLogin && _selectedImage == null) {
-    //   ScaffoldMessenger.of(context).clearSnackBars();
-    //   ScaffoldMessenger.of(context)
-    //       .showSnackBar(SnackBar(content: Text("Please choose an image!")));
-    // }
-
     _formkey.currentState!.save();
     try {
       setState(() {
@@ -84,31 +78,6 @@ class _AuthScreenState extends State<AuthScreen> {
           builder: (context) => const ProfileScreen(),
         ),
       );
-        // final storageRef = FirebaseStorage.instance
-        //     .ref()
-        //     .child('user_images')
-        //     .child('${userCredentials.user!.uid}.jpg');
-        // var imageUrl = "";
-        // if (!isLogin && _selectedImage == null) {
-        //   imageUrl = 'https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png';
-        // }else {
-        //   await storageRef.putFile(_selectedImage!);
-          
-        //   imageUrl = await storageRef.getDownloadURL();
-        // }
-        // // print(imageUrl);
-
-        // await FirebaseFirestore.instance
-        //     .collection("users")
-        //     .doc(userCredentials.user!.uid)
-        //     .set({
-
-        //   "username": _enteredUsername,
-        //   "name": _enteredName,
-        //   "email": _enteredEmail,
-        //   "isOnline": true,
-        //   "image_url": imageUrl
-        // });
       }
     } on FirebaseAuthException catch (err) {
       ScaffoldMessenger.of(context).clearSnackBars();

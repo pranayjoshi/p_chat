@@ -10,15 +10,17 @@ class UserImagePicker extends StatefulWidget {
   final String defaultImageUrl;
   final double radius;
   final void Function(File pickedImage) onPickImage;
+  
 
   @override
   State<UserImagePicker> createState() => _UserImagePickerState();
 }
 
 class _UserImagePickerState extends State<UserImagePicker> {
+  
   File? _pickedImageFile;
-
-
+  
+  // late String _defaultImageUrl;
   
 
   void pickImage() async {
@@ -33,7 +35,17 @@ class _UserImagePickerState extends State<UserImagePicker> {
       _pickedImageFile = File(pickedImage.path);
     });
     widget.onPickImage(_pickedImageFile!); 
+    
+    // _defaultImageUrl = widget.defaultImageUrl;
+    
   }
+
+  // @override
+  // void initState() {
+  //   print("object");
+  //   print(widget.defaultImageUrl);
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +69,7 @@ class _UserImagePickerState extends State<UserImagePicker> {
               backgroundColor: Colors.grey,
               backgroundImage: NetworkImage(widget.defaultImageUrl) ,
             ),
+            
             Positioned(
                 bottom: 0,
                 right: -25,
