@@ -2,6 +2,7 @@ import 'dart:ffi';
 import 'dart:io';
 
 // import 'package:p_chat/apps/auth/controller/auth_controller.dart';
+import 'package:p_chat/apps/auth/screens/profile.dart';
 import 'package:p_chat/apps/auth/widgets/user_picker_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -86,31 +87,38 @@ class _AuthScreenState extends State<AuthScreen> {
       } else {
         final userCredentials = await _firebase.createUserWithEmailAndPassword(
             email: _enteredEmail, password: _enteredPass);
-        final storageRef = FirebaseStorage.instance
-            .ref()
-            .child('user_images')
-            .child('${userCredentials.user!.uid}.jpg');
-        var imageUrl = "";
-        if (!isLogin && _selectedImage == null) {
-          imageUrl = 'https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png';
-        }else {
-          await storageRef.putFile(_selectedImage!);
+
+        Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ProfileScreen(),
+        ),
+      );
+        // final storageRef = FirebaseStorage.instance
+        //     .ref()
+        //     .child('user_images')
+        //     .child('${userCredentials.user!.uid}.jpg');
+        // var imageUrl = "";
+        // if (!isLogin && _selectedImage == null) {
+        //   imageUrl = 'https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png';
+        // }else {
+        //   await storageRef.putFile(_selectedImage!);
           
-          imageUrl = await storageRef.getDownloadURL();
-        }
-        // print(imageUrl);
+        //   imageUrl = await storageRef.getDownloadURL();
+        // }
+        // // print(imageUrl);
 
-        await FirebaseFirestore.instance
-            .collection("users")
-            .doc(userCredentials.user!.uid)
-            .set({
+        // await FirebaseFirestore.instance
+        //     .collection("users")
+        //     .doc(userCredentials.user!.uid)
+        //     .set({
 
-          "username": _enteredUsername,
-          "name": _enteredName,
-          "email": _enteredEmail,
-          "isOnline": true,
-          "image_url": imageUrl
-        });
+        //   "username": _enteredUsername,
+        //   "name": _enteredName,
+        //   "email": _enteredEmail,
+        //   "isOnline": true,
+        //   "image_url": imageUrl
+        // });
       }
     } on FirebaseAuthException catch (err) {
       ScaffoldMessenger.of(context).clearSnackBars();

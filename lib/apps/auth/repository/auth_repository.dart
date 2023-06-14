@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:p_chat/apps/auth/screens/profile.dart';
+import 'package:p_chat/common/screens/mobile_layout_screen.dart';
 
 import '../../../common/utils/utils.dart';
 import '../../../models/user.dart';
@@ -72,7 +73,7 @@ class AuthRepository {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-          builder: (context) => const ProfileScreen(),
+          builder: (context) => const MobileLayoutScreen(),
         ),
         (route) => false,
       );
