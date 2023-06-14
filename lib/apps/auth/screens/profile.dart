@@ -9,6 +9,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:p_chat/colors.dart';
 
+import '../../../models/user.dart';
+
 final _firebase = FirebaseAuth.instance;
 
 class ProfileScreen extends ConsumerStatefulWidget {
@@ -24,14 +26,17 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   final _formkey = GlobalKey<FormState>();
   // var isLogin = true;
   var _isUploading = false;
-  var _enteredUsername = "";
-  var _enteredName = "";
+  UserModel? _userData;
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _nameController = TextEditingController();
   var _defaultImageUrl = "";
 
   var userExists = true;
 
   Future<bool> usernameExists(String username) async {
-    
+    if (_userData!.username == username){
+      return false;
+    }
     final stat = await FirebaseFirestore.instance
         .collection("users")
         .where("username", isEqualTo: username)
@@ -55,8 +60,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     );
   }
 
-  void setFields() {
+  void setFields() async {
     print("hello");
+    final userData = await ref.read(authControllerProvider).getUserData();
+    _userData = userData;
+    _usernameController.text =  userData!.username;
+    _nameController.text = userData.name;
+    print(_nameController.text);
   }
 
   void storeUserData() async {
@@ -69,8 +79,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     _formkey.currentState!.save();
     ref.read(authControllerProvider).saveUserDataToFirebase(
           context,
-          _enteredName,
-          _enteredUsername,
+          _nameController.text,
+          _usernameController.text,
           _selectedImage,
         );
   }
@@ -107,7 +117,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         Map<String, dynamic>? data = documentSnap.data();
         var value = data?['username'];
         var value2 = data?['username'];
-        _enteredUsername = value; // <-- The value you want to retrieve.
+        // _usernameController.text = value; // <-- The value you want to retrieve.
         _defaultImageUrl = value2;
         // Call setState if needed.
       }
@@ -204,9 +214,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       }
                       return null;
                     },
-                    onSaved: (value) {
-                      _enteredName = value!;
-                    },
+                    controller: _nameController,
                   ),
                 SizedBox(
                   height: 20,
@@ -237,9 +245,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     if (userExists) return 'Username Already Exists!';
                     return null;
                   },
-                  onSaved: (value) {
-                    _enteredUsername = value!;
-                  },
+                  controller: _usernameController,
                 ),
                 SizedBox(
                   height: 30,
