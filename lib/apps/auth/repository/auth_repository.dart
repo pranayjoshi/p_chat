@@ -36,6 +36,7 @@ class AuthRepository {
 
   void saveUserDataToFirebase({
     required String name,
+    required String username,
     required File? profilePic,
     required ProviderRef ref,
     required BuildContext context,
@@ -55,11 +56,12 @@ class AuthRepository {
       }
 
       var user = UserModel(
+        username: username,
         name: name,
         uid: uid,
         profilePic: photoUrl,
         isOnline: true,
-        phoneNumber: auth.currentUser!.phoneNumber!,
+        email: auth.currentUser!.email!,
         groupId: [],
       );
 

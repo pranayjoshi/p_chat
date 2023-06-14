@@ -1,12 +1,14 @@
 import 'dart:ffi';
 import 'dart:io';
 
+// import 'package:p_chat/apps/auth/controller/auth_controller.dart';
 import 'package:p_chat/apps/auth/widgets/user_picker_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:p_chat/colors.dart';
+
 
 final _firebase = FirebaseAuth.instance;
 var _instance = FirebaseFirestore.instance;
@@ -104,6 +106,7 @@ class _AuthScreenState extends State<AuthScreen> {
             .set({
 
           "username": _enteredUsername,
+          "name": _enteredName,
           "email": _enteredEmail,
           "isOnline": true,
           "image_url": imageUrl
