@@ -79,7 +79,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
     _usernameController.text =  _userData!.username;
     _nameController.text = _userData!.name;
-    print(_nameController.text);
+    _defaultImageUrl = _userData!.profilePic;
+
+    // print(_defaultImageUrl);
   }
 
   void storeUserData() async {
@@ -173,8 +175,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   @override
   void initState() {
-    setFields();
+    
     super.initState();
+    setFields();
   }
 
   @override
@@ -203,7 +206,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   onPickImage: (pickedImage) {
                     _selectedImage = pickedImage;
                   },
-                  // defaultImageUrl: _defaultImageUrl,
+                  defaultImageUrl: _defaultImageUrl,
                 ),
                 SizedBox(
                   height: 30,

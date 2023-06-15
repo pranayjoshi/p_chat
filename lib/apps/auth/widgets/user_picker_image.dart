@@ -40,6 +40,13 @@ class _UserImagePickerState extends State<UserImagePicker> {
     
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print(widget.defaultImageUrl);
+  }
+
   // @override
   // void initState() {
   //   print("object");
