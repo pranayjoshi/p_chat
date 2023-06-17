@@ -36,6 +36,7 @@ class UserModel {
       profilePic: map['profilePic'] ?? '',
       isOnline: map['isOnline'] ?? false,
       email: map['phoneNumber'] ?? '',
+      // ignore: unrelated_type_equality_checks
       groupId: List<String>.from(map['groupId'])== Null ? [] :List<String>.from(map['groupId']),
     );
   }
