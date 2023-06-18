@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:p_chat/apps/global_contacts/controller/global_contacts_controller.dart';
+import 'package:p_chat/common/widgets/loader.dart';
+
+import '../../../common/widgets/error.dart';
 
 class GlobalContactsScreen extends ConsumerWidget {
   static const String routeName = '/global-contact';
