@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:p_chat/colors.dart';
+import 'package:p_chat/common/utils/colors.dart';
 
 
 class UserImagePicker extends StatefulWidget {
