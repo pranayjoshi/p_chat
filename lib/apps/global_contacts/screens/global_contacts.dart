@@ -119,6 +119,7 @@ class _GlobalContactsScreenState extends ConsumerState<GlobalContactsScreen> {
                       ),
                     ),
                   );}
+                  return Container();
                 });}),
             error: (err, trace) => ErrorScreen(error: err.toString()),
             loading: () => const Loader(),
