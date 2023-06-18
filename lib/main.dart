@@ -6,6 +6,7 @@ import 'package:p_chat/apps/auth/screens/auth.dart';
 import 'package:p_chat/apps/calculator/screens/calc_page.dart';
 import 'package:p_chat/common/utils/colors.dart';
 import 'package:p_chat/firebase_options.dart';
+import 'package:p_chat/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      onGenerateRoute: (settings) => generateRoute(settings),
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
