@@ -12,7 +12,8 @@ class GlobalContactsScreen extends ConsumerStatefulWidget {
   const GlobalContactsScreen({super.key});
 
   @override
-  ConsumerState<GlobalContactsScreen> createState() => _GlobalContactsScreenState();
+  ConsumerState<GlobalContactsScreen> createState() =>
+      _GlobalContactsScreenState();
 }
 
 class _GlobalContactsScreenState extends ConsumerState<GlobalContactsScreen> {
@@ -23,58 +24,63 @@ class _GlobalContactsScreenState extends ConsumerState<GlobalContactsScreen> {
         .selectContact(selectedContact, context);
   }
 
-  var username = "";
+  String username = "";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Select contact'),
-        actions: [
-          TextField(decoration: InputDecoration(hintText: "Search username...", prefixIcon: Icon(Icons.search)), onChanged: (value) {
-            setState(() {
-              username = value;
-            });
-          },),
+        title: Card(
+            child: Row(children: [
+          TextField(
+            decoration: InputDecoration(
+                hintText: "Search username...", prefixIcon: Icon(Icons.search)),
+            onChanged: (value) {
+              setState(() {
+                username = value;
+              });
+            },
+          ),
           IconButton(
             onPressed: () {},
             icon: const Icon(
               Icons.more_vert,
             ),
           ),
-        ],
+        ])),
       ),
-      body: ref.watch(getContactsProvider).when(
-            data: (contactList) => StreamBuilder<QuerySnapshot>(
-                stream: ref.read(getContactsProvider as ProviderListenable<Stream<QuerySnapshot<Object?>>?>),
-                builder:(context, snapshot) => ListView.builder(
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  final contact = UserModel.fromMap(snapshot.data!.docs[index].data() as Map<String, dynamic>);
-                  return InkWell(
-                    onTap: () => selectContact(ref, contact, context),
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: ListTile(
-                        title: Text(
-                          contact.name,
-                          style: const TextStyle(
-                            fontSize: 18,
-                          ),
-                        ),
-                        leading: contact.profilePic == null
-                            ? null
-                            : CircleAvatar(
-                                backgroundImage: NetworkImage(contact.profilePic!),
-                                radius: 30,
-                              ),
-                      ),
-                    ),
-                  );
-                })),
-            error: (err, trace) => ErrorScreen(error: err.toString()),
-            loading: () => const Loader(),
-          ),
+      body: Center(child: Text("dwada")),
+      // body: ref.watch(getContactsProvider).when(
+      //       data: (contactList) => StreamBuilder<QuerySnapshot>(
+      //           stream: ref.read(getContactsProvider as ProviderListenable<Stream<QuerySnapshot<Object?>>?>),
+      //           builder:(context, snapshot) => ListView.builder(
+      //           itemCount: snapshot.data!.docs.length,
+      //           itemBuilder: (context, index) {
+      //             final contact = snapshot.data!.docs[index].data() as Map<String, dynamic>;
+      //             return InkWell(
+      //               // onTap: () => selectContact(ref, contact, context),
+      //               child: Padding(
+      //                 padding: const EdgeInsets.only(bottom: 8.0),
+      //                 child: ListTile(
+      //                   title: Text(
+      //                     contact["name"],
+      //                     style: const TextStyle(
+      //                       fontSize: 18,
+      //                     ),
+      //                   ),
+      //                   leading: contact["profilePic"] == null
+      //                       ? null
+      //                       : CircleAvatar(
+      //                           backgroundImage: NetworkImage(contact["profilePic"]),
+      //                           radius: 30,
+      //                         ),
+      //                 ),
+      //               ),
+      //             );
+      //           })),
+      //       error: (err, trace) => ErrorScreen(error: err.toString()),
+      //       loading: () => const Loader(),
+      //     ),
     );
   }
 }
