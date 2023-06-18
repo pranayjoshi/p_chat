@@ -64,14 +64,17 @@ class MobileChatScreen extends ConsumerWidget {
           actions: [
             IconButton(
               onPressed: () => {},
+              color: textColor,
               icon: const Icon(Icons.video_call),
             ),
             IconButton(
               onPressed: () {},
+              color: textColor,
               icon: const Icon(Icons.call),
             ),
             IconButton(
               onPressed: () {},
+              color: textColor,
               icon: const Icon(Icons.more_vert),
             ),
           ],
