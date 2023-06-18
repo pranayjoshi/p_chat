@@ -29,7 +29,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   UserModel? _userData;
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _nameController = TextEditingController();
-  var _defaultImageUrl = "";
+  var _defaultImageUrl = "https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png";
 
   var userExists = false;
 

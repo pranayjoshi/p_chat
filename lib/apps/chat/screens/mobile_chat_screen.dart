@@ -38,6 +38,7 @@ class MobileChatScreen extends ConsumerWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: appBarColor,
+        iconTheme: IconThemeData(color: textColor),
           // title: isGroupChat
           //     ? Text(name)
               title: StreamBuilder<UserModel>(

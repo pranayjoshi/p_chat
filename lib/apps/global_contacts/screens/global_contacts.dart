@@ -62,22 +62,30 @@ class _GlobalContactsScreenState extends ConsumerState<GlobalContactsScreen> {
                   :  ListView.builder(
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
-                  final contact = snapshot.data!.docs[index].data() as Map<String, dynamic>;
+                  final contact = UserModel.fromMap((snapshot.data!.docs[index].data()) as Map<String, dynamic>);
                   return InkWell(
-                    // onTap: () => selectContact(ref, contact, context),
+                    onTap: () => selectContact(ref, contact, context),
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: ListTile(
                         title: Text(
-                          contact["username"],
+                          contact.name,
                           style: const TextStyle(
                             fontSize: 18,
+                            fontWeight: FontWeight.bold
                           ),
                         ),
-                        leading: contact["profilePic"] == null
+                        subtitle: Text(
+                          "@" + contact.username,
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
+                        leading: contact.profilePic == null
                             ? null
                             : CircleAvatar(
-                                backgroundImage: NetworkImage(contact["profilePic"]),
+                                backgroundImage: NetworkImage(contact.profilePic),
                                 radius: 30,
                               ),
                       ),
