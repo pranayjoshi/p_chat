@@ -2,21 +2,21 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:whatsapp_ui/common/widgets/error.dart';
-import 'package:whatsapp_ui/features/auth/screens/login_screen.dart';
-import 'package:whatsapp_ui/features/auth/screens/otp_screen.dart';
-import 'package:whatsapp_ui/features/auth/screens/user_information_screen.dart';
-import 'package:whatsapp_ui/features/group/screens/create_group_screen.dart';
-import 'package:whatsapp_ui/features/select_contacts/screens/select_contacts_screen.dart';
-import 'package:whatsapp_ui/features/chat/screens/mobile_chat_screen.dart';
-import 'package:whatsapp_ui/features/status/screens/confirm_status_screen.dart';
-import 'package:whatsapp_ui/features/status/screens/status_screen.dart';
+import 'package:p_chat/apps/auth/screens/auth.dart';
+import 'package:p_chat/apps/auth/screens/otp_screen.dart';
+import 'package:p_chat/apps/auth/screens/user_information_screen.dart';
+import 'package:p_chat/apps/group/screens/create_group_screen.dart';
+import 'package:p_chat/apps/select_contacts/screens/select_contacts_screen.dart';
+import 'package:p_chat/apps/chat/screens/mobile_chat_screen.dart';
+import 'package:p_chat/apps/status/screens/confirm_status_screen.dart';
+import 'package:p_chat/apps/status/screens/status_screen.dart';
 import 'package:whatsapp_ui/models/status_model.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
-    case LoginScreen.routeName:
+    case AuthScreen.routeName:
       return MaterialPageRoute(
-        builder: (context) => const LoginScreen(),
+        builder: (context) => const AuthScreen(),
       );
     case OTPScreen.routeName:
       final verificationId = settings.arguments as String;

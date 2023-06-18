@@ -11,6 +11,7 @@ final _firebase = FirebaseAuth.instance;
 var _instance = FirebaseFirestore.instance;
 
 class AuthScreen extends StatefulWidget {
+  static const routeName = "/auth";
   const AuthScreen({super.key});
 
   @override
