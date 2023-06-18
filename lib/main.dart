@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:p_chat/apps/auth/screens/auth.dart';
 import 'package:p_chat/apps/calculator/screens/calc_page.dart';
-import 'package:p_chat/colors.dart';
+import 'package:p_chat/common/utils/colors.dart';
 import 'package:p_chat/firebase_options.dart';
 
 void main() async {
