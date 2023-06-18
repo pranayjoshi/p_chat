@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:p_chat/colors.dart';
+import 'package:p_chat/common/utils/colors.dart';
 
 final _firebase = FirebaseAuth.instance;
 var _instance = FirebaseFirestore.instance;
