@@ -65,7 +65,7 @@ class AuthRepository {
         profilePic: imageUrl,
         isOnline: true,
         email: auth.currentUser!.email!,
-        groupId: [],
+        // groupId: [],
       );
 
       await firestore.collection('users').doc(uid).set(user.toMap());

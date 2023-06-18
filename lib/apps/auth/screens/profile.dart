@@ -72,7 +72,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       profilePic: '',
       isOnline: false,
       email: '',
-      groupId: [],
+      // groupId: [],
     );
     }else {_userData = userData;}
     
