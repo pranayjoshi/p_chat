@@ -22,8 +22,8 @@ class SelectContactRepository {
     required this.firestore,
   });
 
-  Future<QuerySnapshot<Map<String, dynamic>>> getContacts() async {
-    var userCollection = await firestore.collection('users').get();
+  Future<Stream<QuerySnapshot<Map<String, dynamic>>>> getContacts() async {
+    var userCollection = await firestore.collection('users').snapshots();
     return userCollection;
   }
 

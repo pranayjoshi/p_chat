@@ -23,12 +23,13 @@ class MobileLayoutScreen extends ConsumerStatefulWidget {
   ConsumerState<MobileLayoutScreen> createState() => _MobileLayoutScreenState();
 }
 
-class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen> with WidgetsBindingObserver, TickerProviderStateMixin {
+class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
+    with WidgetsBindingObserver, TickerProviderStateMixin {
   Future logout() async {
     await FirebaseAuth.instance.signOut();
-
   }
-    late TabController tabBarController;
+
+  late TabController tabBarController;
   @override
   void initState() {
     super.initState();
@@ -60,31 +61,41 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen> with Wi
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        
-        backgroundColor: appBarColor,
-        title: Text(
-          "Chat",
-          style: TextStyle(color: textColor),
+        appBar: AppBar(
+          backgroundColor: appBarColor,
+          title: Text(
+            "Chat",
+            style: TextStyle(color: textColor),
+          ),
+          actions: [
+            IconButton(
+                color: textColor,
+                onPressed: () {
+                  logout();
+                  Navigator.pop(context);
+                },
+                icon: Icon(Icons.exit_to_app)),
+            IconButton(
+              icon: const Icon(Icons.search, color: Colors.grey),
+              onPressed: () {},
+            ),
+          ],
         ),
-        actions: [
-          IconButton(
-              color: textColor,
-              onPressed: () {
-                logout(); Navigator.pop(context);
-              },
-              icon: Icon(Icons.exit_to_app))
-        ],
-      ),
-      body: Center(child: ElevatedButton(child: Text('Mobile!'), onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProfileScreen()));
-      },),
-      
-    ),
-    floatingActionButton: FloatingActionButton(
+        body: Center(
+          child: ElevatedButton(
+            child: Text('Mobile!'),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => ProfileScreen()));
+            },
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
           onPressed: () async {
             // if (tabBarController.index == 0) {
-            //   
+            //
             // } else {
             //   File? pickedImage = await pickImageFromGallery(context);
             //   if (pickedImage != null) {
@@ -102,9 +113,6 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen> with Wi
             Icons.comment,
             color: Colors.white,
           ),
-      )
-    
-    );
-    
+        ));
   }
 }
