@@ -63,11 +63,13 @@ class _GlobalContactsScreenState extends ConsumerState<GlobalContactsScreen> {
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
                   final contact = UserModel.fromMap((snapshot.data!.docs[index].data()) as Map<String, dynamic>);
+                  if (username.isEmpty){
                   return InkWell(
                     onTap: () => selectContact(ref, contact, context),
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
-                      child: ListTile(
+                      child: 
+                      ListTile(
                         title: Text(
                           contact.name,
                           style: const TextStyle(
@@ -82,15 +84,41 @@ class _GlobalContactsScreenState extends ConsumerState<GlobalContactsScreen> {
                             fontWeight: FontWeight.bold
                           ),
                         ),
-                        leading: contact.profilePic == null
-                            ? null
-                            : CircleAvatar(
+                        leading: CircleAvatar(
                                 backgroundImage: NetworkImage(contact.profilePic),
                                 radius: 30,
                               ),
                       ),
                     ),
-                  );
+                  );}
+                  if (contact.username.toString().toLowerCase().startsWith(username.toLowerCase())){
+                    return InkWell(
+                    onTap: () => selectContact(ref, contact, context),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: 
+                      ListTile(
+                        title: Text(
+                          contact.name,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
+                        subtitle: Text(
+                          "@" + contact.username,
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
+                        leading: CircleAvatar(
+                                backgroundImage: NetworkImage(contact.profilePic),
+                                radius: 30,
+                              ),
+                      ),
+                    ),
+                  );}
                 });}),
             error: (err, trace) => ErrorScreen(error: err.toString()),
             loading: () => const Loader(),
