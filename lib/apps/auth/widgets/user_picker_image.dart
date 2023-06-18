@@ -73,7 +73,7 @@ class _UserImagePickerState extends State<UserImagePicker> {
             ) :
             CircleAvatar(
               radius: widget.radius,
-              backgroundColor: Colors.grey,
+              backgroundColor: Colors.black,
               backgroundImage: NetworkImage(widget.defaultImageUrl) ,
             ),
             

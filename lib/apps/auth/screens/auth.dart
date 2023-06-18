@@ -166,7 +166,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           height: 12,
                         ),
                         if (_isUploading)
-                          Center(child: const CircularProgressIndicator()),
+                          CircularProgressIndicator(),
                         if (!_isUploading)
                           ElevatedButton(
                               onPressed: () {

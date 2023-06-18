@@ -267,7 +267,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   height: 30,
                 ),
                 if (_isUploading)
-                  Center(child: const CircularProgressIndicator()),
+                  const CircularProgressIndicator(),
                 if (!_isUploading)
                   ElevatedButton(
                     onPressed: () {
