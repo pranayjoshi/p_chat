@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:p_chat/apps/auth/screens/auth.dart';
 import 'package:p_chat/apps/auth/screens/profile.dart';
+import 'package:p_chat/apps/chat/widgets/contact_list.dart';
 import 'package:p_chat/common/utils/colors.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -81,16 +82,23 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
             ),
           ],
         ),
-        body: Center(
-          child: ElevatedButton(
-            child: Text('Mobile!'),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => ProfileScreen()));
-            },
-          ),
+        body: TabBarView(
+          controller: tabBarController,
+          children: [
+            ContactsList(),
+            Center(
+              child: ElevatedButton(
+                child: Text('Mobile!'),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => ProfileScreen()));
+                },
+              ),
+            ),
+            Text('Calls')
+          ],
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
