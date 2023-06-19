@@ -3,11 +3,12 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sound/public/flutter_sound_recorder.dart';
+import 'package:p_chat/apps/chat/controller/chat_controller.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:p_chat/common/utils/colors.dart';
 import 'package:p_chat/common/enums/message_enum.dart';
-import 'package:whatsapp_ui/common/providers/message_reply_provider.dart';
+// import 'package:whatsapp_ui/common/providers/message_reply_provider.dart';
 import 'package:p_chat/common/utils/utils.dart';
 import 'package:whatsapp_ui/features/chat/controller/chat_controller.dart';
 // import 'package:whatsapp_ui/features/chat/widgets/message_reply_preview.dart';
@@ -37,18 +38,18 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
   @override
   void initState() {
     super.initState();
-    _soundRecorder = FlutterSoundRecorder();
-    openAudio();
+    // _soundRecorder = FlutterSoundRecorder();
+    // openAudio();
   }
 
-  void openAudio() async {
-    final status = await Permission.microphone.request();
-    if (status != PermissionStatus.granted) {
-      throw RecordingPermissionException('Mic permission not allowed!');
-    }
-    await _soundRecorder!.openRecorder();
-    isRecorderInit = true;
-  }
+  // void openAudio() async {
+  //   final status = await Permission.microphone.request();
+  //   if (status != PermissionStatus.granted) {
+  //     throw RecordingPermissionException('Mic permission not allowed!');
+  //   }
+  //   await _soundRecorder!.openRecorder();
+  //   isRecorderInit = true;
+  // }
 
   void sendTextMessage() async {
     if (isShowSendButton) {
@@ -82,85 +83,86 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
     }
   }
 
-  void sendFileMessage(
-    File file,
-    MessageEnum messageEnum,
-  ) {
-    ref.read(chatControllerProvider).sendFileMessage(
-          context,
-          file,
-          widget.recieverUserId,
-          messageEnum,
-          widget.isGroupChat,
-        );
-  }
+  // void sendFileMessage(
+  //   File file,
+  //   MessageEnum messageEnum,
+  // ) {
+  //   ref.read(chatControllerProvider).sendFileMessage(
+  //         context,
+  //         file,
+  //         widget.recieverUserId,
+  //         messageEnum,
+  //         widget.isGroupChat,
+  //       );
+  // }
 
-  void selectImage() async {
-    File? image = await pickImageFromGallery(context);
-    if (image != null) {
-      sendFileMessage(image, MessageEnum.image);
-    }
-  }
+  // void selectImage() async {
+  //   File? image = await pickImageFromGallery(context);
+  //   if (image != null) {
+  //     sendFileMessage(image, MessageEnum.image);
+  //   }
+  // }
 
-  void selectVideo() async {
-    File? video = await pickVideoFromGallery(context);
-    if (video != null) {
-      sendFileMessage(video, MessageEnum.video);
-    }
-  }
+  // void selectVideo() async {
+  //   File? video = await pickVideoFromGallery(context);
+  //   if (video != null) {
+  //     sendFileMessage(video, MessageEnum.video);
+  //   }
+  // }
 
-  void selectGIF() async {
-    final gif = await pickGIF(context);
-    if (gif != null) {
-      ref.read(chatControllerProvider).sendGIFMessage(
-            context,
-            gif.url,
-            widget.recieverUserId,
-            widget.isGroupChat,
-          );
-    }
-  }
+  // void selectGIF() async {
+  //   final gif = await pickGIF(context);
+  //   if (gif != null) {
+  //     ref.read(chatControllerProvider).sendGIFMessage(
+  //           context,
+  //           gif.url,
+  //           widget.recieverUserId,
+  //           widget.isGroupChat,
+  //         );
+  //   }
+  // }
 
-  void hideEmojiContainer() {
-    setState(() {
-      isShowEmojiContainer = false;
-    });
-  }
+  // void hideEmojiContainer() {
+  //   setState(() {
+  //     isShowEmojiContainer = false;
+  //   });
+  // }
 
-  void showEmojiContainer() {
-    setState(() {
-      isShowEmojiContainer = true;
-    });
-  }
+  // void showEmojiContainer() {
+  //   setState(() {
+  //     isShowEmojiContainer = true;
+  //   });
+  // }
 
-  void showKeyboard() => focusNode.requestFocus();
-  void hideKeyboard() => focusNode.unfocus();
+  // void showKeyboard() => focusNode.requestFocus();
+  // void hideKeyboard() => focusNode.unfocus();
 
-  void toggleEmojiKeyboardContainer() {
-    if (isShowEmojiContainer) {
-      showKeyboard();
-      hideEmojiContainer();
-    } else {
-      hideKeyboard();
-      showEmojiContainer();
-    }
-  }
+  // void toggleEmojiKeyboardContainer() {
+  //   if (isShowEmojiContainer) {
+  //     showKeyboard();
+  //     hideEmojiContainer();
+  //   } else {
+  //     hideKeyboard();
+  //     showEmojiContainer();
+  //   }
+  // }
 
-  @override
-  void dispose() {
-    super.dispose();
-    _messageController.dispose();
-    _soundRecorder!.closeRecorder();
-    isRecorderInit = false;
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   _messageController.dispose();
+  //   _soundRecorder!.closeRecorder();
+  //   isRecorderInit = false;
+  // }
 
   @override
   Widget build(BuildContext context) {
-    final messageReply = ref.watch(messageReplyProvider);
-    final isShowMessageReply = messageReply != null;
+    // final messageReply = ref.watch(messageReplyProvider);
+    // final isShowMessageReply = messageReply != null;
     return Column(
       children: [
-        isShowMessageReply ? const MessageReplyPreview() : const SizedBox(),
+        // isShowMessageReply ? const MessageReplyPreview() : const SizedBox(),
+        const SizedBox(),
         Row(
           children: [
             Expanded(
