@@ -107,17 +107,17 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
                   //       context, CreateGroupScreen.routeName),
                   // ),
                 ),
-                PopupMenuItem(
-                    child: const Text(
-                      'Logout',
-                      style: TextStyle(color: textColor),
-                    ),
-                    onTap: () => Future(
-                          () {
-                            logout();
-                            Navigator.pop(context);
-                          },
-                        ))
+                // PopupMenuItem(
+                //     child: const Text(
+                //       'Logout',
+                //       style: TextStyle(color: textColor),
+                //     ),
+                //     onTap: () {
+                //             logout();
+                //             Navigator.pop(context);
+                //             // Navigator.pop(context);
+                //           },
+                //   )
               ],
             ),
           ],
