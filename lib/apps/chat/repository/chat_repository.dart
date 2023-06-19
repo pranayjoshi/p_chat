@@ -117,6 +117,10 @@ class ChatRepository {
     String recieverUserId,
     // bool isGroupChat,
   ) async {
+    print(senderUserData);
+    print(text);
+    print(timeSent);
+    print(recieverUserData);
     // if (isGroupChat) {
     //   await firestore.collection('groups').doc(recieverUserId).update({
     //     'lastMessage': text,
@@ -236,9 +240,9 @@ class ChatRepository {
       UserModel? recieverUserData;
 
       // if (!isGroupChat) {
-      //   var userDataMap =
-      //       await firestore.collection('users').doc(recieverUserId).get();
-      //   recieverUserData = UserModel.fromMap(userDataMap.data()!);
+        var userDataMap =
+            await firestore.collection('users').doc(recieverUserId).get();
+        recieverUserData = UserModel.fromMap(userDataMap.data()!);
       // }
 
       var messageId = const Uuid().v1();
