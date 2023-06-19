@@ -64,10 +64,12 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
     return Scaffold(
         appBar: AppBar(
           backgroundColor: appBarColor,
+          iconTheme: IconThemeData(color: textColor),
           title: Text(
-            "Chat",
+            "P-Chat",
             style: TextStyle(color: textColor),
           ),
+          
           actions: [
             IconButton(
                 color: textColor,
@@ -80,7 +82,61 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
               icon: const Icon(Icons.search, color: Colors.grey),
               onPressed: () {},
             ),
+            PopupMenuButton(
+              icon: const Icon(
+                Icons.more_vert,
+                color: Colors.grey,
+              ),
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  child: const Text(
+                    'Profile',
+                  ),
+                  // onTap: () => Future(
+                  //   () => Navigator.pushNamed(
+                  //       context, CreateGroupScreen.routeName),
+                  // ),
+                ),
+                PopupMenuItem(
+                  child: const Text(
+                    'Create Group',
+                  ),
+                  // onTap: () => Future(
+                  //   () => Navigator.pushNamed(
+                  //       context, CreateGroupScreen.routeName),
+                  // ),
+                ),
+                PopupMenuItem(
+                  child: const Text(
+                    'Logout',
+                  ),
+                  onTap: () {logout();
+                  Navigator.pop(context);},
+                )
+              ],
+            ),
           ],
+          bottom: TabBar(
+            controller: tabBarController,
+            indicatorColor: tabColor,
+            indicatorWeight: 4,
+            labelColor: tabColor,
+            unselectedLabelColor: Colors.grey,
+            labelStyle: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+            tabs: const [
+              Tab(
+                text: 'CHATS',
+              ),
+              Tab(
+                text: 'STATUS',
+              ),
+              Tab(
+                text: 'CALLS',
+              ),
+            ],
+          ),
         ),
         body: TabBarView(
           controller: tabBarController,
@@ -100,6 +156,7 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
             Text('Calls')
           ],
         ),
+        
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             // if (tabBarController.index == 0) {
