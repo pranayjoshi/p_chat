@@ -69,7 +69,6 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
             "P-Chat",
             style: TextStyle(color: textColor),
           ),
-          
           actions: [
             IconButton(
                 color: textColor,
@@ -83,23 +82,25 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
               onPressed: () {},
             ),
             PopupMenuButton(
+              color: backgroundColor,
               icon: const Icon(
                 Icons.more_vert,
-                color: Colors.grey,
+                color: textColor,
               ),
               itemBuilder: (context) => [
                 PopupMenuItem(
                   child: const Text(
                     'Profile',
+                    style: TextStyle(color: textColor),
                   ),
-                  // onTap: () => Future(
-                  //   () => Navigator.pushNamed(
-                  //       context, CreateGroupScreen.routeName),
-                  // ),
+                  onTap: () => Future(
+                    () => Navigator.pushNamed(context, ProfileScreen.routeName),
+                  ),
                 ),
                 PopupMenuItem(
                   child: const Text(
                     'Create Group',
+                    style: TextStyle(color: textColor),
                   ),
                   // onTap: () => Future(
                   //   () => Navigator.pushNamed(
@@ -107,12 +108,16 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
                   // ),
                 ),
                 PopupMenuItem(
-                  child: const Text(
-                    'Logout',
-                  ),
-                  onTap: () {logout();
-                  Navigator.pop(context);},
-                )
+                    child: const Text(
+                      'Logout',
+                      style: TextStyle(color: textColor),
+                    ),
+                    onTap: () => Future(
+                          () {
+                            logout();
+                            Navigator.pop(context);
+                          },
+                        ))
               ],
             ),
           ],
@@ -156,7 +161,6 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
             Text('Calls')
           ],
         ),
-        
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             // if (tabBarController.index == 0) {
