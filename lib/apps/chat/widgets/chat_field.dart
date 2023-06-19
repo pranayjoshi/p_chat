@@ -12,23 +12,23 @@ import 'package:p_chat/common/enums/message_enum.dart';
 import 'package:p_chat/common/utils/utils.dart';
 // import 'package:whatsapp_ui/features/chat/widgets/message_reply_preview.dart';
 
-class BottomChatField extends ConsumerStatefulWidget {
+class ChatField extends ConsumerStatefulWidget {
   final String recieverUserId;
   final bool isGroupChat;
-  const BottomChatField({
+  const ChatField({
     Key? key,
     required this.recieverUserId,
     required this.isGroupChat,
   }) : super(key: key);
 
   @override
-  ConsumerState<BottomChatField> createState() => _BottomChatFieldState();
+  ConsumerState<ChatField> createState() => _ChatFieldState();
 }
 
-class _BottomChatFieldState extends ConsumerState<BottomChatField> {
+class _ChatFieldState extends ConsumerState<ChatField> {
   bool isShowSendButton = false;
   final TextEditingController _messageController = TextEditingController();
-  FlutterSoundRecorder? _soundRecorder;
+  // FlutterSoundRecorder? _soundRecorder;
   bool isRecorderInit = false;
   bool isShowEmojiContainer = false;
   bool isRecording = false;

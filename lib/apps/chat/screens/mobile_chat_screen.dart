@@ -36,65 +36,67 @@ class MobileChatScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: appBarColor,
+      appBar: AppBar(
+        backgroundColor: appBarColor,
         iconTheme: IconThemeData(color: textColor),
-          // title: isGroupChat
-          //     ? Text(name)
-              title: StreamBuilder<UserModel>(
-                  stream: ref.read(authControllerProvider).userDataById(uid),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Loader();
-                    }
-                    return Column(
-                      children: [
-                        Text(name),
-                        Text(
-                          snapshot.data!.isOnline ? 'online' : 'offline',
-                          style: const TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ],
-                    );
-                  }),
-          centerTitle: false,
-          actions: [
-            IconButton(
-              onPressed: () => {},
-              color: textColor,
-              icon: const Icon(Icons.video_call),
-            ),
-            IconButton(
-              onPressed: () {},
-              color: textColor,
-              icon: const Icon(Icons.call),
-            ),
-            IconButton(
-              onPressed: () {},
-              color: textColor,
-              icon: const Icon(Icons.more_vert),
-            ),
-          ],
-        ),
-        body: Column(
-          children: [
-            // Expanded(
-            //   child: ChatList(
-            //     recieverUserId: uid,
-            //     isGroupChat: false,
-            //   ),
-            // ),
-            // ChatField(
-            //   recieverUserId: uid,
-            //   isGroupChat: false,
-            // ),
-            Text(uid)
-          ],
-        ),
-      
+        // title: isGroupChat
+        //     ? Text(name)
+        title: StreamBuilder<UserModel>(
+            stream: ref.read(authControllerProvider).userDataById(uid),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Loader();
+              }
+              return Column(
+                children: [
+                  Text(
+                    name,
+                    style: TextStyle(color: textColor),
+                  ),
+                  Text(
+                    snapshot.data!.isOnline ? 'online' : 'offline',
+                    style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.normal,
+                        color: textColor),
+                  ),
+                ],
+              );
+            }),
+        centerTitle: false,
+        actions: [
+          IconButton(
+            onPressed: () => {},
+            color: textColor,
+            icon: const Icon(Icons.video_call),
+          ),
+          IconButton(
+            onPressed: () {},
+            color: textColor,
+            icon: const Icon(Icons.call),
+          ),
+          IconButton(
+            onPressed: () {},
+            color: textColor,
+            icon: const Icon(Icons.more_vert),
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          // Expanded(
+          //   child: ChatList(
+          //     recieverUserId: uid,
+          //     isGroupChat: false,
+          //   ),
+          // ),
+          ChatField(
+            recieverUserId: uid,
+            isGroupChat: false,
+          ),
+          Text(uid)
+        ],
+      ),
     );
   }
 }
