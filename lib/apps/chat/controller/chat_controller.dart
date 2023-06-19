@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:p_chat/apps/auth/controller/auth_controller.dart';
 import 'package:p_chat/apps/chat/repository/chat_repository.dart';
+import 'package:p_chat/models/chat_contact.dart';
 // import 'package:whatsapp_ui/common/enums/message_enum.dart';
 // import 'package:whatsapp_ui/common/providers/message_reply_provider.dart';
 // import 'package:whatsapp_ui/features/auth/controller/auth_controller.dart';
@@ -28,9 +29,9 @@ class ChatController {
     required this.ref,
   });
 
-  // Stream<List<ChatContact>> chatContacts() {
-  //   return chatRepository.getChatContacts();
-  // }
+  Stream<List<ChatContact>> chatContacts() {
+    return chatRepository.getChatContacts();
+  }
 
   // Stream<List<Group>> chatGroups() {
   //   return chatRepository.getChatGroups();
