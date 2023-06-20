@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p_chat/apps/chat/widgets/display_text_image_gif.dart';
 import 'package:p_chat/common/enums/message_enum.dart';
 import 'package:p_chat/common/utils/colors.dart';
 
@@ -31,12 +32,7 @@ class MyMessageCard extends StatelessWidget {
                   top: 5,
                   bottom: 20,
                 ),
-                child: Text(
-                  message,
-                  style: const TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
+                child: DisplayTextImageGIF(message: message, type: type)
               ),
               Positioned(
                 bottom: 4,
