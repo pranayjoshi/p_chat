@@ -29,7 +29,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   UserModel? _userData;
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _nameController = TextEditingController();
-  var _defaultImageUrl = "https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png";
+  var _defaultImageUrl = "";
 
   var userExists = false;
 
@@ -61,7 +61,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     );
   }
 
-  void setFields() async {
+  Future<void> setFields() async {
     print("hello");
     final userData = await ref.read(authControllerProvider).getUserData();
     if (userData == null) {
@@ -75,11 +75,17 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       // groupId: [],
     );
     }else {_userData = userData;}
+
+    
     
 
     _usernameController.text =  _userData!.username;
     _nameController.text = _userData!.name;
-    _defaultImageUrl = _userData!.profilePic;
+    setState(() {
+      _defaultImageUrl = _userData!.profilePic;
+    });
+    print("hehehes");
+    print(_defaultImageUrl);
 
     // print(_defaultImageUrl);
   }
@@ -177,7 +183,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   void initState() {
     
     super.initState();
-    setFields();
+    Future.delayed(Duration.zero,() async {await setFields();});
   }
 
   @override
@@ -202,6 +208,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 SizedBox(
                   height: 120,
                 ),
+                if (_defaultImageUrl != "")
                 UserImagePicker(
                   onPickImage: (pickedImage) {
                     _selectedImage = pickedImage;
