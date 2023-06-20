@@ -292,7 +292,7 @@ class ChatRepository {
       final storageRef = FirebaseStorage.instance
             .ref()
             .child('chat/${messageEnum.type}/${senderUserData.uid}/$recieverUserId/')
-            .child('${messageId}.jpg');
+            .child('${messageId}');
         await storageRef.putFile(file!);
         var imageUrl = await storageRef.getDownloadURL();
       
@@ -328,7 +328,7 @@ class ChatRepository {
         contactMsg,
         timeSent,
         recieverUserId,
-        isGroupChat,
+        // isGroupChat,
       );
 
       _saveMessageToMessageSubcollection(
@@ -338,10 +338,10 @@ class ChatRepository {
         messageId: messageId,
         username: senderUserData.name,
         messageType: messageEnum,
-        messageReply: messageReply,
-        recieverUserName: recieverUserData?.name,
-        senderUsername: senderUserData.name,
-        isGroupChat: isGroupChat,
+        // messageReply: messageReply,
+        // recieverUserName: recieverUserData?.name,
+        // senderUsername: senderUserData.name,
+        // isGroupChat: isGroupChat,
       );
     }catch (e) {
       showSnackBar(context: context, content: e.toString());
