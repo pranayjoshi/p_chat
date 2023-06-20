@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p_chat/common/enums/message_enum.dart';
 import 'package:p_chat/common/utils/colors.dart';
 
 class SenderMessageCard extends StatelessWidget {
@@ -6,9 +7,11 @@ class SenderMessageCard extends StatelessWidget {
     Key? key,
     required this.message,
     required this.date,
+    required this.type
   }) : super(key: key);
   final String message;
   final String date;
+  final MessageEnum type;
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +29,16 @@ class SenderMessageCard extends StatelessWidget {
           child: Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.only(
+                padding: type == MessageEnum.text ? const EdgeInsets.only(
                   left: 10,
                   right: 30,
                   top: 5,
                   bottom: 20,
+                ): EdgeInsets.only(
+                  left: 5,
+                  right: 5,
+                  top: 5,
+                  bottom: 25,
                 ),
                 child: Text(
                   message,
