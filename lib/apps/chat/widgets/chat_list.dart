@@ -93,7 +93,7 @@ class _ChatListState extends ConsumerState<ChatList> {
                 return MyMessageCard(
                   message: messageData.text,
                   date: timeSent,
-                  // type: messageData.type,
+                  type: messageData.type,
                   // repliedText: messageData.repliedMessage,
                   // username: messageData.repliedTo,
                   // repliedMessageType: messageData.repliedMessageType,

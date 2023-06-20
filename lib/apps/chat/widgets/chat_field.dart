@@ -83,25 +83,25 @@ class _ChatFieldState extends ConsumerState<ChatField> {
     // }
   }
 
-  // void sendFileMessage(
-  //   File file,
-  //   MessageEnum messageEnum,
-  // ) {
-  //   ref.read(chatControllerProvider).sendFileMessage(
-  //         context,
-  //         file,
-  //         widget.recieverUserId,
-  //         messageEnum,
-  //         widget.isGroupChat,
-  //       );
-  // }
+  void sendFileMessage(
+    File file,
+    MessageEnum messageEnum,
+  ) {
+    ref.read(chatControllerProvider).sendFileMessage(
+          context,
+          file,
+          widget.recieverUserId,
+          messageEnum,
+          // widget.isGroupChat,
+        );
+  }
 
-  // void selectImage() async {
-  //   File? image = await pickImageFromGallery(context);
-  //   if (image != null) {
-  //     sendFileMessage(image, MessageEnum.image);
-  //   }
-  // }
+  void selectImage() async {
+    File? image = await pickImageFromGallery(context);
+    if (image != null) {
+      sendFileMessage(image, MessageEnum.image);
+    }
+  }
 
   // void selectVideo() async {
   //   File? video = await pickVideoFromGallery(context);
@@ -209,7 +209,7 @@ class _ChatFieldState extends ConsumerState<ChatField> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         IconButton(
-                          onPressed: (){},
+                          onPressed: (){selectImage();},
                           icon: const Icon(
                             Icons.camera_alt,
                             color: Colors.grey,

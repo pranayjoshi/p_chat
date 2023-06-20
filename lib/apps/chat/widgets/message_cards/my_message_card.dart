@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:p_chat/common/enums/message_enum.dart';
 import 'package:p_chat/common/utils/colors.dart';
 
 class MyMessageCard extends StatelessWidget {
   final String message;
   final String date;
+  final MessageEnum type; 
 
-  const MyMessageCard({Key? key, required this.message, required this.date}) : super(key: key);
+  const MyMessageCard({Key? key, required this.message, required this.date, required this.type}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
