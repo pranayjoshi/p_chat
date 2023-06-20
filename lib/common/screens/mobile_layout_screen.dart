@@ -70,13 +70,13 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
             style: TextStyle(color: textColor),
           ),
           actions: [
-            IconButton(
-                color: textColor,
-                onPressed: () {
-                  logout();
-                  Navigator.pop(context);
-                },
-                icon: Icon(Icons.exit_to_app)),
+            // IconButton(
+            //     color: textColor,
+            //     onPressed: () {
+            //       logout();
+            //       Navigator.pop(context);
+            //     },
+            //     icon: Icon(Icons.exit_to_app)),
             IconButton(
               icon: const Icon(Icons.search, color: Colors.grey),
               onPressed: () {},
@@ -107,17 +107,17 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
                   //       context, CreateGroupScreen.routeName),
                   // ),
                 ),
-                // PopupMenuItem(
-                //     child: const Text(
-                //       'Logout',
-                //       style: TextStyle(color: textColor),
-                //     ),
-                //     onTap: () {
-                //             logout();
-                //             Navigator.pop(context);
-                //             // Navigator.pop(context);
-                //           },
-                //   )
+                PopupMenuItem(
+                    child: const Text(
+                      'Logout',
+                      style: TextStyle(color: textColor),
+                    ),
+                    onTap: () {
+                            logout();
+                            Navigator.pop(context);
+                            // Navigator.pop(context);
+                          },
+                  )
               ],
             ),
           ],

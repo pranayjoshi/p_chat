@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:p_chat/common/utils/colors.dart';
+import 'package:p_chat/common/widgets/loader.dart';
 
 final _firebase = FirebaseAuth.instance;
 var _instance = FirebaseFirestore.instance;
@@ -47,6 +48,9 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   void _submit() async {
+    setState(() {
+        _isUploading = true;
+      });
     final isValid = _formkey.currentState!.validate();
 
     if (!isValid) {
@@ -55,9 +59,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
     _formkey.currentState!.save();
     try {
-      setState(() {
-        _isUploading = true;
-      });
+      
       if (isLogin) {
         final userCredentials = await _firebase.signInWithEmailAndPassword(
             email: _enteredEmail, password: _enteredPass);
@@ -75,14 +77,18 @@ class _AuthScreenState extends State<AuthScreen> {
           ),
         );
       }
+    //   setState(() {
+    //   _isUploading = false;
+    // });
     } on FirebaseAuthException catch (err) {
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(err.message ?? "Authentication Failed!")));
-    }
-    setState(() {
+          setState(() {
       _isUploading = false;
     });
+    }
+    
   }
 
   @override
@@ -112,7 +118,8 @@ class _AuthScreenState extends State<AuthScreen> {
                         SizedBox(
                           height: 12,
                         ),
-                        if (!_isUploading)
+                        // if (_isUploading) Text("hi"),
+                        // if (!_isUploading)
                           isLogin
                               ? Text(
                                   "Login",
@@ -165,8 +172,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         SizedBox(
                           height: 12,
                         ),
-                        if (_isUploading)
-                          CircularProgressIndicator(),
+                        if (_isUploading) CircularProgressIndicator(color: textColor,),
                         if (!_isUploading)
                           ElevatedButton(
                               onPressed: () {

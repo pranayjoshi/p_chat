@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:p_chat/apps/auth/screens/auth.dart';
 import 'package:p_chat/common/utils/colors.dart';
 import 'package:p_chat/common/widgets/loader.dart';
 import 'package:p_chat/apps/chat/controller/chat_controller.dart';
@@ -89,6 +90,9 @@ class ContactsList extends ConsumerWidget {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Loader();
+                  }
+                  if ( !snapshot.hasData) {
+                    return Loader();
                   }
 
                   return ListView.builder(
