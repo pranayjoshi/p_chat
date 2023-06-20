@@ -184,9 +184,9 @@ class _ChatFieldState extends ConsumerState<ChatField> {
                   filled: true,
                   fillColor: mobileChatBoxColor,
                   prefixIcon: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: SizedBox(
-                      width: 100,
+                      width: 48,
                       child: Row(
                         children: [
                           IconButton(
@@ -196,15 +196,7 @@ class _ChatFieldState extends ConsumerState<ChatField> {
                             },
                             icon: const Icon(
                               Icons.emoji_emotions,
-                              color: Colors.grey,
-                            ),
-                          ),
-                          IconButton(
-                            // onPressed: selectGIF,
-                            onPressed: (){},
-                            icon: const Icon(
-                              Icons.gif,
-                              color: Colors.grey,
+                              color: textColor,
                             ),
                           ),
                         ],
@@ -252,7 +244,7 @@ class _ChatFieldState extends ConsumerState<ChatField> {
                 left: 2,
               ),
               child: CircleAvatar(
-                backgroundColor: const Color(0xFF128C7E),
+                backgroundColor: mainColor,
                 radius: 25,
                 child: GestureDetector(
                   child: Icon(
@@ -261,7 +253,7 @@ class _ChatFieldState extends ConsumerState<ChatField> {
                         : isRecording
                             ? Icons.close
                             : Icons.mic,
-                    color: Colors.white,
+                    color: textColor,
                   ),
                   onTap: sendTextMessage,
                 ),

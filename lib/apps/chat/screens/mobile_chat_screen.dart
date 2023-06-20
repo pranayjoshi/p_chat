@@ -94,7 +94,6 @@ class MobileChatScreen extends ConsumerWidget {
             recieverUserId: uid,
             isGroupChat: false,
           ),
-          Text(uid)
         ],
       ),
     );
