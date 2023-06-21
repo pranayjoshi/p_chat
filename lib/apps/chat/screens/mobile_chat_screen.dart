@@ -50,6 +50,7 @@ class MobileChatScreen extends ConsumerWidget {
               return Row(
                 children: [
                   CircleAvatar(foregroundImage: NetworkImage(profilePic),),
+                  SizedBox(width: 12,),
                   Column(
                     children: [
                       Text(
