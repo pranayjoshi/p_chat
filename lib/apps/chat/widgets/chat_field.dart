@@ -259,7 +259,7 @@ class _ChatFieldState extends ConsumerState<ChatField> {
                             : Icons.mic,
                     color: textColor,
                   ),
-                  onTap: sendTextMessage,
+                  onTap: (){},
                 ),
               ),
             ),
