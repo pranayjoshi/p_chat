@@ -8,6 +8,7 @@ class MyMessageCard extends StatelessWidget {
   final String message;
   final String date;
   final MessageEnum type;
+  final VoidCallback onLeftSwipe;
 
   const MyMessageCard(
       {Key? key, required this.message, required this.date, required this.type})
