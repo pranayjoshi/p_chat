@@ -186,7 +186,7 @@ class _ChatFieldState extends ConsumerState<ChatField> {
                   prefixIcon: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: SizedBox(
-                      width: 100,
+                      width: 48,
                       child: Row(
                         children: [
                           IconButton(

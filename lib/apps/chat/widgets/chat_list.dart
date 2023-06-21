@@ -35,6 +35,13 @@ class _ChatListState extends ConsumerState<ChatList> {
     super.dispose();
     messageController.dispose();
   }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // messageController
+    //             .jumpTo(messageController.position.maxScrollExtent+60);
+  }
 
   // void onMessageSwipe(
   //   String message,
@@ -62,17 +69,20 @@ class _ChatListState extends ConsumerState<ChatList> {
             ref
                 .read(chatControllerProvider)
                 .chatStream(widget.recieverUserId),
+
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Loader();
           }
+          
 
           SchedulerBinding.instance.addPostFrameCallback((_) {
             messageController
-                .jumpTo(messageController.position.maxScrollExtent);
+                .jumpTo(messageController.position.maxScrollExtent+60);
           });
 
           return ListView.builder(
+            reverse: true,
             controller: messageController,
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
