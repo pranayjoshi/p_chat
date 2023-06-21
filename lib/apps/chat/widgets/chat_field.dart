@@ -103,12 +103,12 @@ class _ChatFieldState extends ConsumerState<ChatField> {
     }
   }
 
-  // void selectVideo() async {
-  //   File? video = await pickVideoFromGallery(context);
-  //   if (video != null) {
-  //     sendFileMessage(video, MessageEnum.video);
-  //   }
-  // }
+  void selectVideo() async {
+    File? video = await pickVideoFromGallery(context);
+    if (video != null) {
+      sendFileMessage(video, MessageEnum.video);
+    }
+  }
 
   // void selectGIF() async {
   //   final gif = await pickGIF(context);
@@ -216,9 +216,9 @@ class _ChatFieldState extends ConsumerState<ChatField> {
                           ),
                         ),
                         IconButton(
-                          onPressed: (){},
+                          onPressed: (){selectVideo();},
                           icon: const Icon(
-                            Icons.attach_file,
+                            Icons.video_camera_back,
                             color: Colors.grey,
                           ),
                         ),
