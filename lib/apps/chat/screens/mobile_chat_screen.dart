@@ -20,7 +20,7 @@ class MobileChatScreen extends ConsumerWidget {
     required this.name,
     required this.uid,
     // required this.isGroupChat,
-    // required this.profilePic,
+    required this.profilePic,
   }) : super(key: key);
 
   // void makeCall(WidgetRef ref, BuildContext context) {
