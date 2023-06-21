@@ -186,7 +186,7 @@ class _ChatFieldState extends ConsumerState<ChatField> {
                   prefixIcon: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: SizedBox(
-                      width: 48,
+                      width: 100,
                       child: Row(
                         children: [
                           IconButton(
@@ -196,6 +196,13 @@ class _ChatFieldState extends ConsumerState<ChatField> {
                               color: textColor,
                             ),
                           ),
+                          // IconButton(
+                          //   onPressed: (){selectGIF();},
+                          //   icon: const Icon(
+                          //     Icons.gif,
+                          //     color: textColor,
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
