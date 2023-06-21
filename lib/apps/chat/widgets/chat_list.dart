@@ -92,11 +92,11 @@ class _ChatListState extends ConsumerState<ChatList> {
 
           SchedulerBinding.instance.addPostFrameCallback((_) {
             messageController
-                .jumpTo(messageController.position.maxScrollExtent);
+                .jumpTo(messageController.position.minScrollExtent);
           });
 
           return ListView.builder(
-            // reverse: true,
+            reverse: true,
             controller: messageController,
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
