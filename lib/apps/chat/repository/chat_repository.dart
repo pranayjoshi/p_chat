@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:p_chat/common/enums/message_enum.dart';
+import 'package:p_chat/common/providers/message_reply_provider.dart';
 import 'package:p_chat/models/chat_contact.dart';
 import 'package:p_chat/models/message.dart';
 import 'package:p_chat/models/user.dart';
@@ -172,9 +173,9 @@ class ChatRepository {
     required String messageId,
     required String username,
     required MessageEnum messageType,
-    // required MessageReply? messageReply,
-    // required String senderUsername,
-    // required String? recieverUserName,
+    required MessageReply? messageReply,
+    required String senderUsername,
+    required String? recieverUserName,
     // required bool isGroupChat,
   }) async {
     final message = Message(
@@ -185,14 +186,14 @@ class ChatRepository {
       timeSent: timeSent,
       messageId: messageId,
       isSeen: false,
-      // repliedMessage: messageReply == null ? '' : messageReply.message,
-      // repliedTo: messageReply == null
-      //     ? ''
-      //     : messageReply.isMe
-      //         ? senderUsername
-      //         : recieverUserName ?? '',
-      // repliedMessageType:
-      //     messageReply == null ? MessageEnum.text : messageReply.messageEnum,
+      repliedMessage: messageReply == null ? '' : messageReply.message,
+      repliedTo: messageReply == null
+          ? ''
+          : messageReply.isMe
+              ? senderUsername
+              : recieverUserName ?? '',
+      repliedMessageType:
+          messageReply == null ? MessageEnum.text : messageReply.messageEnum,
     );
     // if (isGroupChat) {
     //   // groups -> group id -> chat -> message
@@ -235,7 +236,7 @@ class ChatRepository {
     required String text,
     required String recieverUserId,
     required UserModel senderUser,
-    // required MessageReply? messageReply,
+    required MessageReply? messageReply,
     // required bool isGroupChat,
   }) async {
     try {
@@ -266,9 +267,9 @@ class ChatRepository {
         messageType: MessageEnum.text,
         messageId: messageId,
         username: senderUser.name,
-        // messageReply: messageReply,
-        // recieverUserName: recieverUserData?.name,
-        // senderUsername: senderUser.name,
+        messageReply: messageReply,
+        recieverUserName: recieverUserData?.name,
+        senderUsername: senderUser.name,
         // isGroupChat: isGroupChat,
       );
     } catch (e) {
@@ -283,7 +284,7 @@ class ChatRepository {
     required UserModel senderUserData,
     required ProviderRef ref,
     required MessageEnum messageEnum,
-    // required MessageReply? messageReply,
+    required MessageReply? messageReply,
     // required bool isGroupChat, 
   }) async {
     try {
@@ -338,9 +339,9 @@ class ChatRepository {
         messageId: messageId,
         username: senderUserData.name,
         messageType: messageEnum,
-        // messageReply: messageReply,
-        // recieverUserName: recieverUserData?.name,
-        // senderUsername: senderUserData.name,
+        messageReply: messageReply,
+        recieverUserName: recieverUserData?.name,
+        senderUsername: senderUserData.name,
         // isGroupChat: isGroupChat,
       );
     }catch (e) {
@@ -348,51 +349,51 @@ class ChatRepository {
     }
   }
 
-  void sendGIFMessage({
-    required BuildContext context,
-    required String gifUrl,
-    required String recieverUserId,
-    required UserModel senderUser,
-    // required MessageReply? messageReply,
-    required bool isGroupChat,
-  }) async {
-    try {
-      var timeSent = DateTime.now();
-      UserModel? recieverUserData;
+  // void sendGIFMessage({
+  //   required BuildContext context,
+  //   required String gifUrl,
+  //   required String recieverUserId,
+  //   required UserModel senderUser,
+  //   required MessageReply? messageReply,
+  //   // required bool isGroupChat,
+  // }) async {
+  //   try {
+  //     var timeSent = DateTime.now();
+  //     UserModel? recieverUserData;
 
-      if (!isGroupChat) {
-        var userDataMap =
-            await firestore.collection('users').doc(recieverUserId).get();
-        recieverUserData = UserModel.fromMap(userDataMap.data()!);
-      }
+  //     if (!isGroupChat) {
+  //       var userDataMap =
+  //           await firestore.collection('users').doc(recieverUserId).get();
+  //       recieverUserData = UserModel.fromMap(userDataMap.data()!);
+  //     }
 
-      var messageId = const Uuid().v1();
+  //     var messageId = const Uuid().v1();
 
-      _saveDataToContactsSubcollection(
-        senderUser,
-        recieverUserData,
-        'GIF',
-        timeSent,
-        recieverUserId,
-        // isGroupChat,
-      );
+  //     _saveDataToContactsSubcollection(
+  //       senderUser,
+  //       recieverUserData,
+  //       'GIF',
+  //       timeSent,
+  //       recieverUserId,
+  //       // isGroupChat,
+  //     );
 
-      _saveMessageToMessageSubcollection(
-        recieverUserId: recieverUserId,
-        text: gifUrl,
-        timeSent: timeSent,
-        messageType: MessageEnum.gif,
-        messageId: messageId,
-        username: senderUser.name,
-        // messageReply: messageReply,
-        // recieverUserName: recieverUserData?.name,
-        // senderUsername: senderUser.name,
-        // isGroupChat: isGroupChat,
-      );
-    } catch (e) {
-      showSnackBar(context: context, content: e.toString());
-    }
-  }
+  //     _saveMessageToMessageSubcollection(
+  //       recieverUserId: recieverUserId,
+  //       text: gifUrl,
+  //       timeSent: timeSent,
+  //       messageType: MessageEnum.gif,
+  //       messageId: messageId,
+  //       username: senderUser.name,
+  //       messageReply: messageReply,
+  //       recieverUserName: recieverUserData?.name,
+  //       senderUsername: senderUser.name,
+  //       // isGroupChat: isGroupChat,
+  //     );
+  //   } catch (e) {
+  //     showSnackBar(context: context, content: e.toString());
+  //   }
+  // }
 
 //   void setChatMessageSeen(
 //     BuildContext context,
