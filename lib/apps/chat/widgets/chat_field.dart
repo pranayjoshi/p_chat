@@ -28,7 +28,7 @@ class ChatField extends ConsumerStatefulWidget {
 class _ChatFieldState extends ConsumerState<ChatField> {
   bool isShowSendButton = false;
   final TextEditingController _messageController = TextEditingController();
-  // FlutterSoundRecorder? _soundRecorder;
+  FlutterSoundRecorder? _soundRecorder;
   bool isRecorderInit = false;
   bool isShowEmojiContainer = false;
   bool isRecording = false;
@@ -37,18 +37,18 @@ class _ChatFieldState extends ConsumerState<ChatField> {
   @override
   void initState() {
     super.initState();
-    // _soundRecorder = FlutterSoundRecorder();
-    // openAudio();
+    _soundRecorder = FlutterSoundRecorder();
+    openAudio();
   }
 
-  // void openAudio() async {
-  //   final status = await Permission.microphone.request();
-  //   if (status != PermissionStatus.granted) {
-  //     throw RecordingPermissionException('Mic permission not allowed!');
-  //   }
-  //   await _soundRecorder!.openRecorder();
-  //   isRecorderInit = true;
-  // }
+  void openAudio() async {
+    final status = await Permission.microphone.request();
+    if (status != PermissionStatus.granted) {
+      throw RecordingPermissionException('Mic permission not allowed!');
+    }
+    await _soundRecorder!.openRecorder();
+    isRecorderInit = true;
+  }
 
   void sendTextMessage() async {
     if (isShowSendButton) {
@@ -151,8 +151,8 @@ class _ChatFieldState extends ConsumerState<ChatField> {
   void dispose() {
     super.dispose();
     _messageController.dispose();
-    // _soundRecorder!.closeRecorder();
-    // isRecorderInit = false;
+    _soundRecorder!.closeRecorder();
+    isRecorderInit = false;
   }
 
   @override
