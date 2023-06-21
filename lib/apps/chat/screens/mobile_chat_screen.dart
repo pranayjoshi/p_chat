@@ -14,7 +14,7 @@ class MobileChatScreen extends ConsumerWidget {
   final String name;
   final String uid;
   // final bool isGroupChat;
-  // final String profilePic;
+  final String profilePic;
   const MobileChatScreen({
     Key? key,
     required this.name,
@@ -47,18 +47,23 @@ class MobileChatScreen extends ConsumerWidget {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Loader();
               }
-              return Column(
+              return Row(
                 children: [
-                  Text(
-                    name,
-                    style: TextStyle(color: textColor),
-                  ),
-                  Text(
-                    snapshot.data!.isOnline ? 'online' : 'offline',
-                    style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.normal,
-                        color: textColor),
+                  CircleAvatar(foregroundImage: NetworkImage(profilePic),),
+                  Column(
+                    children: [
+                      Text(
+                        name,
+                        style: TextStyle(color: textColor),
+                      ),
+                      Text(
+                        snapshot.data!.isOnline ? 'online' : 'offline',
+                        style: const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.normal,
+                            color: textColor),
+                      ),
+                    ],
                   ),
                 ],
               );
