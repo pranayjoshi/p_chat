@@ -122,38 +122,38 @@ class _ChatFieldState extends ConsumerState<ChatField> {
   //   }
   // }
 
-  // void hideEmojiContainer() {
-  //   setState(() {
-  //     isShowEmojiContainer = false;
-  //   });
-  // }
+  void hideEmojiContainer() {
+    setState(() {
+      isShowEmojiContainer = false;
+    });
+  }
 
-  // void showEmojiContainer() {
-  //   setState(() {
-  //     isShowEmojiContainer = true;
-  //   });
-  // }
+  void showEmojiContainer() {
+    setState(() {
+      isShowEmojiContainer = true;
+    });
+  }
 
-  // void showKeyboard() => focusNode.requestFocus();
-  // void hideKeyboard() => focusNode.unfocus();
+  void showKeyboard() => focusNode.requestFocus();
+  void hideKeyboard() => focusNode.unfocus();
 
-  // void toggleEmojiKeyboardContainer() {
-  //   if (isShowEmojiContainer) {
-  //     showKeyboard();
-  //     hideEmojiContainer();
-  //   } else {
-  //     hideKeyboard();
-  //     showEmojiContainer();
-  //   }
-  // }
+  void toggleEmojiKeyboardContainer() {
+    if (isShowEmojiContainer) {
+      showKeyboard();
+      hideEmojiContainer();
+    } else {
+      hideKeyboard();
+      showEmojiContainer();
+    }
+  }
 
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   _messageController.dispose();
-  //   _soundRecorder!.closeRecorder();
-  //   isRecorderInit = false;
-  // }
+  @override
+  void dispose() {
+    super.dispose();
+    _messageController.dispose();
+    // _soundRecorder!.closeRecorder();
+    // isRecorderInit = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -190,10 +190,7 @@ class _ChatFieldState extends ConsumerState<ChatField> {
                       child: Row(
                         children: [
                           IconButton(
-                            // onPressed: toggleEmojiKeyboardContainer,
-                            onPressed:() {
-                              
-                            },
+                            onPressed: toggleEmojiKeyboardContainer,
                             icon: const Icon(
                               Icons.emoji_emotions,
                               color: textColor,
