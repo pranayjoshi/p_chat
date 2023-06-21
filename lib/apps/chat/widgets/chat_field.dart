@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sound/public/flutter_sound_recorder.dart';
 import 'package:p_chat/apps/chat/controller/chat_controller.dart';
+import 'package:p_chat/apps/chat/widgets/message_reply_preview.dart';
 import 'package:p_chat/common/providers/message_reply_provider.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -111,17 +112,17 @@ class _ChatFieldState extends ConsumerState<ChatField> {
     }
   }
 
-  void selectGIF() async {
-    final gif = await pickGIF(context);
-    if (gif != null) {
-      ref.read(chatControllerProvider).sendGIFMessage(
-            context,
-            gif.url,
-            widget.recieverUserId,
-            widget.isGroupChat,
-          );
-    }
-  }
+  // void selectGIF() async {
+  //   final gif = await pickGIF(context);
+  //   if (gif != null) {
+  //     ref.read(chatControllerProvider).sendGIFMessage(
+  //           context,
+  //           gif.url,
+  //           widget.recieverUserId,
+  //           widget.isGroupChat,
+  //         );
+  //   }
+  // }
 
   void hideEmojiContainer() {
     setState(() {
@@ -162,7 +163,7 @@ class _ChatFieldState extends ConsumerState<ChatField> {
     final isShowMessageReply = messageReply != null;
     return Column(
       children: [
-        // isShowMessageReply ? const MessageReplyPreview() : const SizedBox(),
+        isShowMessageReply ? const MessageReplyPreview() : const SizedBox(),
         const SizedBox(),
         Row(
           children: [
