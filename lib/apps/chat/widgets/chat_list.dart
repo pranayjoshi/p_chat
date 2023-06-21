@@ -89,6 +89,9 @@ class _ChatListState extends ConsumerState<ChatList> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Loader();
           }
+          // if ( !snapshot.hasData) {
+          //           return Loader();
+          //         }
           
 
           SchedulerBinding.instance.addPostFrameCallback((_) {
