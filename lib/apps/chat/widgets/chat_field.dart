@@ -62,25 +62,25 @@ class _ChatFieldState extends ConsumerState<ChatField> {
         _messageController.text = '';
       });
     }
-    // else {
-    //   var tempDir = await getTemporaryDirectory();
-    //   var path = '${tempDir.path}/flutter_sound.aac';
-    //   if (!isRecorderInit) {
-    //     return;
-    //   }
-    //   if (isRecording) {
-    //     await _soundRecorder!.stopRecorder();
-    //     sendFileMessage(File(path), MessageEnum.audio);
-    //   } else {
-    //     await _soundRecorder!.startRecorder(
-    //       toFile: path,
-    //     );
-    //   }
+    else {
+      var tempDir = await getTemporaryDirectory();
+      var path = '${tempDir.path}/flutter_sound.aac';
+      if (!isRecorderInit) {
+        return;
+      }
+      if (isRecording) {
+        await _soundRecorder!.stopRecorder();
+        sendFileMessage(File(path), MessageEnum.audio);
+      } else {
+        await _soundRecorder!.startRecorder(
+          toFile: path,
+        );
+      }
 
-    //   setState(() {
-    //     isRecording = !isRecording;
-    //   });
-    // }
+      setState(() {
+        isRecording = !isRecording;
+      });
+    }
   }
 
   void sendFileMessage(
