@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:p_chat/apps/chat/widgets/photo_viewer.dart';
 import 'package:p_chat/common/enums/message_enum.dart';
 
 // import 'package:whatsapp_ui/features/chat/widgets/video_player_item.dart';
@@ -58,8 +59,12 @@ class DisplayTextImageGIF extends StatelessWidget {
                     ? CachedNetworkImage(
                         imageUrl: message,
                       )
-                    : CachedNetworkImage(
+                    : GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, PhotoViewer.routeName,arguments:{"imageUrl": message} );
+                      },
+                      child: CachedNetworkImage(
                         imageUrl: message,
-                      );
+                      ));
   }
 }
