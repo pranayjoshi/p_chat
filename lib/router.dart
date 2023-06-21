@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p_chat/apps/auth/screens/profile.dart';
+import 'package:p_chat/apps/chat/widgets/photo_viewer.dart';
 import 'package:p_chat/common/widgets/error.dart';
 import 'package:p_chat/apps/auth/screens/auth.dart';
 // import 'package:p_chat/apps/auth/screens/otp_screen.dart';
@@ -26,6 +27,18 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case GlobalContactsScreen.routeName:
       return MaterialPageRoute(
         builder: (context) => const GlobalContactsScreen(),
+      );
+    case PhotoViewer.routeName:
+        final arguments = settings.arguments as Map<String, dynamic>;
+        final imageUrl = arguments['imageUrl'];
+        // final isGroupChat = arguments['isGroupChat'];
+        // final profilePic = arguments['profilePic'];
+        return MaterialPageRoute(
+          builder: (context) => PhotoViewer(
+            imageUrl: imageUrl,
+            // isGroupChat: isGroupChat,
+            // profilePic: profilePic,
+        )
       );
     case MobileChatScreen.routeName:
       final arguments = settings.arguments as Map<String, dynamic>;
