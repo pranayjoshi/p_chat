@@ -12,14 +12,7 @@ import 'package:p_chat/models/chat_contact.dart';
 import 'package:p_chat/models/message.dart';
 import 'package:p_chat/models/user.dart';
 import 'package:uuid/uuid.dart';
-// import 'package:p_chat/common/enums/message_enum.dart';
-// import 'package:p_chat/common/providers/message_reply_provider.dart';
-// import 'package:p_chat/common/repositories/common_firebase_storage_repository.dart';
 import 'package:p_chat/common/utils/utils.dart';
-// import 'package:p_chat/models/chat_contact.dart';
-// import 'package:p_chat/models/group.dart';
-// import 'package:p_chat/models/message.dart';
-// import 'package:p_chat/models/user_model.dart';
 
 final chatRepositoryProvider = Provider(
   (ref) => ChatRepository(
@@ -395,31 +388,31 @@ class ChatRepository {
   //   }
   // }
 
-//   void setChatMessageSeen(
-//     BuildContext context,
-//     String recieverUserId,
-//     String messageId,
-//   ) async {
-//     try {
-//       await firestore
-//           .collection('users')
-//           .doc(auth.currentUser!.uid)
-//           .collection('chats')
-//           .doc(recieverUserId)
-//           .collection('messages')
-//           .doc(messageId)
-//           .update({'isSeen': true});
+  void setChatMessageSeen(
+    BuildContext context,
+    String recieverUserId,
+    String messageId,
+  ) async {
+    try {
+      await firestore
+          .collection('users')
+          .doc(auth.currentUser!.uid)
+          .collection('chats')
+          .doc(recieverUserId)
+          .collection('messages')
+          .doc(messageId)
+          .update({'isSeen': true});
 
-//       await firestore
-//           .collection('users')
-//           .doc(recieverUserId)
-//           .collection('chats')
-//           .doc(auth.currentUser!.uid)
-//           .collection('messages')
-//           .doc(messageId)
-//           .update({'isSeen': true});
-//     } catch (e) {
-//       showSnackBar(context: context, content: e.toString());
-//     }
-//   }
+      await firestore
+          .collection('users')
+          .doc(recieverUserId)
+          .collection('chats')
+          .doc(auth.currentUser!.uid)
+          .collection('messages')
+          .doc(messageId)
+          .update({'isSeen': true});
+    } catch (e) {
+      showSnackBar(context: context, content: e.toString());
+    }
+  }
 }
