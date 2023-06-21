@@ -71,6 +71,8 @@ class SelectContactRepository {
             arguments: {
               'name': selectedUserData.name,
               'uid': selectedUserData.uid,
+              'profilePic': selectedUserData.profilePic,
+              // 'isGroupChat': false,
             },
           );
     }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:p_chat/apps/auth/screens/auth.dart';
+import 'package:p_chat/apps/chat/widgets/photo_viewer.dart';
 import 'package:p_chat/common/utils/colors.dart';
 import 'package:p_chat/common/widgets/loader.dart';
 import 'package:p_chat/apps/chat/controller/chat_controller.dart';
@@ -111,8 +112,8 @@ class ContactsList extends ConsumerWidget {
                                 arguments: {
                                   'name': chatContactData.name,
                                   'uid': chatContactData.contactId,
-                                  // 'isGroupChat': false,
                                   'profilePic': chatContactData.profilePic,
+                                  // 'isGroupChat': false,
                                 },
                               );
                             },
@@ -132,11 +133,14 @@ class ContactsList extends ConsumerWidget {
                                     style: const TextStyle(fontSize: 15),
                                   ),
                                 ),
-                                leading: CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                    chatContactData.profilePic,
+                                leading: GestureDetector(
+                                  onTap:() => Navigator.pushNamed(context, PhotoViewer.routeName,arguments:{"imageUrl": chatContactData.profilePic} ),
+                                  child: CircleAvatar(
+                                    backgroundImage: NetworkImage(
+                                      chatContactData.profilePic,
+                                    ),
+                                    radius: 30,
                                   ),
-                                  radius: 30,
                                 ),
                                 trailing: Text(
                                   DateFormat.Hm()
