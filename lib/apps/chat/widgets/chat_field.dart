@@ -110,17 +110,17 @@ class _ChatFieldState extends ConsumerState<ChatField> {
     }
   }
 
-  // void selectGIF() async {
-  //   final gif = await pickGIF(context);
-  //   if (gif != null) {
-  //     ref.read(chatControllerProvider).sendGIFMessage(
-  //           context,
-  //           gif.url,
-  //           widget.recieverUserId,
-  //           widget.isGroupChat,
-  //         );
-  //   }
-  // }
+  void selectGIF() async {
+    final gif = await pickGIF(context);
+    if (gif != null) {
+      ref.read(chatControllerProvider).sendGIFMessage(
+            context,
+            gif.url,
+            widget.recieverUserId,
+            widget.isGroupChat,
+          );
+    }
+  }
 
   void hideEmojiContainer() {
     setState(() {
