@@ -29,6 +29,7 @@ class ChatList extends ConsumerStatefulWidget {
 
 class _ChatListState extends ConsumerState<ChatList> {
   final ScrollController messageController = ScrollController();
+  bool _needsScroll = true;
 
   @override
   void dispose() {
@@ -57,8 +58,21 @@ class _ChatListState extends ConsumerState<ChatList> {
   //       );
   // }
 
+  void _scrollToEnd(){
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if(messageController.hasClients){
+                  messageController.jumpTo(messageController.position.maxScrollExtent+60);
+          }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+  //   if (_needsScroll) {
+  //   WidgetsBinding.instance.addPostFrameCallback(
+  //     (_) => _scrollToEnd());
+  //   _needsScroll = false;
+  // }
     return StreamBuilder<List<Message>>(
         stream: 
         // widget.isGroupChat
@@ -78,11 +92,11 @@ class _ChatListState extends ConsumerState<ChatList> {
 
           SchedulerBinding.instance.addPostFrameCallback((_) {
             messageController
-                .jumpTo(messageController.position.maxScrollExtent+60);
+                .jumpTo(messageController.position.maxScrollExtent);
           });
 
           return ListView.builder(
-            reverse: true,
+            // reverse: true,
             controller: messageController,
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
