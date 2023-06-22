@@ -12,7 +12,7 @@ class StatusContactsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return FutureBuilder<List<Status>>(
-      // future: ref.read(statusControllerProvider).getStatus(context),
+      future: ref.read(statusControllerProvider).getStatus(context),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Loader();

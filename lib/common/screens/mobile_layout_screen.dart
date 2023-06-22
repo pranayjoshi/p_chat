@@ -5,6 +5,7 @@ import 'package:p_chat/apps/auth/screens/auth.dart';
 import 'package:p_chat/apps/auth/screens/profile.dart';
 import 'package:p_chat/apps/chat/widgets/contact_list.dart';
 import 'package:p_chat/apps/status/screens/confirm_status.dart';
+import 'package:p_chat/apps/status/screens/status_contacts.dart';
 import 'package:p_chat/common/utils/colors.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -146,17 +147,7 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
           controller: tabBarController,
           children: [
             ContactsList(),
-            Center(
-              child: ElevatedButton(
-                child: Text('Mobile!'),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => ProfileScreen()));
-                },
-              ),
-            ),
+            StatusContactsScreen(),
             Text('Calls')
           ],
         ),

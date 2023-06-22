@@ -55,12 +55,12 @@ class StatusRepository {
           .doc(auth.currentUser!.uid)
           .collection('chats').get();
         List<QueryDocumentSnapshot<Map<String, dynamic>>> contacts= userCollection.docs; 
-        print(contacts);
+        // print(contacts);
         for (var document in contacts) {
           var userData = ChatContact.fromMap(document.data());
           uidWhoCanSee.add(userData.contactId);
         }
-        print(uidWhoCanSee);
+        // print(uidWhoCanSee);
       
 
       List<String> statusImageUrls = [];
@@ -103,31 +103,33 @@ class StatusRepository {
     }
   }
 
-//   Future<List<Status>> getStatus(BuildContext context) async {
-//     List<Status> statusData = [];
-//     try {
-//       var userCollection = await firestore.collection('status').get();
-//       List<QueryDocumentSnapshot<Map<String, dynamic>>> contacts= userCollection.docs; 
-//       for (var document in contacts) {
-//         var statusesSnapshot = document
-//             .where(
-//               'createdAt',
-//               isGreaterThan: DateTime.now()
-//                   .subtract(const Duration(hours: 24))
-//                   .millisecondsSinceEpoch,
-//             )
-//             .get();
-//         for (var tempData in statusesSnapshot.docs) {
-//           Status tempStatus = Status.fromMap(tempData.data());
-//           if (tempStatus.whoCanSee.contains(auth.currentUser!.uid)) {
-//             statusData.add(tempStatus);
-//           }
-//         }
-//       }
-//     } catch (e) {
-//       if (kDebugMode) print(e);
-//       showSnackBar(context: context, content: e.toString());
-//     }
-//     return statusData;
-//   }
+  Future<List<Status>> getStatus(BuildContext context) async {
+    List<Status> statusData = [];
+    try {
+      var userCollection = await firestore.collection('users')
+          .doc(auth.currentUser!.uid)
+          .collection('chats').get();
+        List<QueryDocumentSnapshot<Map<String, dynamic>>> contacts= userCollection.docs; 
+        var statusesSnapshot = await firestore.collection('status')
+            .where(
+              'createdAt',
+              isGreaterThan: DateTime.now()
+                  .subtract(const Duration(hours: 24))
+                  .millisecondsSinceEpoch,
+            )
+            .get();
+        for (var tempData in statusesSnapshot.docs) {
+          Status tempStatus = Status.fromMap(tempData.data());
+          if (tempStatus.whoCanSee.contains(auth.currentUser!.uid)) {
+            statusData.add(tempStatus);
+          }
+        
+      }
+      print(statusData);
+    } catch (e) {
+      if (kDebugMode) print(e);
+      showSnackBar(context: context, content: e.toString());
+    }
+    return statusData;
+  }
 }

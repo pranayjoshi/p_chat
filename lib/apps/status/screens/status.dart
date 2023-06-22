@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p_chat/common/utils/colors.dart';
 import 'package:story_view/story_view.dart';
 import 'package:p_chat/common/widgets/loader.dart';
 
@@ -38,6 +39,14 @@ class _StatusScreenState extends State<StatusScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Status",
+          style: TextStyle(color: textColor),
+        ),
+        backgroundColor: appBarColor,
+        iconTheme: IconThemeData(color: textColor),
+      ),
       body: storyItems.isEmpty
           ? const Loader()
           : StoryView(
