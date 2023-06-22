@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:p_chat/apps/auth/screens/profile.dart';
 import 'package:p_chat/apps/chat/widgets/photo_viewer.dart';
+import 'package:p_chat/apps/status/screens/confirm_status.dart';
+import 'package:p_chat/apps/status/screens/status.dart';
 import 'package:p_chat/common/widgets/error.dart';
 import 'package:p_chat/apps/auth/screens/auth.dart';
 // import 'package:p_chat/apps/auth/screens/otp_screen.dart';
@@ -8,6 +12,7 @@ import 'package:p_chat/apps/auth/screens/auth.dart';
 // import 'package:p_chat/apps/group/screens/create_group_screen.dart';
 // import 'package:p_chat/apps/select_contacts/screens/select_contacts_screen.dart';
 import 'package:p_chat/apps/chat/screens/mobile_chat_screen.dart';
+import 'package:p_chat/models/status.dart';
 // import 'package:p_chat/apps/status/screens/confirm_status_screen.dart';
 // import 'package:p_chat/apps/status/screens/status_screen.dart';
 // import 'package:p_chat/models/status_model.dart';
@@ -54,20 +59,20 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           profilePic: profilePic,
         ),
       );
-    // case ConfirmStatusScreen.routeName:
-    //   final file = settings.arguments as File;
-    //   return MaterialPageRoute(
-    //     builder: (context) => ConfirmStatusScreen(
-    //       file: file,
-    //     ),
-    //   );
-    // case StatusScreen.routeName:
-    //   final status = settings.arguments as Status;
-    //   return MaterialPageRoute(
-    //     builder: (context) => StatusScreen(
-    //       status: status,
-    //     ),
-    //   );
+    case ConfirmStatusScreen.routeName:
+      final file = settings.arguments as File;
+      return MaterialPageRoute(
+        builder: (context) => ConfirmStatusScreen(
+          file: file,
+        ),
+      );
+    case StatusScreen.routeName:
+      final status = settings.arguments as Status;
+      return MaterialPageRoute(
+        builder: (context) => StatusScreen(
+          status: status,
+        ),
+      );
     // case CreateGroupScreen.routeName:
     //   return MaterialPageRoute(
     //     builder: (context) => const CreateGroupScreen(),

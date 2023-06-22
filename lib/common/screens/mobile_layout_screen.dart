@@ -36,8 +36,12 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
   void initState() {
     super.initState();
     tabBarController = TabController(length: 3, vsync: this);
+    tabBarController.addListener(_handleTabChange);
     WidgetsBinding.instance.addObserver(this);
   }
+  void _handleTabChange(){
+  setState((){});    
+}
 
   @override
   void dispose() {
@@ -62,6 +66,7 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
 
   @override
   Widget build(BuildContext context) {
+    // var icon = "comment";
     return Scaffold(
         appBar: AppBar(
           backgroundColor: appBarColor,
@@ -102,16 +107,16 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
                   // ),
                 ),
                 PopupMenuItem(
-                    child: const Text(
-                      'Logout',
-                      style: TextStyle(color: textColor),
-                    ),
-                    onTap: () {
-                            logout();
-                            Navigator.pop(context);
-                            // Navigator.pop(context);
-                          },
-                  )
+                  child: const Text(
+                    'Logout',
+                    style: TextStyle(color: textColor),
+                  ),
+                  onTap: () {
+                    logout();
+                    Navigator.pop(context);
+                    // Navigator.pop(context);
+                  },
+                )
               ],
             ),
           ],
@@ -155,11 +160,36 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
             Text('Calls')
           ],
         ),
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton:floatingButtons(),);
+  }
+  Widget floatingButtons(){
+    return tabBarController.index == 0 ?
+   FloatingActionButton(
           onPressed: () async {
-            if (tabBarController.index == 0) {
-            
-            } else {
+            // if (tabBarController.index == 0) {
+              Navigator.pushNamed(context, GlobalContactsScreen.routeName);
+            // } else {
+            //   File? pickedImage = await pickImageFromGallery(context);
+            //   if (pickedImage != null) {
+            //     Navigator.pushNamed(
+            //       context,
+            //       ConfirmStatusScreen.routeName,
+            //       arguments: pickedImage,
+            //     );
+            //   }
+            // }
+          },
+          backgroundColor: tabColor,
+          child:const Icon(
+                  Icons.comment,
+                  color: Colors.white,
+                )
+        )
+        : FloatingActionButton(
+          onPressed: () async {
+            // if (tabBarController.index == 0) {
+            //   Navigator.pushNamed(context, GlobalContactsScreen.routeName);
+            // } else {
               File? pickedImage = await pickImageFromGallery(context);
               if (pickedImage != null) {
                 Navigator.pushNamed(
@@ -168,17 +198,13 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
                   arguments: pickedImage,
                 );
               }
-            }
-            Navigator.pushNamed(context, GlobalContactsScreen.routeName);
+            // }
           },
           backgroundColor: tabColor,
-          child: tabBarController.index == 0 ? const Icon(
-            Icons.comment,
-            color: Colors.white,
-          ) : const Icon(
-            Icons.camera,
-            color: Colors.white,
-          ),
-        ));
+          child:const Icon(
+                  Icons.camera,
+                  color: Colors.white,
+                ),
+        );
   }
 }
