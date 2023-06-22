@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,15 @@ class SelectContactRepository {
 
   Future<Stream<QuerySnapshot<Map<String, dynamic>>>> getContacts() async {
     var userCollection = await firestore.collection('users').snapshots();
+    return userCollection;
+  }
+
+  Future<QuerySnapshot<Map<String, dynamic>>> getChatContacts() async {
+    var userCollection = await firestore.collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('chats').get();
+        List<QueryDocumentSnapshot<Map<String, dynamic>>> contacts= userCollection.docs; 
+
     return userCollection;
   }
     void selectContact(UserModel selectedUserData, BuildContext context) async{
