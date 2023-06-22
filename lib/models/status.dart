@@ -1,7 +1,6 @@
 class Status {
   final String uid;
   final String username;
-  final String phoneNumber;
   final List<String> photoUrl;
   final DateTime createdAt;
   final String profilePic;
@@ -10,7 +9,6 @@ class Status {
   Status({
     required this.uid,
     required this.username,
-    required this.phoneNumber,
     required this.photoUrl,
     required this.createdAt,
     required this.profilePic,
@@ -22,7 +20,6 @@ class Status {
     return {
       'uid': uid,
       'username': username,
-      'phoneNumber': phoneNumber,
       'photoUrl': photoUrl,
       'createdAt': createdAt.millisecondsSinceEpoch,
       'profilePic': profilePic,
@@ -35,7 +32,6 @@ class Status {
     return Status(
       uid: map['uid'] ?? '',
       username: map['username'] ?? '',
-      phoneNumber: map['phoneNumber'] ?? '',
       photoUrl: List<String>.from(map['photoUrl']),
       createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt']),
       profilePic: map['profilePic'] ?? '',
