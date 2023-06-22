@@ -287,7 +287,7 @@ class ChatRepository {
             .ref()
             .child('chat/${messageEnum.type}/${senderUserData.uid}/$recieverUserId/')
             .child('${messageId}');
-        await storageRef.putFile(file!);
+        await storageRef.putFile(file);
         var imageUrl = await storageRef.getDownloadURL();
       
 

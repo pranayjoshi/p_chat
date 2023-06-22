@@ -6,6 +6,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:p_chat/common/utils/utils.dart';
+import 'package:p_chat/models/status.dart';
+import 'package:p_chat/models/user.dart';
 import 'package:uuid/uuid.dart';
 import 'package:whatsapp_ui/common/repositories/common_firebase_storage_repository.dart';
 import 'package:whatsapp_ui/common/utils/utils.dart';
@@ -46,30 +49,19 @@ class StatusRepository {
             '/status/$statusId$uid',
             statusImage,
           );
-      List<Contact> contacts = [];
-      if (await FlutterContacts.requestPermission()) {
-        contacts = await FlutterContacts.getContacts(withProperties: true);
-      }
 
       List<String> uidWhoCanSee = [];
 
-      for (int i = 0; i < contacts.length; i++) {
-        var userDataFirebase = await firestore
-            .collection('users')
-            .where(
-              'phoneNumber',
-              isEqualTo: contacts[i].phones[0].number.replaceAll(
-                    ' ',
-                    '',
-                  ),
-            )
-            .get();
+        var userCollection = await firestore.collection('users/${FirebaseAuth.instance.currentUser!.uid}/chats').get();
 
-        if (userDataFirebase.docs.isNotEmpty) {
-          var userData = UserModel.fromMap(userDataFirebase.docs[0].data());
+        for (var document in userCollection.docs) {
+          
+          var userData = UserModel.fromMap(document.data());
           uidWhoCanSee.add(userData.uid);
         }
+        print(uidWhoCanSee);
       }
+      
 
       List<String> statusImageUrls = [];
       var statusesSnapshot = await firestore
@@ -98,7 +90,6 @@ class StatusRepository {
       Status status = Status(
         uid: uid,
         username: username,
-        phoneNumber: phoneNumber,
         photoUrl: statusImageUrls,
         createdAt: DateTime.now(),
         profilePic: profilePic,
@@ -116,9 +107,7 @@ class StatusRepository {
     List<Status> statusData = [];
     try {
       List<Contact> contacts = [];
-      if (await FlutterContacts.requestPermission()) {
-        contacts = await FlutterContacts.getContacts(withProperties: true);
-      }
+      contacts = 
       for (int i = 0; i < contacts.length; i++) {
         var statusesSnapshot = await firestore
             .collection('status')
