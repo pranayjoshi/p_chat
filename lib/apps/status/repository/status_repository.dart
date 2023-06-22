@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:p_chat/common/utils/utils.dart';
+import 'package:p_chat/models/chat_contact.dart';
 import 'package:p_chat/models/status.dart';
 import 'package:p_chat/models/user.dart';
 import 'package:uuid/uuid.dart';
@@ -48,13 +49,16 @@ class StatusRepository {
       String imageUrl = await storageRef.getDownloadURL();
 
       List<String> uidWhoCanSee = [];
-
-        var userCollection = await firestore.collection('users/${FirebaseAuth.instance.currentUser!.uid}/chats').get();
+      // print(FirebaseAuth.instance.currentUser!.uid);
+        // print();
+        var userCollection = await firestore.collection('users')
+          .doc(auth.currentUser!.uid)
+          .collection('chats').get();
         List<QueryDocumentSnapshot<Map<String, dynamic>>> contacts= userCollection.docs; 
+        print(contacts);
         for (var document in contacts) {
-          
-          var userData = UserModel.fromMap(document.data());
-          uidWhoCanSee.add(userData.uid);
+          var userData = ChatContact.fromMap(document.data());
+          uidWhoCanSee.add(userData.contactId);
         }
         print(uidWhoCanSee);
       
