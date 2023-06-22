@@ -2,18 +2,14 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:p_chat/common/utils/utils.dart';
 import 'package:p_chat/models/status.dart';
 import 'package:p_chat/models/user.dart';
 import 'package:uuid/uuid.dart';
-import 'package:whatsapp_ui/common/repositories/common_firebase_storage_repository.dart';
-import 'package:whatsapp_ui/common/utils/utils.dart';
-import 'package:whatsapp_ui/models/status_model.dart';
-import 'package:whatsapp_ui/models/user_model.dart';
 
 final statusRepositoryProvider = Provider(
   (ref) => StatusRepository(
@@ -43,12 +39,12 @@ class StatusRepository {
     try {
       var statusId = const Uuid().v1();
       String uid = auth.currentUser!.uid;
-      String imageurl = await ref
-          .read(commonFirebaseStorageRepositoryProvider)
-          .storeFileToFirebase(
-            '/status/$statusId$uid',
-            statusImage,
-          );
+
+      final storageRef = FirebaseStorage.instance
+            .ref()
+            .child('/status/$statusId$uid',);
+        await storageRef.putFile(statusImage);
+      String imageUrl = await storageRef.getDownloadURL();
 
       List<String> uidWhoCanSee = [];
 
@@ -60,7 +56,6 @@ class StatusRepository {
           uidWhoCanSee.add(userData.uid);
         }
         print(uidWhoCanSee);
-      }
       
 
       List<String> statusImageUrls = [];
@@ -75,7 +70,7 @@ class StatusRepository {
       if (statusesSnapshot.docs.isNotEmpty) {
         Status status = Status.fromMap(statusesSnapshot.docs[0].data());
         statusImageUrls = status.photoUrl;
-        statusImageUrls.add(imageurl);
+        statusImageUrls.add(imageUrl);
         await firestore
             .collection('status')
             .doc(statusesSnapshot.docs[0].id)
@@ -84,7 +79,7 @@ class StatusRepository {
         });
         return;
       } else {
-        statusImageUrls = [imageurl];
+        statusImageUrls = [imageUrl];
       }
 
       Status status = Status(
