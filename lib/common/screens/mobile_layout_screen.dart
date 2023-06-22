@@ -71,13 +71,6 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
             style: TextStyle(color: textColor),
           ),
           actions: [
-            // IconButton(
-            //     color: textColor,
-            //     onPressed: () {
-            //       logout();
-            //       Navigator.pop(context);
-            //     },
-            //     icon: Icon(Icons.exit_to_app)),
             IconButton(
               icon: const Icon(Icons.search, color: Colors.grey),
               onPressed: () {},
