@@ -178,8 +178,11 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
             Navigator.pushNamed(context, GlobalContactsScreen.routeName);
           },
           backgroundColor: tabColor,
-          child: const Icon(
+          child: tabBarController.index == 0 ? const Icon(
             Icons.comment,
+            color: Colors.white,
+          ) : const Icon(
+            Icons.camera,
             color: Colors.white,
           ),
         ));
