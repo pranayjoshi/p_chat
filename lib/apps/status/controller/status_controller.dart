@@ -2,10 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:p_chat/apps/auth/controller/auth_controller.dart';
-import 'package:whatsapp_ui/features/auth/controller/auth_controller.dart';
-
-import 'package:whatsapp_ui/features/status/repository/status_repository.dart';
-import 'package:whatsapp_ui/models/status_model.dart';
+import 'package:p_chat/apps/status/repository/status_repository.dart';
+import 'package:p_chat/models/status.dart';
 
 final statusControllerProvider = Provider((ref) {
   final statusRepository = ref.read(statusRepositoryProvider);
@@ -28,15 +26,14 @@ class StatusController {
       statusRepository.uploadStatus(
         username: value!.name,
         profilePic: value.profilePic,
-        phoneNumber: value.phoneNumber,
         statusImage: file,
         context: context,
       );
     });
   }
 
-  Future<List<Status>> getStatus(BuildContext context) async {
-    List<Status> statuses = await statusRepository.getStatus(context);
-    return statuses;
-  }
+  // Future<List<Status>> getStatus(BuildContext context) async {
+  //   List<Status> statuses = await statusRepository.getStatus(context);
+  //   return statuses;
+  // }
 }
