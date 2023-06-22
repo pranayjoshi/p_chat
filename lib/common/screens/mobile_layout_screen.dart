@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:p_chat/apps/auth/screens/auth.dart';
 import 'package:p_chat/apps/auth/screens/profile.dart';
 import 'package:p_chat/apps/chat/widgets/contact_list.dart';
+import 'package:p_chat/apps/status/screens/confirm_status.dart';
 import 'package:p_chat/common/utils/colors.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -163,18 +164,18 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            // if (tabBarController.index == 0) {
-            //
-            // } else {
-            //   File? pickedImage = await pickImageFromGallery(context);
-            //   if (pickedImage != null) {
-            //     Navigator.pushNamed(
-            //       context,
-            //       ConfirmStatusScreen.routeName,
-            //       arguments: pickedImage,
-            //     );
-            //   }
-            // }
+            if (tabBarController.index == 0) {
+            
+            } else {
+              File? pickedImage = await pickImageFromGallery(context);
+              if (pickedImage != null) {
+                Navigator.pushNamed(
+                  context,
+                  ConfirmStatusScreen.routeName,
+                  arguments: pickedImage,
+                );
+              }
+            }
             Navigator.pushNamed(context, GlobalContactsScreen.routeName);
           },
           backgroundColor: tabColor,
