@@ -23,6 +23,7 @@ class StatusContactsScreen extends ConsumerWidget {
             var statusData = snapshot.data![index];
             return Column(
               children: [
+                SizedBox(height: 12,),
                 InkWell(
                   onTap: () {
                     Navigator.pushNamed(
@@ -38,6 +39,7 @@ class StatusContactsScreen extends ConsumerWidget {
                         statusData.username,
                       ),
                       leading: CircleAvatar(
+                        
                         backgroundImage: NetworkImage(
                           statusData.profilePic,
                         ),
