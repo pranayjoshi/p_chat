@@ -125,7 +125,7 @@ class StatusRepository {
           }
         
       }
-      print(statusData);
+      // print(statusData);
     } catch (e) {
       if (kDebugMode) print(e);
       showSnackBar(context: context, content: e.toString());
