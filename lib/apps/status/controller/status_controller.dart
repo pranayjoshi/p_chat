@@ -36,4 +36,17 @@ class StatusController {
     List<Status> statuses = await statusRepository.getStatus(context);
     return statuses;
   }
+
+    void setChatMessageSeen(
+    BuildContext context,
+    String recieverUserId,
+    String messageId,
+  ) {
+    chatRepository.setChatMessageSeen(
+      context,
+      recieverUserId,
+      messageId,
+    );
+  }
+}
 }
