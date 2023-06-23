@@ -34,7 +34,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   var userExists = false;
 
   Future<bool> usernameExists(String username) async {
-    print(_userData!.username);
+    // print(_userData!.username);
     if (_userData!.username == username){
       return false;
     }
@@ -43,7 +43,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         .where("username", isEqualTo: username)
         .get()
         .then((value) => value.size > 0 ? true : false);
-    print(stat);
+    // print(stat);
     return stat;
   }
 
@@ -62,7 +62,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   }
 
   Future<void> setFields() async {
-    print("hello");
+    // print("hello");
     final userData = await ref.read(authControllerProvider).getUserData();
     if (userData == null) {
       _userData = UserModel(
@@ -84,8 +84,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     setState(() {
       _defaultImageUrl = _userData!.profilePic;
     });
-    print("hehehes");
-    print(_defaultImageUrl);
+    // print("hehehes");
+    // print(_defaultImageUrl);
 
     // print(_defaultImageUrl);
   }
@@ -232,7 +232,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           value.trim().length < 4 ||
                           value.trim().length > 32 ||
                           value.isEmpty) {
-                        print(value);
+                        // print(value);
                         return 'Please enter valid username!';
                       }
                       return null;
@@ -254,7 +254,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   onChanged: (text) async {
                     final check = await usernameExists(text);
                     setState(() => userExists = check);
-                    print(userExists);
+                    // print(userExists);
                   },
                   validator: (value) {
                     if (value == null ||
@@ -262,7 +262,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         value.trim().length > 32 ||
                         value.contains(" ") ||
                         value.isEmpty) {
-                      print(value);
+                      // print(value);
                       return 'Please enter valid username!';
                     }
                     if (userExists) return 'Username Already Exists!';

@@ -54,12 +54,21 @@ class _SelectContactsGroupState extends ConsumerState<SelectContactsGroup> {
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 8),
                       child: ListTile(
-                        title: Text(
-                          contact.contactId,
-                          style: const TextStyle(
-                            fontSize: 18,
-                          ),
+                        title: Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: ListTile(
+                      title: Text(
+                        contact.name,
+                      ),
+                      leading: CircleAvatar(
+                        
+                        backgroundImage: NetworkImage(
+                          contact.profilePic,
                         ),
+                        radius: 30,
+                      ),
+                    ),
+                  ),
                         leading: selectedContactsIndex.contains(index)
                             ? IconButton(
                                 onPressed: () {},
