@@ -7,7 +7,7 @@ import 'package:p_chat/common/widgets/error.dart';
 import 'package:p_chat/common/widgets/loader.dart';
 import 'package:p_chat/models/chat_contact.dart';
 
-final selectedGroupContacts = StateProvider<List<Contact>>((ref) => []);
+final selectedGroupContacts = StateProvider<List<ChatContact>>((ref) => []);
 
 class SelectContactsGroup extends ConsumerStatefulWidget {
   const SelectContactsGroup({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class SelectContactsGroup extends ConsumerStatefulWidget {
 class _SelectContactsGroupState extends ConsumerState<SelectContactsGroup> {
   List<int> selectedContactsIndex = [];
 
-  void selectContact(int index, Contact contact) {
+  void selectContact(int index, ChatContact contact) {
     if (selectedContactsIndex.contains(index)) {
       selectedContactsIndex.removeAt(index);
     } else {
