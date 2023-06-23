@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:p_chat/apps/auth/widgets/user_picker_image.dart';
 import 'package:p_chat/common/utils/colors.dart';
 
 class CreateGroupScreen extends ConsumerStatefulWidget {
@@ -10,6 +13,9 @@ class CreateGroupScreen extends ConsumerStatefulWidget {
 }
 
 class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
+
+  TextEditingController groupNameController = TextEditingController();
+  File? _selectedImage;
 
   @override
   Widget build(BuildContext context) {
@@ -26,32 +32,10 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
         child: Column(
           children: [
             const SizedBox(height: 10),
-            Stack(
-              children: [
-                image == null
-                    ? const CircleAvatar(
-                        backgroundImage: NetworkImage(
-                          'https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png',
-                        ),
-                        radius: 64,
-                      )
-                    : CircleAvatar(
-                        backgroundImage: FileImage(
-                          image!,
-                        ),
-                        radius: 64,
-                      ),
-                Positioned(
-                  bottom: -10,
-                  left: 80,
-                  child: IconButton(
-                    onPressed: selectImage,
-                    icon: const Icon(
-                      Icons.add_a_photo,
-                    ),
-                  ),
-                ),
-              ],
+            UserImagePicker(
+                  onPickImage: (pickedImage) {
+                    _selectedImage = pickedImage;
+                  },
             ),
             Padding(
               padding: const EdgeInsets.all(10.0),

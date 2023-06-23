@@ -25,7 +25,7 @@ class GroupRepository {
   GroupRepository(
       {required this.firestore, required this.auth, required this.ref});
 
-    void createGroup(BuildContext context, String name, File profilePic,
+    void createGroup(BuildContext context, String name, String profileUrl,
       List<Contact> selectedContact) async {
     try {
       List<String> uids = [];
@@ -47,11 +47,7 @@ class GroupRepository {
       }
       var groupId = const Uuid().v1();
       
-      final storageRef = FirebaseStorage.instance
-            .ref()
-            .child('/group/$groupId',);
-        await storageRef.putFile(profilePic);
-      String profileUrl = await storageRef.getDownloadURL();
+      
       model.Group group = model.Group(
         senderId: auth.currentUser!.uid,
         name: name,
