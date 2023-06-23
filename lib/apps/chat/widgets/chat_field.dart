@@ -58,7 +58,7 @@ class _ChatFieldState extends ConsumerState<ChatField> {
             context,
             _messageController.text.trim(),
             widget.recieverUserId,
-            // widget.isGroupChat,
+            widget.isGroupChat,
           );
       setState(() {
         _messageController.text = '';
@@ -94,7 +94,7 @@ class _ChatFieldState extends ConsumerState<ChatField> {
           file,
           widget.recieverUserId,
           messageEnum,
-          // widget.isGroupChat,
+          widget.isGroupChat,
         );
   }
 
