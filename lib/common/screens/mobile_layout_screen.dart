@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:p_chat/apps/auth/screens/auth.dart';
 import 'package:p_chat/apps/auth/screens/profile.dart';
 import 'package:p_chat/apps/chat/widgets/contact_list.dart';
+import 'package:p_chat/apps/group/screens/create_group_screen.dart';
 import 'package:p_chat/apps/status/screens/confirm_status.dart';
 import 'package:p_chat/apps/status/screens/status_contacts.dart';
 import 'package:p_chat/common/utils/colors.dart';
@@ -102,10 +103,10 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
                     'Create Group',
                     style: TextStyle(color: textColor),
                   ),
-                  // onTap: () => Future(
-                  //   () => Navigator.pushNamed(
-                  //       context, CreateGroupScreen.routeName),
-                  // ),
+                  onTap: () => Future(
+                    () => Navigator.pushNamed(
+                        context, CreateGroupScreen.routeName),
+                  ),
                 ),
                 PopupMenuItem(
                   child: const Text(
