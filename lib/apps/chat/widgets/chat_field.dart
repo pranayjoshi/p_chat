@@ -54,7 +54,7 @@ class _ChatFieldState extends ConsumerState<ChatField> {
 
   void sendTextMessage() async {
     if (isShowSendButton) {
-      print(_messageController.text.trim());
+      // print(_messageController.text.trim());
       ref.read(chatControllerProvider).sendTextMessage(
             context,
             _messageController.text.trim(),
