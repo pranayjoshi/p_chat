@@ -39,6 +39,7 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
             context,
             groupNameController.text.trim(),
             profileUrl,
+            groupId,
             ref.read(selectedGroupContacts),
           );
       ref.read(selectedGroupContacts.state).update((state) => []);
