@@ -53,7 +53,7 @@ class ChatController {
     BuildContext context,
     String text,
     String recieverUserId,
-    // bool isGroupChat,
+    bool isGroupChat,
   ) {
     final messageReply = ref.read(messageReplyProvider);
     ref.read(userDataAuthProvider).whenData(
@@ -63,7 +63,7 @@ class ChatController {
             recieverUserId: recieverUserId,
             senderUser: value!,
             messageReply: messageReply,
-            // isGroupChat: isGroupChat,
+            isGroupChat: isGroupChat,
           ),
         );
     ref.read(messageReplyProvider.state).update((state) => null);
@@ -74,7 +74,7 @@ class ChatController {
     File file,
     String recieverUserId,
     MessageEnum messageEnum,
-    // bool isGroupChat,
+    bool isGroupChat,
   ) {
     final messageReply = ref.read(messageReplyProvider);
     ref.read(userDataAuthProvider).whenData(
@@ -86,7 +86,7 @@ class ChatController {
             messageEnum: messageEnum,
             ref: ref,
             messageReply: messageReply,
-            // isGroupChat: isGroupChat,
+            isGroupChat: isGroupChat,
           ),
         );
     ref.read(messageReplyProvider.state).update((state) => null);
