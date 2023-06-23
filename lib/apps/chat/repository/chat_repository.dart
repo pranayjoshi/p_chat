@@ -114,10 +114,10 @@ class ChatRepository {
     String recieverUserId,
     // bool isGroupChat,
   ) async {
-    print(senderUserData);
-    print(text);
-    print(timeSent);
-    print(recieverUserData);
+    // print(senderUserData);
+    // print(text);
+    // print(timeSent);
+    // print(recieverUserData);
     // if (isGroupChat) {
     //   await firestore.collection('groups').doc(recieverUserId).update({
     //     'lastMessage': text,
