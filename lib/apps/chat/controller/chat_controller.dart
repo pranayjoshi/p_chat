@@ -88,7 +88,7 @@ class ChatController {
             // isGroupChat: isGroupChat,
           ),
         );
-    // ref.read(messageReplyProvider.state).update((state) => null);
+    ref.read(messageReplyProvider.state).update((state) => null);
   }
 
   // void sendGIFMessage(

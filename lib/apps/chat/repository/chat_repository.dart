@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:p_chat/common/enums/message_enum.dart';
 import 'package:p_chat/common/providers/message_reply_provider.dart';
 import 'package:p_chat/models/chat_contact.dart';
+import 'package:p_chat/models/group.dart';
 import 'package:p_chat/models/message.dart';
 import 'package:p_chat/models/user.dart';
 import 'package:uuid/uuid.dart';
@@ -59,18 +60,18 @@ class ChatRepository {
     });
   }
 
-//   Stream<List<Group>> getChatGroups() {
-//     return firestore.collection('groups').snapshots().map((event) {
-//       List<Group> groups = [];
-//       for (var document in event.docs) {
-//         var group = Group.fromMap(document.data());
-//         if (group.membersUid.contains(auth.currentUser!.uid)) {
-//           groups.add(group);
-//         }
-//       }
-//       return groups;
-//     });
-//   }
+  Stream<List<Group>> getChatGroups() {
+    return firestore.collection('groups').snapshots().map((event) {
+      List<Group> groups = [];
+      for (var document in event.docs) {
+        var group = Group.fromMap(document.data());
+        if (group.membersUid.contains(auth.currentUser!.uid)) {
+          groups.add(group);
+        }
+      }
+      return groups;
+    });
+  }
 
   Stream<List<Message>> getChatStream(String recieverUserId) {
     return firestore
@@ -90,21 +91,21 @@ class ChatRepository {
     });
   }
 
-//   Stream<List<Message>> getGroupChatStream(String groudId) {
-//     return firestore
-//         .collection('groups')
-//         .doc(groudId)
-//         .collection('chats')
-//         .orderBy('timeSent')
-//         .snapshots()
-//         .map((event) {
-//       List<Message> messages = [];
-//       for (var document in event.docs) {
-//         messages.add(Message.fromMap(document.data()));
-//       }
-//       return messages;
-//     });
-//   }
+  Stream<List<Message>> getGroupChatStream(String groudId) {
+    return firestore
+        .collection('groups')
+        .doc(groudId)
+        .collection('chats')
+        .orderBy('timeSent')
+        .snapshots()
+        .map((event) {
+      List<Message> messages = [];
+      for (var document in event.docs) {
+        messages.add(Message.fromMap(document.data()));
+      }
+      return messages;
+    });
+  }
 
   void _saveDataToContactsSubcollection(
     UserModel senderUserData,
