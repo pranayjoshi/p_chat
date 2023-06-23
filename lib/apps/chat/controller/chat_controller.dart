@@ -9,13 +9,6 @@ import 'package:p_chat/common/providers/message_reply_provider.dart';
 import 'package:p_chat/models/chat_contact.dart';
 import 'package:p_chat/models/group.dart';
 import 'package:p_chat/models/message.dart';
-// import 'package:whatsapp_ui/common/enums/message_enum.dart';
-// import 'package:whatsapp_ui/common/providers/message_reply_provider.dart';
-// import 'package:whatsapp_ui/features/auth/controller/auth_controller.dart';
-// import 'package:whatsapp_ui/features/chat/repositories/chat_repository.dart';
-// import 'package:whatsapp_ui/models/chat_contact.dart';
-// import 'package:whatsapp_ui/models/group.dart';
-// import 'package:whatsapp_ui/models/message.dart';
 
 final chatControllerProvider = Provider((ref) {
   final chatRepository = ref.watch(chatRepositoryProvider);
