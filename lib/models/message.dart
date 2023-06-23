@@ -9,6 +9,7 @@ class Message {
   final String messageId;
   final bool isSeen;
   final String repliedMessage;
+  final String senderName;
   final String repliedTo;
   final MessageEnum repliedMessageType;
 
@@ -21,6 +22,7 @@ class Message {
     required this.messageId,
     required this.isSeen,
     required this.repliedMessage,
+    required this.senderName,
     required this.repliedTo,
     required this.repliedMessageType,
   });
@@ -37,12 +39,14 @@ class Message {
       'repliedMessage': repliedMessage,
       'repliedTo': repliedTo,
       'repliedMessageType': repliedMessageType.type,
+      'senderName': senderName
     };
   }
 
   factory Message.fromMap(Map<String, dynamic> map) {
     return Message(
       senderId: map['senderId'] ?? '',
+      senderName: map['senderName'] ?? '',
       recieverid: map['recieverid'] ?? '',
       text: map['text'] ?? '',
       type: (map['type'] as String).toEnum(),

@@ -120,7 +120,7 @@ class _ChatListState extends ConsumerState<ChatList> {
                   FirebaseAuth.instance.currentUser!.uid) {
                 return MyMessageCard(
                   message: messageData.text,
-                  isGroupChat: isGroupChat,
+                  isGroupChat: widget.isGroupChat,
                   date: timeSent,
                   type: messageData.type,
                   repliedText: messageData.repliedMessage,
@@ -136,7 +136,7 @@ class _ChatListState extends ConsumerState<ChatList> {
               }
               return SenderMessageCard(
                 message: messageData.text,
-                isGroupChat: isGroupChat,
+                isGroupChat: widget.isGroupChat,
                 date: timeSent,
                 type: messageData.type,
                 username: messageData.repliedTo,
