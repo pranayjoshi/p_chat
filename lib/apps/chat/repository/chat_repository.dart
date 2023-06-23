@@ -233,6 +233,7 @@ class ChatRepository {
     required MessageReply? messageReply,
     required bool isGroupChat,
   }) async {
+    print(text);
     try {
       var timeSent = DateTime.now();
       UserModel? recieverUserData;

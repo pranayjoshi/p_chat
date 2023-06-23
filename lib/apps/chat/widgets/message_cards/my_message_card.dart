@@ -13,6 +13,7 @@ class MyMessageCard extends StatelessWidget {
   final String username;
   final MessageEnum repliedMessageType;
   final bool isSeen;
+  final bool isGroupChat;
 
   const MyMessageCard({
     Key? key,
@@ -24,6 +25,7 @@ class MyMessageCard extends StatelessWidget {
     required this.username,
     required this.repliedMessageType,
     required this.isSeen,
+    required this.isGroupChat,
   }) : super(key: key);
 
   @override
@@ -62,7 +64,7 @@ class MyMessageCard extends StatelessWidget {
                         ),
                   child: Column(
                     children: [
-                      if (isReplying) ...[
+                      if (isReplying || isGroupChat) ...[
                         Text(
                           username,
                           style: const TextStyle(

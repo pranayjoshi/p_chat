@@ -15,6 +15,7 @@ class SenderMessageCard extends StatelessWidget {
     required this.repliedText,
     required this.username,
     required this.repliedMessageType,
+    required this.isGroupChat
   }) : super(key: key);
   final String message;
   final String date;
@@ -23,6 +24,7 @@ class SenderMessageCard extends StatelessWidget {
   final String repliedText;
   final String username;
   final MessageEnum repliedMessageType;
+  final bool isGroupChat;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +62,7 @@ class SenderMessageCard extends StatelessWidget {
                         ),
                   child: Column(
                     children: [
-                      if (isReplying) ...[
+                      if (isReplying || isGroupChat) ...[
                         Text(
                           textAlign: TextAlign.left,
                           username,

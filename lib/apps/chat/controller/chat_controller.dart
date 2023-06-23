@@ -48,7 +48,7 @@ class ChatController {
     String recieverUserId,
     bool isGroupChat,
   ) {
-    print(text);
+    
     final messageReply = ref.read(messageReplyProvider);
     ref.read(userDataAuthProvider).whenData(
           (value) => chatRepository.sendTextMessage(
