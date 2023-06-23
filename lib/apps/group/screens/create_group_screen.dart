@@ -26,7 +26,7 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
 
   void createGroup() async{
     var groupId = const Uuid().v1();
-    String profileUrl = "";
+    String profileUrl = "https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png";
     if (_selectedImage != null){
       final storageRef = FirebaseStorage.instance
             .ref()
