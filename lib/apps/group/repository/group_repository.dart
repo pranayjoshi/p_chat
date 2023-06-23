@@ -30,22 +30,31 @@ class GroupRepository {
       List<ChatContact> selectedContact) async {
     try {
       List<String> uids = [];
-      for (int i = 0; i < selectedContact.length; i++) {
-        var userCollection = await firestore
-            .collection('users')
-            .where(
-              'phoneNumber',
-              isEqualTo: selectedContact[i].phones[0].number.replaceAll(
-                    ' ',
-                    '',
-                  ),
-            )
-            .get();
+      // for (int i = 0; i < selectedContact.length; i++) {
+      //   var userCollection = await firestore
+      //       .collection('users')
+      //       .where(
+      //         'phoneNumber',
+      //         isEqualTo: selectedContact[i].phones[0].number.replaceAll(
+      //               ' ',
+      //               '',
+      //             ),
+      //       )
+      //       .get();
 
-        if (userCollection.docs.isNotEmpty && userCollection.docs[0].exists) {
-          uids.add(userCollection.docs[0].data()['uid']);
+      //   if (userCollection.docs.isNotEmpty && userCollection.docs[0].exists) {
+      //     uids.add(userCollection.docs[0].data()['uid']);
+      //   }
+      // }
+      var userCollection = await firestore.collection('users')
+          .doc(auth.currentUser!.uid)
+          .collection('chats').get();
+        List<QueryDocumentSnapshot<Map<String, dynamic>>> contacts= userCollection.docs; 
+        // print(contacts);
+        for (var document in contacts) {
+          var userData = ChatContact.fromMap(document.data());
+          uids.add(userData.contactId);
         }
-      }
       
       
       
