@@ -4,20 +4,19 @@ import 'package:p_chat/common/enums/message_enum.dart';
 import 'package:p_chat/common/utils/colors.dart';
 import 'package:swipe_to/swipe_to.dart';
 
-
 class SenderMessageCard extends StatelessWidget {
-  const SenderMessageCard({
-    Key? key,
-    required this.message,
-    required this.date,
-    required this.type,
-    required this.onRightSwipe,
-    required this.repliedText,
-    required this.username,
-    required this.senderName,
-    required this.repliedMessageType,
-    required this.isGroupChat
-  }) : super(key: key);
+  const SenderMessageCard(
+      {Key? key,
+      required this.message,
+      required this.date,
+      required this.type,
+      required this.onRightSwipe,
+      required this.repliedText,
+      required this.username,
+      required this.senderName,
+      required this.repliedMessageType,
+      required this.isGroupChat})
+      : super(key: key);
   final String message;
   final String date;
   final MessageEnum type;
@@ -64,12 +63,11 @@ class SenderMessageCard extends StatelessWidget {
                         ),
                   child: Column(
                     children: [
-                      if (isReplying || isGroupChat) ...[
+                      if (isReplying) ...[
                         Text(
                           textAlign: TextAlign.left,
                           username,
                           style: const TextStyle(
-                            
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -91,7 +89,13 @@ class SenderMessageCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                       ],
-                      Text(senderName),
+                      if (isGroupChat)
+                        Text(
+                          senderName,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       DisplayTextImageGIF(
                         message: message,
                         type: type,
