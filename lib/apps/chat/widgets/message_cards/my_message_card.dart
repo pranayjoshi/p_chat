@@ -66,7 +66,7 @@ class MyMessageCard extends StatelessWidget {
                         ),
                   child: Column(
                     children: [
-                      if (isReplying ) ...[
+                      if (isReplying) ...[
                         Text(
                           username,
                           style: const TextStyle(
@@ -91,7 +91,13 @@ class MyMessageCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                       ],
-                      Text(senderName),
+                      if (isGroupChat)
+                        Text(
+                          senderName,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       DisplayTextImageGIF(
                         message: message,
                         type: type,
