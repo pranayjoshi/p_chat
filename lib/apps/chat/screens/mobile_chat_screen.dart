@@ -13,13 +13,13 @@ class MobileChatScreen extends ConsumerWidget {
   static const String routeName = '/mobile-chat-screen';
   final String name;
   final String uid;
-  // final bool isGroupChat;
+  final bool isGroupChat;
   final String profilePic;
   const MobileChatScreen({
     Key? key,
     required this.name,
     required this.uid,
-    // required this.isGroupChat,
+    required this.isGroupChat,
     required this.profilePic,
   }) : super(key: key);
 
