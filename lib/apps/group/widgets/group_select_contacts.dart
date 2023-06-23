@@ -21,7 +21,9 @@ class _SelectContactsGroupState extends ConsumerState<SelectContactsGroup> {
   List<int> selectedContactsIndex = [];
 
   void selectContact(int index, ChatContact contact) {
+    print( selectedContactsIndex);
     if (selectedContactsIndex.contains(index)) {
+      print(index);
       selectedContactsIndex.removeAt(index);
     } else {
       selectedContactsIndex.add(index);
