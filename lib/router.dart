@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:p_chat/apps/auth/screens/profile.dart';
 import 'package:p_chat/apps/chat/widgets/photo_viewer.dart';
+import 'package:p_chat/apps/group/screens/create_group_screen.dart';
 import 'package:p_chat/apps/status/screens/confirm_status.dart';
 import 'package:p_chat/apps/status/screens/status.dart';
 import 'package:p_chat/common/widgets/error.dart';
@@ -73,10 +74,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           status: status,
         ),
       );
-    // case CreateGroupScreen.routeName:
-    //   return MaterialPageRoute(
-    //     builder: (context) => const CreateGroupScreen(),
-    //   );
+    case CreateGroupScreen.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const CreateGroupScreen(),
+      );
     default:
       return MaterialPageRoute(
         builder: (context) => const Scaffold(
