@@ -158,18 +158,7 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
     return tabBarController.index == 0 ?
    FloatingActionButton(
           onPressed: () async {
-            // if (tabBarController.index == 0) {
               Navigator.pushNamed(context, GlobalContactsScreen.routeName);
-            // } else {
-            //   File? pickedImage = await pickImageFromGallery(context);
-            //   if (pickedImage != null) {
-            //     Navigator.pushNamed(
-            //       context,
-            //       ConfirmStatusScreen.routeName,
-            //       arguments: pickedImage,
-            //     );
-            //   }
-            // }
           },
           backgroundColor: tabColor,
           child:const Icon(
@@ -179,9 +168,6 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
         )
         : FloatingActionButton(
           onPressed: () async {
-            // if (tabBarController.index == 0) {
-            //   Navigator.pushNamed(context, GlobalContactsScreen.routeName);
-            // } else {
               File? pickedImage = await pickImageFromGallery(context);
               if (pickedImage != null) {
                 Navigator.pushNamed(
