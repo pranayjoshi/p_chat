@@ -28,13 +28,13 @@ class SelectContactRepository {
     return userCollection;
   }
 
-  Future<QuerySnapshot<Map<String, dynamic>>> getChatContacts() async {
-    var userCollection = await firestore.collection('users')
+  Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>> getChatContacts() async {
+    var userCollection = await FirebaseFirestore.instance.collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('chats').get();
-        List<QueryDocumentSnapshot<Map<String, dynamic>>> contacts= userCollection.docs; 
+    List<QueryDocumentSnapshot<Map<String, dynamic>>> contacts = userCollection.docs; 
 
-    return userCollection;
+    return contacts;
   }
     void selectContact(UserModel selectedUserData, BuildContext context) async{
       // var userCollection = await firestore.collection('users').get();
