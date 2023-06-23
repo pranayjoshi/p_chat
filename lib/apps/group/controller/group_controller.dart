@@ -23,8 +23,8 @@ class GroupController {
     required this.ref,
   });
 
-  void createGroup(BuildContext context, String name, String profileUrl,
+  void createGroup(BuildContext context, String name, String profileUrl, String groupId,
       List<ChatContact> selectedContact) {
-    groupRepository.createGroup(context, name, profileUrl, selectedContact);
+    groupRepository.createGroup(context, name, profileUrl, groupId, selectedContact);
   }
 }

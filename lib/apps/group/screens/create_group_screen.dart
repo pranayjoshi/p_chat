@@ -1,12 +1,17 @@
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:p_chat/apps/auth/widgets/user_picker_image.dart';
+import 'package:p_chat/apps/group/controller/group_controller.dart';
+import 'package:p_chat/apps/group/widgets/group_select_contacts.dart';
 import 'package:p_chat/common/utils/colors.dart';
+import 'package:uuid/uuid.dart';
 
 class CreateGroupScreen extends ConsumerStatefulWidget {
   const CreateGroupScreen({super.key});
+  static const String routeName = '/create-group';
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _CreateGroupScreenState();
@@ -16,6 +21,30 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
 
   TextEditingController groupNameController = TextEditingController();
   File? _selectedImage;
+
+
+
+  void createGroup() async{
+    var groupId = const Uuid().v1();
+    String profileUrl = "";
+    if (_selectedImage != null){
+      final storageRef = FirebaseStorage.instance
+            .ref()
+            .child('/group/$groupId',);
+        await storageRef.putFile(_selectedImage!);
+      profileUrl = await storageRef.getDownloadURL();
+    }
+    if (groupNameController.text.trim().isNotEmpty) {
+      ref.read(groupControllerProvider).createGroup(
+            context,
+            groupNameController.text.trim(),
+            profileUrl,
+            ref.read(selectedGroupContacts),
+          );
+      ref.read(selectedGroupContacts.state).update((state) => []);
+      Navigator.pop(context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +98,6 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
           color: Colors.white,
         ),
       ),
-    );
     );
   }
 }
