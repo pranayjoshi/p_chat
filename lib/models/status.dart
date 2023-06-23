@@ -4,6 +4,7 @@ class Status {
   final List<String> photoUrl;
   final DateTime createdAt;
   final String profilePic;
+  final bool isSeen;
   final String statusId;
   final List<String> whoCanSee;
   Status({
@@ -11,6 +12,7 @@ class Status {
     required this.username,
     required this.photoUrl,
     required this.createdAt,
+    required this.isSeen,
     required this.profilePic,
     required this.statusId,
     required this.whoCanSee,
