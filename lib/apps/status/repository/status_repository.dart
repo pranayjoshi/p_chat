@@ -91,6 +91,7 @@ class StatusRepository {
         uid: uid,
         username: username,
         photoUrl: statusImageUrls,
+        isSeen: false,
         createdAt: DateTime.now(),
         profilePic: profilePic,
         statusId: statusId,
@@ -102,6 +103,8 @@ class StatusRepository {
       showSnackBar(context: context, content: e.toString());
     }
   }
+
+  
 
   Future<List<Status>> getStatus(BuildContext context) async {
     List<Status> statusData = [];

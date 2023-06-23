@@ -34,6 +34,7 @@ class Status {
     return Status(
       uid: map['uid'] ?? '',
       username: map['username'] ?? '',
+      isSeen: map['isSeen'] ?? false,
       photoUrl: List<String>.from(map['photoUrl']),
       createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt']),
       profilePic: map['profilePic'] ?? '',

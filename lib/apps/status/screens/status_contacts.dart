@@ -11,6 +11,16 @@ class StatusContactsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+    // if (!messageData.isSeen &&
+    //               messageData.recieverid ==
+    //                   FirebaseAuth.instance.currentUser!.uid) {
+    //             ref.read(chatControllerProvider).setChatMessageSeen(
+    //                   context,
+    //                   widget.recieverUserId,
+    //                   messageData.messageId,
+    //                 );
+    //           }
     return FutureBuilder<List<Status>>(
       future: ref.read(statusControllerProvider).getStatus(context),
       builder: (context, snapshot) {
