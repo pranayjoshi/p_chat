@@ -39,9 +39,22 @@ class MobileChatScreen extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: appBarColor,
         iconTheme: IconThemeData(color: textColor),
-        // title: isGroupChat
-        //     ? Text(name)
-        title: StreamBuilder<UserModel>(
+        title: isGroupChat
+            ? Row(
+                children: [
+                  CircleAvatar(foregroundImage: NetworkImage(profilePic),),
+                  SizedBox(width: 12,),
+                  Column(
+                    children: [
+                      Text(
+                        name,
+                        style: TextStyle(color: textColor),
+                      ),
+                    ],
+                  ),
+                ],
+              )
+        : StreamBuilder<UserModel>(
             stream: ref.read(authControllerProvider).userDataById(uid),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
