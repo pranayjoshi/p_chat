@@ -96,7 +96,7 @@ class ChatRepository {
         .collection('groups')
         .doc(groudId)
         .collection('chats')
-        .orderBy('timeSent')
+        .orderBy('timeSent', descending: true)
         .snapshots()
         .map((event) {
       List<Message> messages = [];
@@ -237,6 +237,8 @@ class ChatRepository {
       var timeSent = DateTime.now();
       UserModel? recieverUserData;
 
+      print(isGroupChat);
+
       if (!isGroupChat) {
         var userDataMap =
             await firestore.collection('users').doc(recieverUserId).get();
@@ -262,7 +264,7 @@ class ChatRepository {
         messageId: messageId,
         username: senderUser.name,
         messageReply: messageReply,
-        recieverUserName: recieverUserData!.name,
+        recieverUserName: recieverUserData?.name,
         senderUsername: senderUser.name,
         isGroupChat: isGroupChat,
       );

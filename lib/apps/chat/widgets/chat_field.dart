@@ -63,8 +63,7 @@ class _ChatFieldState extends ConsumerState<ChatField> {
       setState(() {
         _messageController.text = '';
       });
-    }
-    else {
+    } else {
       var tempDir = await getTemporaryDirectory();
       var path = '${tempDir.path}/flutter_sound.aac';
       if (!isRecorderInit) {
