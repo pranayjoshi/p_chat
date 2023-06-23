@@ -11,6 +11,7 @@ class MyMessageCard extends StatelessWidget {
   final VoidCallback onLeftSwipe;
   final String repliedText;
   final String username;
+  final String senderName;
   final MessageEnum repliedMessageType;
   final bool isSeen;
   final bool isGroupChat;
@@ -22,6 +23,7 @@ class MyMessageCard extends StatelessWidget {
     required this.type,
     required this.onLeftSwipe,
     required this.repliedText,
+    required this.senderName,
     required this.username,
     required this.repliedMessageType,
     required this.isSeen,
@@ -64,7 +66,7 @@ class MyMessageCard extends StatelessWidget {
                         ),
                   child: Column(
                     children: [
-                      if (isReplying || isGroupChat) ...[
+                      if (isReplying ) ...[
                         Text(
                           username,
                           style: const TextStyle(
@@ -89,6 +91,7 @@ class MyMessageCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                       ],
+                      Text(senderName),
                       DisplayTextImageGIF(
                         message: message,
                         type: type,

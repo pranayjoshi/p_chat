@@ -14,6 +14,7 @@ class SenderMessageCard extends StatelessWidget {
     required this.onRightSwipe,
     required this.repliedText,
     required this.username,
+    required this.senderName,
     required this.repliedMessageType,
     required this.isGroupChat
   }) : super(key: key);
@@ -24,6 +25,7 @@ class SenderMessageCard extends StatelessWidget {
   final String repliedText;
   final String username;
   final MessageEnum repliedMessageType;
+  final String senderName;
   final bool isGroupChat;
 
   @override
@@ -89,6 +91,7 @@ class SenderMessageCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                       ],
+                      Text(senderName),
                       DisplayTextImageGIF(
                         message: message,
                         type: type,

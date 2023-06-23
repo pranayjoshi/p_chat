@@ -122,6 +122,7 @@ class _ChatListState extends ConsumerState<ChatList> {
                   message: messageData.text,
                   isGroupChat: widget.isGroupChat,
                   date: timeSent,
+                  senderName: messageData.senderName,
                   type: messageData.type,
                   repliedText: messageData.repliedMessage,
                   username: messageData.repliedTo,
@@ -139,6 +140,7 @@ class _ChatListState extends ConsumerState<ChatList> {
                 isGroupChat: widget.isGroupChat,
                 date: timeSent,
                 type: messageData.type,
+                senderName: messageData.senderName,
                 username: messageData.repliedTo,
                 repliedMessageType: messageData.repliedMessageType,
                 onRightSwipe: () => onMessageSwipe(
