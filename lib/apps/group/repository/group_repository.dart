@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:p_chat/models/chat_contact.dart';
 import 'package:uuid/uuid.dart';
 import 'package:p_chat/common/utils/utils.dart';
 import 'package:p_chat/models/group.dart' as model;
@@ -26,7 +27,7 @@ class GroupRepository {
       {required this.firestore, required this.auth, required this.ref});
 
     void createGroup(BuildContext context, String name, String profileUrl,
-      List<Contact> selectedContact) async {
+      List<ChatContact> selectedContact) async {
     try {
       List<String> uids = [];
       for (int i = 0; i < selectedContact.length; i++) {
