@@ -7,6 +7,7 @@ import 'package:p_chat/apps/chat/repository/chat_repository.dart';
 import 'package:p_chat/common/enums/message_enum.dart';
 import 'package:p_chat/common/providers/message_reply_provider.dart';
 import 'package:p_chat/models/chat_contact.dart';
+import 'package:p_chat/models/group.dart';
 import 'package:p_chat/models/message.dart';
 // import 'package:whatsapp_ui/common/enums/message_enum.dart';
 // import 'package:whatsapp_ui/common/providers/message_reply_provider.dart';
@@ -36,17 +37,17 @@ class ChatController {
     return chatRepository.getChatContacts();
   }
 
-  // Stream<List<Group>> chatGroups() {
-  //   return chatRepository.getChatGroups();
-  // }
+  Stream<List<Group>> chatGroups() {
+    return chatRepository.getChatGroups();
+  }
 
   Stream<List<Message>> chatStream(String recieverUserId) {
     return chatRepository.getChatStream(recieverUserId);
   }
 
-  // Stream<List<Message>> groupChatStream(String groupId) {
-  //   return chatRepository.getGroupChatStream(groupId);
-  // }
+  Stream<List<Message>> groupChatStream(String groupId) {
+    return chatRepository.getGroupChatStream(groupId);
+  }
 
   void sendTextMessage(
     BuildContext context,
