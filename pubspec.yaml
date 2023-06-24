@@ -53,7 +53,10 @@ dependencies:
   cached_network_image: ^3.2.3
   audioplayers: ^4.1.0
   photo_view: ^0.14.0
-  cached_video_player: ^2.0.4
+  cached_video_player:
+    git:
+      url: https://github.com/vikram25897/flutter_cached_video_player
+      ref: feature/gradle_version_bump
   story_view: ^0.14.0
   flutter_launcher_icons: ^0.13.1
 
@@ -77,10 +80,7 @@ flutter_icons:
   android: true
   ios: true
 
-cached_video_player:
-  git:
-    url: https://github.com/vikram25897/flutter_cached_video_player
-    ref: feature/gradle_version_bump
+
 # The following section is specific to Flutter packages.
 flutter:
 
