@@ -48,7 +48,7 @@ class SelectContactRepository {
               'name': selectedUserData.name,
               'uid': selectedUserData.uid,
               'profilePic': selectedUserData.profilePic,
-              // 'isGroupChat': false,
+              'isGroupChat': false,
             },
           );
     }
