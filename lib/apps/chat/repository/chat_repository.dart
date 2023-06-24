@@ -184,9 +184,7 @@ class ChatRepository {
       repliedMessage: messageReply == null ? '' : messageReply.message,
       repliedTo: messageReply == null
           ? ''
-          : messageReply.isMe
-              ? senderUsername
-              : recieverUserName ?? '',
+          : messageReply.name,
       repliedMessageType:
           messageReply == null ? MessageEnum.text : messageReply.messageEnum,
     );

@@ -47,12 +47,14 @@ class _ChatListState extends ConsumerState<ChatList> {
 
   void onMessageSwipe(
     String message,
+    String name,
     bool isMe,
     MessageEnum messageEnum,
   ) {
     ref.read(messageReplyProvider.state).update(
           (state) => MessageReply(
             message,
+            name,
             isMe,
             messageEnum,
           ),
