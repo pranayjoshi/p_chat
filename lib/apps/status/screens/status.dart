@@ -28,7 +28,7 @@ class _StatusScreenState extends ConsumerState<StatusScreen> {
   void initState() {
     super.initState();
     initStoryPageItems();
-    print(widget.status);
+    // print(widget.status);
   }
 
   void initStoryPageItems() {

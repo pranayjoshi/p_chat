@@ -127,6 +127,7 @@ class StatusRepository {
                   .millisecondsSinceEpoch,
             )
             .get();
+        
         print(statusesSnapshot);
         for (var tempData in statusesSnapshot.docs) {
           print(tempData["whoCanSee"]);
