@@ -63,45 +63,43 @@ class SenderMessageCard extends StatelessWidget {
                         ),
                   child: Column(
                     children: [
-                           Text(
-                            textAlign: TextAlign.left,
-                            senderName,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height:3),
-                      if (isReplying) Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-
-                              color: backgroundColor.withOpacity(0.5),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(
-                                  5,
-                                ),
+                      Text(
+                        textAlign: TextAlign.left,
+                        senderName,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 3),
+                      if (isReplying)
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: backgroundColor.withOpacity(0.5),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(
+                                5,
                               ),
                             ),
-                        child: Column(
-                          children: [ Text(
-                            textAlign: TextAlign.left,
-                            username,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
                           ),
-                          
-                          const SizedBox(height: 3),
-                          Container(
-                            
-                            child: DisplayTextImageGIF(
-                              message: repliedText,
-                              type: repliedMessageType,
+                          child: Column(children: [
+                            Text(
+                              textAlign: TextAlign.left,
+                              username,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 8),
-                        ]),
-                      ),
+                            const SizedBox(height: 3),
+                            Container(
+                              child: DisplayTextImageGIF(
+                                message: repliedText,
+                                type: repliedMessageType,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                          ]),
+                        ),
                       if (isGroupChat && !isReplying)
                         Column(
                           children: [
