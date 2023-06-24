@@ -21,6 +21,9 @@ class MyApp extends ConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(chatControllerProvider).sendTextMessage(
+      context, "dwad", "dwadad", false
+    );
     return MaterialApp(
       title: 'P-Chat',
       debugShowCheckedModeBanner: false, 
@@ -34,9 +37,7 @@ class MyApp extends ConsumerWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            ref.read(chatControllerProvider).sendTextMessage(
-      context, "dwad", "dwadad", true
-    );
+            
             return CalcPage();
             
           }

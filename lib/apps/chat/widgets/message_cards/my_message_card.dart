@@ -106,13 +106,17 @@ class MyMessageCard extends ConsumerWidget {
                           ),
                     child: Column(
                       children: [
-                        Text(
-                          
-                          textAlign: TextAlign.left,
-                          senderName,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            backgroundColor: textColor,
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            color: Colors.red,
+                            child: Text(
+                              textAlign: TextAlign.left,
+                              senderName,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ),
                         SizedBox(height: 3),
