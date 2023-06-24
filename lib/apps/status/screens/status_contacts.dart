@@ -31,6 +31,7 @@ class StatusContactsScreen extends ConsumerWidget {
           itemCount: snapshot.data!.length,
           itemBuilder: (context, index) {
             var statusData = snapshot.data![index];
+            print(statusData);
             return Column(
               children: [
                 SizedBox(height: 12,),

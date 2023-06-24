@@ -28,6 +28,7 @@ class _StatusScreenState extends ConsumerState<StatusScreen> {
   void initState() {
     super.initState();
     initStoryPageItems();
+    print(widget.status);
   }
 
   void initStoryPageItems() {
@@ -41,7 +42,7 @@ class _StatusScreenState extends ConsumerState<StatusScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // if (!widget.status.isSeen &&
+    // if (!widget.status. &&
     //               widget.status.uid ==
     //                   FirebaseAuth.instance.currentUser!.uid) {
     //             ref.read(statusRepositoryProvider).setChatMessageSeen(

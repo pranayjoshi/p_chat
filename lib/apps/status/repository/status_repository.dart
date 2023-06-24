@@ -101,7 +101,9 @@ class StatusRepository {
       var whoCanSee = {"isSeen": false};
 
       await firestore.collection('status').doc(statusId).set(status.toMap());
-      uidWhoCanSee.map((uid)async => await firestore.collection('status').doc(statusId).collection("whoCanSee").doc(uid).set(whoCanSee));
+      for (var i = 0; i < whoCanSee.length; i++) {
+        await firestore.collection('status').doc(statusId).collection("whoCanSee").doc(uidWhoCanSee[i]).set(whoCanSee);
+      }
       
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
@@ -125,7 +127,9 @@ class StatusRepository {
                   .millisecondsSinceEpoch,
             )
             .get();
+        print(statusesSnapshot);
         for (var tempData in statusesSnapshot.docs) {
+          print(tempData["whoCanSee"]);
           Status tempStatus = Status.fromMap(tempData.data());
           if (tempStatus.whoCanSee.contains(auth.currentUser!.uid)) {
             statusData.add(tempStatus);
