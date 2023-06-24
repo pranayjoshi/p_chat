@@ -11,9 +11,9 @@
 <!-- The Agora SDK requires Bluetooth permissions in case users are using Bluetooth devices.-->
 <uses-permission  android:name="android.permission.BLUETOOTH"  />
     <application
-        android:label="p_chat"
+        android:label="P-chat"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher_round">
         <activity
             android:name=".MainActivity"
             android:exported="true"
