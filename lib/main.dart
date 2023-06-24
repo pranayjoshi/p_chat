@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:p_chat/apps/auth/screens/auth.dart';
 import 'package:p_chat/apps/calculator/screens/calc_page.dart';
+import 'package:p_chat/apps/chat/controller/chat_controller.dart';
 import 'package:p_chat/common/utils/colors.dart';
 import 'package:p_chat/firebase_options.dart';
 import 'package:p_chat/router.dart';
@@ -14,12 +15,12 @@ void main() async {
   runApp(ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       title: 'P-Chat',
       debugShowCheckedModeBanner: false, 
@@ -33,7 +34,11 @@ class MyApp extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            ref.read(chatControllerProvider).sendTextMessage(
+      context, "dwad", "dwadad", true
+    );
             return CalcPage();
+            
           }
           return AuthScreen();
         },

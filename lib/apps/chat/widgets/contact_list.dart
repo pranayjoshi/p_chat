@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:p_chat/apps/auth/screens/auth.dart';
+// import 'package:p_chat/apps/auth/screens/auth.dart';
 import 'package:p_chat/apps/chat/widgets/photo_viewer.dart';
 import 'package:p_chat/common/utils/colors.dart';
 import 'package:p_chat/common/widgets/loader.dart';
@@ -16,6 +16,7 @@ class ContactsList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // DUMMY
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: SingleChildScrollView(
