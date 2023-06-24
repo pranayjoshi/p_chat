@@ -138,11 +138,11 @@ class ContactsList extends ConsumerWidget {
                                     ),
                                   ),
                                   leading: GestureDetector(
-                                    onTap: () => Navigator.pushNamed(
+                                    onTap: () =>{ Navigator.pushNamed(
                                         context, PhotoViewer.routeName,
                                         arguments: {
                                           "imageUrl": chatContactData.profilePic
-                                        }),
+                                        })},
                                     child: CircleAvatar(
                                       backgroundImage: NetworkImage(
                                         chatContactData.profilePic,
@@ -153,28 +153,28 @@ class ContactsList extends ConsumerWidget {
                                   trailing: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      FutureBuilder<int>(
-                                          future: ref
+                                      StreamBuilder<dynamic>(
+                                          stream: ref
                                               .read(chatControllerProvider)
                                               .getUnreadCount(context,
                                                   chatContactData.contactId),
                                           builder: (context, snapshot) {
-                                            return CircleAvatar(
-                                              radius: 15,
+                                            return snapshot.data != null ?  snapshot.data!.length !=0 ? CircleAvatar(
+                                              radius: 10,
                                               backgroundColor: Colors.red,
                                               child: Text(
-                                                  snapshot.data.toString(),
+                                                  snapshot.data.length.toString(),
                                                 
                                                   style: const TextStyle(
                                                                                       color: Colors.white,
                                                                                       fontSize: 13,
-                                                                                      
                                                                                     ),
                                                   ),
-                                            );
+                                            ): 
+                                            Container():Container();
                                                 
                                           }),
-                                      // Text("2"),
+                                      SizedBox(width: 5,),
                                       Text(
                                         DateFormat.Hm()
                                             .format(chatContactData.timeSent),

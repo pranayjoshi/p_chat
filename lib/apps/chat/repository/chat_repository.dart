@@ -391,26 +391,38 @@ class ChatRepository {
   //   }
   // }
 
-  Future<int> getUnreadCount(
+  Stream getUnreadCount(
     BuildContext context,
     String recieverUserId,
-  ) async {
-    try {
-      var unReadDat = await firestore
+  ) {
+    // return firestore
+    //     .collection('groups')
+    //     .doc(groudId)
+    //     .collection('chats')
+    //     .orderBy('timeSent', descending: true)
+    //     .snapshots()
+    //     .map((event) {
+    //   List<Message> messages = [];
+    //   for (var document in event.docs) {
+    //     messages.add(Message.fromMap(document.data()));
+    //   }
+    //   return messages;
+    // });
+      return firestore
           .collection('users')
           .doc(auth.currentUser!.uid)
           .collection('chats')
           .doc(recieverUserId)
           .collection('messages')
-          .where("isSeen", isEqualTo: false);
+          .where("isSeen", isEqualTo: false).where("senderId", isNotEqualTo: auth.currentUser!.uid).snapshots().map((event) {
+      List<Message> messages = [];
+      for (var document in event.docs) {
+        print(document);
+        messages.add(Message.fromMap(document.data()));
+      }
+      return messages;});
           
-      var unReadData = await unReadDat.where("senderId", isNotEqualTo: auth.currentUser!.uid).get();
-      print(unReadData.size);
-      return unReadData.size;
-    } catch (e) {
-      showSnackBar(context: context, content: e.toString());
-      return 0;
-    }
+      // return unReadData;
   }
 
 

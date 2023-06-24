@@ -121,7 +121,8 @@ class ChatController {
       messageId,
     );
   }
-  Future<int> getUnreadCount(
+  
+  Stream<dynamic> getUnreadCount(
     BuildContext context,
     String recieverUserId,
   ) {
