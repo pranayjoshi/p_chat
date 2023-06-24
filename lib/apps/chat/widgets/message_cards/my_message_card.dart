@@ -66,14 +66,15 @@ class MyMessageCard extends StatelessWidget {
                         ),
                   child: Column(
                     children: [
-                      if (isReplying) ...[
-                        Text(
-                          username,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
+                      Text(
+                        textAlign: TextAlign.left,
+                        senderName,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
                         ),
-                        const SizedBox(height: 3),
+                      ),
+                      SizedBox(height: 3),
+                      if (isReplying)
                         Container(
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
@@ -84,26 +85,41 @@ class MyMessageCard extends StatelessWidget {
                               ),
                             ),
                           ),
-                          child: DisplayTextImageGIF(
-                            message: repliedText,
-                            type: repliedMessageType,
-                          ),
+                          child: Column(children: [
+                            Text(
+                              username,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 3),
+                            Container(
+                              child: DisplayTextImageGIF(
+                                message: repliedText,
+                                type: repliedMessageType,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                          ]),
                         ),
-                        const SizedBox(height: 8),
-                      ],
                       if (isGroupChat && !isReplying)
                         Column(
                           children: [
-                              Text(
-                                senderName,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            Text(
+                              senderName,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
                               ),
-                            const SizedBox(height: 3,),
+                            ),
+                            const SizedBox(
+                              height: 3,
+                            ),
                           ],
                         ),
-                      Container( padding: message.length <3 ? EdgeInsets.only(left: 20) : EdgeInsets.only(left: 5),
+                      Container(
+                        padding: message.length < 3
+                            ? EdgeInsets.only(left: 20)
+                            : EdgeInsets.only(left: 5),
                         child: DisplayTextImageGIF(
                           message: message,
                           type: type,
@@ -120,7 +136,6 @@ class MyMessageCard extends StatelessWidget {
                       Text(
                         date,
                         style: const TextStyle(
-                          
                           fontSize: 13,
                           color: Colors.white60,
                         ),
