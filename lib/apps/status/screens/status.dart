@@ -1,11 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:p_chat/apps/status/repository/status_repository.dart';
 import 'package:p_chat/common/utils/colors.dart';
 import 'package:story_view/story_view.dart';
 import 'package:p_chat/common/widgets/loader.dart';
 
 import 'package:p_chat/models/status.dart';
 
-class StatusScreen extends StatefulWidget {
+class StatusScreen extends ConsumerStatefulWidget {
   static const String routeName = '/status-screen';
   final Status status;
   const StatusScreen({
@@ -14,10 +17,10 @@ class StatusScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<StatusScreen> createState() => _StatusScreenState();
+  ConsumerState<StatusScreen> createState() => _StatusScreenState();
 }
 
-class _StatusScreenState extends State<StatusScreen> {
+class _StatusScreenState extends ConsumerState<StatusScreen> {
   StoryController controller = StoryController();
   List<StoryItem> storyItems = [];
 
@@ -38,6 +41,15 @@ class _StatusScreenState extends State<StatusScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // if (!widget.status.isSeen &&
+    //               widget.status.uid ==
+    //                   FirebaseAuth.instance.currentUser!.uid) {
+    //             ref.read(statusRepositoryProvider).setChatMessageSeen(
+    //                   context,
+    //                   widget.recieverUserId,
+    //                   messageData.messageId,
+    //                 );
+    //           }
     return Scaffold(
       appBar: AppBar(
         title: Text(

@@ -37,16 +37,15 @@ class StatusController {
     return statuses;
   }
 
-    void setChatMessageSeen(
+    void setStatusSeen(
     BuildContext context,
     String recieverUserId,
     String messageId,
   ) {
-    chatRepository.setChatMessageSeen(
+    statusRepository.setStatusSeen(
       context,
       recieverUserId,
-      messageId,
     );
   }
-}
+
 }

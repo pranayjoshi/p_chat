@@ -98,7 +98,11 @@ class StatusRepository {
         whoCanSee: uidWhoCanSee,
       );
 
+      var whoCanSee = {"isSeen": false};
+
       await firestore.collection('status').doc(statusId).set(status.toMap());
+      uidWhoCanSee.map((uid)async => await firestore.collection('status').doc(statusId).collection("whoCanSee").doc(uid).set(whoCanSee));
+      
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
     }
@@ -135,28 +139,14 @@ class StatusRepository {
     }
     return statusData;
   }
-    void setChatMessageSeen(
+    void setStatusSeen(
     BuildContext context,
-    String recieverUserId,
-    String messageId,
+    String statusId,
   ) async {
     try {
       await firestore
-          .collection('users')
-          .doc(auth.currentUser!.uid)
-          .collection('chats')
-          .doc(recieverUserId)
-          .collection('messages')
-          .doc(messageId)
-          .update({'isSeen': true});
-
-      await firestore
-          .collection('users')
-          .doc(recieverUserId)
-          .collection('chats')
-          .doc(auth.currentUser!.uid)
-          .collection('messages')
-          .doc(messageId)
+          .collection('status')
+          .doc(statusId)
           .update({'isSeen': true});
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
