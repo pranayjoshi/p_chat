@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:p_chat/apps/chat/widgets/display_text_image_gif.dart';
 import 'package:p_chat/common/enums/message_enum.dart';
@@ -36,122 +37,152 @@ class MyMessageCard extends StatelessWidget {
 
     return SwipeTo(
       onLeftSwipe: onLeftSwipe,
-      child: Align(
-        alignment: Alignment.centerRight,
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width - 45,
-          ),
-          child: Card(
-            elevation: 1,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            color: mainColor,
-            margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-            child: Stack(
-              children: [
-                Padding(
-                  padding: type == MessageEnum.text
-                      ? const EdgeInsets.only(
-                          left: 10,
-                          right: 30,
-                          top: 5,
-                          bottom: 20,
-                        )
-                      : const EdgeInsets.only(
-                          left: 5,
-                          top: 5,
-                          right: 5,
-                          bottom: 25,
+      child: GestureDetector(
+        onLongPress: () {
+          showModalBottomSheet<void>(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
+              ),
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              context: context,
+              builder: (BuildContext context) {
+                return Container(
+                    padding: EdgeInsets.all(5),
+                    color: chatBarMessage,
+                    child: new Wrap(children: <Widget>[
+                      new ListTile(
+                        leading: new Icon(
+                          Icons.delete,
+                          color: Colors.red,
                         ),
-                  child: Column(
-                    children: [
-                      Text(
-                        textAlign: TextAlign.left,
-                        senderName,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
+                        title: new Text(
+                          'Delete',
+                          style: TextStyle(color: textColor),
                         ),
-                      ),
-                      SizedBox(height: 3),
-                      if (isReplying)
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: backgroundColor.withOpacity(0.5),
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(
-                                5,
-                              ),
-                            ),
+                        onTap: () => {},
+                      )
+                    ]));
+              });
+        },
+        child: Align(
+          alignment: Alignment.centerRight,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: MediaQuery.of(context).size.width - 45,
+            ),
+            child: Card(
+              elevation: 1,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)),
+              color: mainColor,
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              child: Stack(
+                children: [
+                  Padding(
+                    padding: type == MessageEnum.text
+                        ? const EdgeInsets.only(
+                            left: 10,
+                            right: 30,
+                            top: 5,
+                            bottom: 20,
+                          )
+                        : const EdgeInsets.only(
+                            left: 5,
+                            top: 5,
+                            right: 5,
+                            bottom: 25,
                           ),
-                          child: Column(children: [
-                            Text(
-                              username,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
+                    child: Column(
+                      children: [
+                        Text(
+                          textAlign: TextAlign.left,
+                          senderName,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 3),
+                        if (isReplying)
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: backgroundColor.withOpacity(0.5),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(
+                                  5,
+                                ),
                               ),
                             ),
-                            const SizedBox(height: 3),
-                            Container(
-                              child: DisplayTextImageGIF(
-                                message: repliedText,
-                                type: repliedMessageType,
+                            child: Column(children: [
+                              Text(
+                                username,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 8),
-                          ]),
+                              const SizedBox(height: 3),
+                              Container(
+                                child: DisplayTextImageGIF(
+                                  message: repliedText,
+                                  type: repliedMessageType,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                            ]),
+                          ),
+                        // if (isGroupChat && !isReplying)
+                        //   Column(
+                        //     children: [
+                        //       Text(
+                        //         senderName,
+                        //         style: const TextStyle(
+                        //           fontWeight: FontWeight.bold,
+                        //         ),
+                        //       ),
+                        //       const SizedBox(
+                        //         height: 3,
+                        //       ),
+                        //     ],
+                        //   ),
+                        Container(
+                          padding: message.length < 3
+                              ? EdgeInsets.only(left: 20)
+                              : EdgeInsets.only(left: 5),
+                          child: DisplayTextImageGIF(
+                            message: message,
+                            type: type,
+                          ),
                         ),
-                      // if (isGroupChat && !isReplying)
-                      //   Column(
-                      //     children: [
-                      //       Text(
-                      //         senderName,
-                      //         style: const TextStyle(
-                      //           fontWeight: FontWeight.bold,
-                      //         ),
-                      //       ),
-                      //       const SizedBox(
-                      //         height: 3,
-                      //       ),
-                      //     ],
-                      //   ),
-                      Container(
-                        padding: message.length < 3
-                            ? EdgeInsets.only(left: 20)
-                            : EdgeInsets.only(left: 5),
-                        child: DisplayTextImageGIF(
-                          message: message,
-                          type: type,
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Positioned(
-                  bottom: 4,
-                  right: 10,
-                  child: Row(
-                    children: [
-                      Text(
-                        date,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          color: Colors.white60,
+                  Positioned(
+                    bottom: 4,
+                    right: 10,
+                    child: Row(
+                      children: [
+                        Text(
+                          date,
+                          style: const TextStyle(
+                            fontSize: 13,
+                            color: Colors.white60,
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Icon(
-                        isSeen ? Icons.done_all : Icons.done,
-                        size: 20,
-                        color: isSeen ? Colors.blue : Colors.white60,
-                      ),
-                    ],
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Icon(
+                          isSeen ? Icons.done_all : Icons.done,
+                          size: 20,
+                          color: isSeen ? Colors.blue : Colors.white60,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

@@ -425,6 +425,18 @@ class ChatRepository {
       // return unReadData;
   }
 
+  void deleteMessage(
+    BuildContext context,
+    String recieverUserId,
+    String messageId
+  ) async{
+       await firestore
+          .collection('users')
+          .doc(auth.currentUser!.uid)
+          .collection('chats')
+          .doc(recieverUserId).collection('messages').doc(messageId).delete();
+}
+
 
   void setChatMessageSeen(
     BuildContext context,
