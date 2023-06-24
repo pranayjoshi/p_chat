@@ -42,6 +42,18 @@ class ChatController {
     return chatRepository.getGroupChatStream(groupId);
   }
 
+    void deleteMessage(
+    BuildContext context,
+    String recieverUserId,
+    String messageId
+  ) async{
+       ref.read(chatRepositoryProvider).deleteMessage(
+    context,
+    recieverUserId,
+    messageId
+  );
+}
+
   void sendTextMessage(
     BuildContext context,
     String text,

@@ -125,6 +125,8 @@ class _ChatListState extends ConsumerState<ChatList> {
               if (messageData.senderId ==
                   FirebaseAuth.instance.currentUser!.uid) {
                 return MyMessageCard(
+                  messageId: messageData.messageId,
+                  receiverId: messageData.recieverid,
                   message: messageData.text,
                   isGroupChat: widget.isGroupChat,
                   date: timeSent,

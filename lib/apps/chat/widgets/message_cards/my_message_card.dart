@@ -1,11 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:p_chat/apps/chat/controller/chat_controller.dart';
 import 'package:p_chat/apps/chat/widgets/display_text_image_gif.dart';
 import 'package:p_chat/common/enums/message_enum.dart';
 import 'package:p_chat/common/utils/colors.dart';
 import 'package:swipe_to/swipe_to.dart';
 
-class MyMessageCard extends StatelessWidget {
+class MyMessageCard extends ConsumerWidget {
+  final String messageId;
+  final String receiverId;
   final String message;
   final String date;
   final MessageEnum type;
@@ -19,6 +23,8 @@ class MyMessageCard extends StatelessWidget {
 
   const MyMessageCard({
     Key? key,
+    required this.messageId,
+    required this.receiverId,
     required this.message,
     required this.date,
     required this.type,
@@ -32,14 +38,14 @@ class MyMessageCard extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final isReplying = repliedText.isNotEmpty;
 
     return SwipeTo(
       onLeftSwipe: onLeftSwipe,
       child: GestureDetector(
         onLongPress: () {
-          showModalBottomSheet<void>(
+          showModalBottomSheet(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(
                   top: Radius.circular(20),
@@ -49,6 +55,7 @@ class MyMessageCard extends StatelessWidget {
               context: context,
               builder: (BuildContext context) {
                 return Container(
+
                     padding: EdgeInsets.all(5),
                     color: chatBarMessage,
                     child: new Wrap(children: <Widget>[
@@ -61,7 +68,10 @@ class MyMessageCard extends StatelessWidget {
                           'Delete',
                           style: TextStyle(color: textColor),
                         ),
-                        onTap: () => {},
+                        onTap: () => {
+                          ref.read(chatControllerProvider).deleteMessage(context, receiverId, messageId),
+                          Navigator.pop(context)
+                        },
                       )
                     ]));
               });
