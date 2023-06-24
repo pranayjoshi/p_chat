@@ -102,20 +102,20 @@ class MyMessageCard extends StatelessWidget {
                             const SizedBox(height: 8),
                           ]),
                         ),
-                      if (isGroupChat && !isReplying)
-                        Column(
-                          children: [
-                            Text(
-                              senderName,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 3,
-                            ),
-                          ],
-                        ),
+                      // if (isGroupChat && !isReplying)
+                      //   Column(
+                      //     children: [
+                      //       Text(
+                      //         senderName,
+                      //         style: const TextStyle(
+                      //           fontWeight: FontWeight.bold,
+                      //         ),
+                      //       ),
+                      //       const SizedBox(
+                      //         height: 3,
+                      //       ),
+                      //     ],
+                      //   ),
                       Container(
                         padding: message.length < 3
                             ? EdgeInsets.only(left: 20)

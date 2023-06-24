@@ -100,18 +100,18 @@ class SenderMessageCard extends StatelessWidget {
                             const SizedBox(height: 8),
                           ]),
                         ),
-                      if (isGroupChat && !isReplying)
-                        Column(
-                          children: [
-                            Text(
-                              senderName,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 3),
-                          ],
-                        ),
+                      // if (isGroupChat && !isReplying)
+                      //   Column(
+                      //     children: [
+                      //       Text(
+                      //         senderName,
+                      //         style: const TextStyle(
+                      //           fontWeight: FontWeight.bold,
+                      //         ),
+                      //       ),
+                      //       const SizedBox(height: 3),
+                      //     ],
+                      //   ),
                       DisplayTextImageGIF(
                         message: message,
                         type: type,
