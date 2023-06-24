@@ -85,6 +85,7 @@ class SenderMessageCard extends StatelessWidget {
                           ),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
+                              
                               children: [
                                 Text(
                                   textAlign: TextAlign.left,

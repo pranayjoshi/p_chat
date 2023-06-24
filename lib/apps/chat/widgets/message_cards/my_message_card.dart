@@ -106,7 +106,7 @@ class MyMessageCard extends ConsumerWidget {
                             bottom: 25,
                           ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                           Text(
                             textAlign: TextAlign.left,
@@ -128,7 +128,7 @@ class MyMessageCard extends ConsumerWidget {
                               ),
                             ),
                             child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
                                     username,
