@@ -14,6 +14,6 @@ const dividerColor = Color.fromRGBO(37, 45, 50, 1);
 const chatBarMessage = Color.fromRGBO(30, 36, 40, 1);
 const mobileChatBoxColor = Color.fromRGBO(31, 44, 52, 1);
 const greyColor = Colors.grey;
-const mainColor = Colors.deepPurple;
+const mainColor = Color(0xFF673AB7);
 const blackColor = Colors.black;
 const containerColor = Color(0xFFD1C4E9);
