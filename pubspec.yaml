@@ -68,12 +68,19 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
 
+
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 flutter_icons:
   image_path: "assets/img/icon.png" 
   android: true
   ios: true
+
+cached_video_player:
+  git:
+    url: https://github.com/vikram25897/flutter_cached_video_player
+    ref: feature/gradle_version_bump
 # The following section is specific to Flutter packages.
 flutter:
 
