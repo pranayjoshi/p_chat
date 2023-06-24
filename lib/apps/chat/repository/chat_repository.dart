@@ -391,6 +391,28 @@ class ChatRepository {
   //   }
   // }
 
+  Future<int> setUnreadCount(
+    BuildContext context,
+    String recieverUserId,
+    String messageId,
+  ) async {
+    try {
+      var unReadData = await firestore
+          .collection('users')
+          .doc(auth.currentUser!.uid)
+          .collection('chats')
+          .doc(recieverUserId)
+          .collection('messages')
+          .where("isSeen", isEqualTo: false).get();
+      print(unReadData.size);
+      return unReadData.size;
+    } catch (e) {
+      showSnackBar(context: context, content: e.toString());
+      return 0;
+    }
+  }
+
+
   void setChatMessageSeen(
     BuildContext context,
     String recieverUserId,
