@@ -121,4 +121,15 @@ class ChatController {
       messageId,
     );
   }
+  Future<int> getUnreadCount(
+    BuildContext context,
+    String recieverUserId,
+  ) {
+      return chatRepository.getUnreadCount(
+      context,
+      recieverUserId
+    );
+    }
 }
+
+  

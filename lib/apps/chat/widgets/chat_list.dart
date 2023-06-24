@@ -117,6 +117,10 @@ class _ChatListState extends ConsumerState<ChatList> {
                       widget.recieverUserId,
                       messageData.messageId,
                     );
+                ref.read(chatControllerProvider).getUnreadCount(
+                      context,
+                      widget.recieverUserId,
+                    );    
               }
               if (messageData.senderId ==
                   FirebaseAuth.instance.currentUser!.uid) {

@@ -77,6 +77,7 @@ class ContactsList extends ConsumerWidget {
                                     color: Colors.grey,
                                     fontSize: 13,
                                   ),
+                                  // ),
                                 ),
                               ),
                             ),
@@ -93,71 +94,105 @@ class ContactsList extends ConsumerWidget {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Loader();
                   }
-                  if ( !snapshot.hasData) {
+                  if (!snapshot.hasData) {
                     return Loader();
                   }
 
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      var chatContactData = snapshot.data![index];
+                  return Container(
+                    height: 400,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        var chatContactData = snapshot.data![index];
 
-                      return Column(
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                context,
-                                MobileChatScreen.routeName,
-                                arguments: {
-                                  'name': chatContactData.name,
-                                  'uid': chatContactData.contactId,
-                                  'profilePic': chatContactData.profilePic,
-                                  'isGroupChat': false,
-                                },
-                              );
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: ListTile(
-                                title: Text(
-                                  chatContactData.name,
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                subtitle: Padding(
-                                  padding: const EdgeInsets.only(top: 6.0),
-                                  child: Text(
-                                    chatContactData.lastMessage,
-                                    style: const TextStyle(fontSize: 15),
-                                  ),
-                                ),
-                                leading: GestureDetector(
-                                  onTap:() => Navigator.pushNamed(context, PhotoViewer.routeName,arguments:{"imageUrl": chatContactData.profilePic} ),
-                                  child: CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                      chatContactData.profilePic,
+                        return Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  MobileChatScreen.routeName,
+                                  arguments: {
+                                    'name': chatContactData.name,
+                                    'uid': chatContactData.contactId,
+                                    'profilePic': chatContactData.profilePic,
+                                    'isGroupChat': false,
+                                  },
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: ListTile(
+                                  title: Text(
+                                    chatContactData.name,
+                                    style: const TextStyle(
+                                      fontSize: 18,
                                     ),
-                                    radius: 30,
                                   ),
-                                ),
-                                trailing: Text(
-                                  DateFormat.Hm()
-                                      .format(chatContactData.timeSent),
-                                  style: const TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 13,
+                                  subtitle: Padding(
+                                    padding: const EdgeInsets.only(top: 6.0),
+                                    child: Text(
+                                      chatContactData.lastMessage,
+                                      style: const TextStyle(fontSize: 15),
+                                    ),
+                                  ),
+                                  leading: GestureDetector(
+                                    onTap: () => Navigator.pushNamed(
+                                        context, PhotoViewer.routeName,
+                                        arguments: {
+                                          "imageUrl": chatContactData.profilePic
+                                        }),
+                                    child: CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                        chatContactData.profilePic,
+                                      ),
+                                      radius: 30,
+                                    ),
+                                  ),
+                                  trailing: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      FutureBuilder<int>(
+                                          future: ref
+                                              .read(chatControllerProvider)
+                                              .getUnreadCount(context,
+                                                  chatContactData.contactId),
+                                          builder: (context, snapshot) {
+                                            return CircleAvatar(
+                                              radius: 15,
+                                              backgroundColor: Colors.red,
+                                              child: Text(
+                                                  snapshot.data.toString(),
+                                                
+                                                  style: const TextStyle(
+                                                                                      color: Colors.white,
+                                                                                      fontSize: 13,
+                                                                                      
+                                                                                    ),
+                                                  ),
+                                            );
+                                                
+                                          }),
+                                      // Text("2"),
+                                      Text(
+                                        DateFormat.Hm()
+                                            .format(chatContactData.timeSent),
+                                        style: const TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          const Divider(color: dividerColor, indent: 85),
-                        ],
-                      );
-                    },
+                            const Divider(color: dividerColor, indent: 85),
+                          ],
+                        );
+                      },
+                    ),
                   );
                 }),
           ],
