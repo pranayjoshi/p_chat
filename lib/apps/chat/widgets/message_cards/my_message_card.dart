@@ -55,7 +55,6 @@ class MyMessageCard extends ConsumerWidget {
               context: context,
               builder: (BuildContext context) {
                 return Container(
-
                     padding: EdgeInsets.all(5),
                     color: chatBarMessage,
                     child: new Wrap(children: <Widget>[
@@ -69,7 +68,9 @@ class MyMessageCard extends ConsumerWidget {
                           style: TextStyle(color: textColor),
                         ),
                         onTap: () => {
-                          ref.read(chatControllerProvider).deleteMessage(context, receiverId, messageId),
+                          ref
+                              .read(chatControllerProvider)
+                              .deleteMessage(context, receiverId, messageId),
                           Navigator.pop(context)
                         },
                       )
@@ -105,19 +106,14 @@ class MyMessageCard extends ConsumerWidget {
                             bottom: 25,
                           ),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Container(
-                            color: Colors.red,
-                            child: Text(
-                              textAlign: TextAlign.left,
-                              senderName,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
+                          Text(
+                            textAlign: TextAlign.left,
+                            senderName,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
                             ),
-                          ),
                         ),
                         SizedBox(height: 3),
                         if (isReplying)
@@ -131,22 +127,24 @@ class MyMessageCard extends ConsumerWidget {
                                 ),
                               ),
                             ),
-                            child: Column(children: [
-                              Text(
-                                username,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 3),
-                              Container(
-                                child: DisplayTextImageGIF(
-                                  message: repliedText,
-                                  type: repliedMessageType,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                            ]),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    username,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 3),
+                                  Container(
+                                    child: DisplayTextImageGIF(
+                                      message: repliedText,
+                                      type: repliedMessageType,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                ]),
                           ),
                         // if (isGroupChat && !isReplying)
                         //   Column(

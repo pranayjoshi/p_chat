@@ -62,6 +62,7 @@ class SenderMessageCard extends StatelessWidget {
                           bottom: 25,
                         ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         textAlign: TextAlign.left,
@@ -82,23 +83,25 @@ class SenderMessageCard extends StatelessWidget {
                               ),
                             ),
                           ),
-                          child: Column(children: [
-                            Text(
-                              textAlign: TextAlign.left,
-                              username,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 3),
-                            Container(
-                              child: DisplayTextImageGIF(
-                                message: repliedText,
-                                type: repliedMessageType,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                          ]),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  textAlign: TextAlign.left,
+                                  username,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 3),
+                                Container(
+                                  child: DisplayTextImageGIF(
+                                    message: repliedText,
+                                    type: repliedMessageType,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                              ]),
                         ),
                       // if (isGroupChat && !isReplying)
                       //   Column(
