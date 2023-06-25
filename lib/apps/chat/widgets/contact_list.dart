@@ -28,6 +28,9 @@ class ContactsList extends ConsumerWidget {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Loader();
                   }
+                  if ( !snapshot.hasData) {
+                    return Loader();
+                  }
 
                   return ListView.builder(
                     shrinkWrap: true,

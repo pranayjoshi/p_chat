@@ -21,9 +21,9 @@ class MyApp extends ConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.read(chatControllerProvider).sendTextMessage(
-      context, "dwad", "dwadad", false
-    );
+    // ref.read(chatControllerProvider).sendTextMessage(
+    //   context, "dwad", "dwadad", false
+    // );
     return MaterialApp(
       title: 'P-Chat',
       debugShowCheckedModeBanner: false, 

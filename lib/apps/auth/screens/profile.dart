@@ -214,6 +214,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     _selectedImage = pickedImage;
                   },
                   defaultImageUrl: _defaultImageUrl,
+                ) else UserImagePicker(
+                  onPickImage: (pickedImage) {
+                    _selectedImage = pickedImage;
+                  },
+                  defaultImageUrl: _defaultImageUrl,
                 ),
                 SizedBox(
                   height: 30,
