@@ -34,7 +34,7 @@ class StatusController {
 
   Future<List<Status>> getStatus(BuildContext context) async {
     List<Status> statuses = await statusRepository.getStatus(context);
-    print(statuses);
+    // print(statuses);
     return statuses;
   }
 

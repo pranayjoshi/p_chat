@@ -28,7 +28,7 @@ class _SelectContactsGroupState extends ConsumerState<SelectContactsGroup> {
     } else {
       selectedContactsIndex.add(index);
     }
-    print( selectedContactsIndex);
+    // print( selectedContactsIndex);
     setState(() {});
     ref
         .read(selectedGroupContacts.state)

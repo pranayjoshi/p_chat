@@ -63,12 +63,12 @@ class _AuthScreenState extends State<AuthScreen> {
       if (isLogin) {
         final userCredentials = await _firebase.signInWithEmailAndPassword(
             email: _enteredEmail, password: _enteredPass);
-        print(userCredentials);
+        // print(userCredentials);
       } else {
         final userCredentials = await _firebase.createUserWithEmailAndPassword(
             email: _enteredEmail, password: _enteredPass);
 
-        print(userCredentials);
+        // print(userCredentials);
 
         Navigator.push(
           context,

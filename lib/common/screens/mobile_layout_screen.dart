@@ -1,8 +1,12 @@
+// import 'dart:js_interop';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:p_chat/apps/auth/screens/auth.dart';
 import 'package:p_chat/apps/auth/screens/profile.dart';
+import 'package:p_chat/apps/chat/controller/chat_controller.dart';
 import 'package:p_chat/apps/chat/widgets/contact_list.dart';
 import 'package:p_chat/apps/group/screens/create_group_screen.dart';
 import 'package:p_chat/apps/status/screens/confirm_status.dart';
@@ -29,8 +33,18 @@ class MobileLayoutScreen extends ConsumerStatefulWidget {
 
 class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
     with WidgetsBindingObserver, TickerProviderStateMixin {
+
+  final firestore = FirebaseFirestore.instance;
   Future logout() async {
     await FirebaseAuth.instance.signOut();
+  }
+
+  void _firstITR() async {
+    await firestore.collection("test").doc("s").set({"dddd":"hi"});
+    // var exists = await firestore.collection("test").where("dddd", isEqualTo: "hello").get();
+    // print(exists.size);
+    // if (exists.size >0) {print("hidawd");}
+    // else print("wdwad");
   }
 
   late TabController tabBarController;
@@ -40,6 +54,7 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
     tabBarController = TabController(length: 3, vsync: this);
     tabBarController.addListener(_handleTabChange);
     WidgetsBinding.instance.addObserver(this);
+    // _firstITR();
   }
   void _handleTabChange(){
   setState((){});    
@@ -65,6 +80,7 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
         break;
     }
   }
+  
 
   @override
   Widget build(BuildContext context) {

@@ -34,7 +34,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   var userExists = false;
 
   Future<bool> usernameExists(String username) async {
-    // print(_userData!.username);
+    // _userData!.username);
     if (_userData!.username == username){
       return false;
     }

@@ -91,6 +91,8 @@ class ChatRepository {
     });
   }
 
+  
+
   Stream<List<Message>> getGroupChatStream(String groudId) {
     return firestore
         .collection('groups')
@@ -232,12 +234,12 @@ class ChatRepository {
     required MessageReply? messageReply,
     required bool isGroupChat,
   }) async {
-    print(text);
+    // print(text);
     try {
       var timeSent = DateTime.now();
       UserModel? recieverUserData;
 
-      print("awdadawdawdwdad");
+      // print("awdadawdawdwdad");
 
       if (!isGroupChat) {
         var userDataMap =
@@ -417,7 +419,7 @@ class ChatRepository {
           .where("isSeen", isEqualTo: false).where("senderId", isNotEqualTo: auth.currentUser!.uid).snapshots().map((event) {
       List<Message> messages = [];
       for (var document in event.docs) {
-        print(document);
+        // print(document);
         messages.add(Message.fromMap(document.data()));
       }
       return messages;});

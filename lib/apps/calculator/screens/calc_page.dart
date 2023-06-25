@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:math_expressions/math_expressions.dart';
@@ -5,6 +7,7 @@ import 'package:p_chat/apps/auth/screens/auth.dart';
 import 'package:p_chat/apps/calculator/widgets/num_button.dart';
 import 'package:p_chat/apps/calculator/helper/gradient_divider.dart';
 import 'package:p_chat/apps/chat/controller/chat_controller.dart';
+import 'package:p_chat/apps/chat/repository/chat_repository.dart';
 import 'package:p_chat/common/screens/mobile_layout_screen.dart';
 
 class CalcPage extends ConsumerStatefulWidget {
@@ -40,15 +43,7 @@ class _CalcPage extends ConsumerState<CalcPage> {
     '+',
   ];
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    print("hi");
-    ref.read(chatControllerProvider).sendTextMessage(
-      context, "dwad", "dwadad", true
-    );
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -181,7 +176,7 @@ class _CalcPage extends ConsumerState<CalcPage> {
         double eval = exp.evaluate(EvaluationType.REAL, cm);
         userAnswer = eval.toString();
       }catch(e){
-          print(e);
+          // print(e);
       }
 
 
