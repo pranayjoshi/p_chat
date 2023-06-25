@@ -218,20 +218,19 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   onPickImage: (pickedImage) {
                     _selectedImage = pickedImage;
                   },
-                  defaultImageUrl: _defaultImageUrl,
                 ),
                 SizedBox(
                   height: 30,
                 ),
                 Container(alignment: Alignment.centerLeft, padding: EdgeInsets.only(bottom: 8), child: Text("Your Name", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),)),
                   TextFormField(
+                    textCapitalization: TextCapitalization.sentences,
                     style: TextStyle(color: textColor),
                     cursorColor: textColor,
                     decoration: textFieldDesign(
                         "Enter your Full Name", Icons.person_2_outlined),
                     enableSuggestions: false,
                     autocorrect: false,
-                    textCapitalization: TextCapitalization.none,
                     validator: (value) {
                       if (value == null ||
                           value.trim().length < 4 ||

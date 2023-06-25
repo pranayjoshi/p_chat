@@ -169,6 +169,7 @@ class _ChatFieldState extends ConsumerState<ChatField> {
           children: [
             Expanded(
               child: TextFormField(
+                textCapitalization: TextCapitalization.sentences,
                 focusNode: focusNode,
                 controller: _messageController,
                 onChanged: (val) {

@@ -15,15 +15,24 @@ void main() async {
   runApp(ProviderScope(child: MyApp()));
 }
 
-class MyApp extends ConsumerWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // ref.read(chatControllerProvider).sendTextMessage(
-    //   context, "dwad", "dwadad", false
-    // );
+  ConsumerState<ConsumerStatefulWidget> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // print("hi");
+  }
+  @override
+  Widget build(BuildContext context) {
+    // 
     return MaterialApp(
       title: 'P-Chat',
       debugShowCheckedModeBanner: false, 

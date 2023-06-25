@@ -17,6 +17,7 @@ class ContactsList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // DUMMY
+    
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: SingleChildScrollView(
